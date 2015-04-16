@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import bl_backend.BusinessOwner;
 import bl_backend.Customer;
 
 public class DAL implements IDAL {
@@ -58,10 +59,13 @@ public class DAL implements IDAL {
 	public Customer selectCustomer(String username) {
 		String sql =String.format("SELECT * FROM couponsdb.customers WHERE Username='%s' ",username) ;
 		List userList=executeActiveCommand(sql);
+		if(userList.size()==0)
+			return null;
 		HashMap user=(HashMap)userList.get(0);
-		Customer result=new Customer((String)user.get("Username"), (String)user.get("pass"), (String)user.get("Email"), (String)user.get("Phone"));
+		Customer result=new Customer((String)user.get("Username"), (String)user.get("Password"), (String)user.get("Email"), (String)user.get("Phone"));
 		return result;
 	}
+	
 	
 	private void executePassiveCommand(String query){
 		Statement stmt = null;
@@ -131,6 +135,38 @@ public class DAL implements IDAL {
 
 		 return list;
 		}
+
+	@Override
+	public void inserBusinessOwner(BusinessOwner owner) {
+		String sql =String.format("INSERT INTO couponsdb.businessowners VALUES ('%s', '%s', '%s','%s')",owner.getUsername(),owner.getPassword(),owner.getEmail(),owner.getPhone()) ;
+		executePassiveCommand(sql);
+		
+	}
+
+	@Override
+	public BusinessOwner selectBusinessOwner(String username) {
+		String sql =String.format("SELECT * FROM couponsdb.businessowners WHERE Username='%s' ",username) ;
+		List userList=executeActiveCommand(sql);
+		if(userList.size()==0)
+			return null;
+		HashMap user=(HashMap)userList.get(0);
+		BusinessOwner result=new BusinessOwner((String)user.get("Username"), (String)user.get("Password"), (String)user.get("Email"), (String)user.get("Phone"));
+		return result;
+	}
+
+	@Override
+	public void deleteBusinessOwner(String username) {
+		String sql =String.format("DELETE FROM couponsdb.businessowners WHERE Username='%s' ",username) ;
+		executePassiveCommand(sql);
+		
+	}
+
+	@Override
+	public void updateBusinessOwner(BusinessOwner owner) {
+		String sql =String.format("UPDATE couponsdb.businessowners SET Password='%s', Email='%s',Phone='%s' WHERE Username='%s' ",owner.getPassword(),owner.getEmail(),owner.getPhone(),owner.getUsername()); 
+		executePassiveCommand(sql);
+		
+	}
 		
 
 }
