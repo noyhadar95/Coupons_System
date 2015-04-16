@@ -21,5 +21,12 @@ public interface IDAL {
 	BusinessOwner selectBusinessOwner(String username);
 	void deleteBusinessOwner(String username);
 	void updateBusinessOwner(BusinessOwner owner);
+	
+	void insertBusiness(Business business);
+	
+	Business selectBusiness(String name);
+	
+	void deleteBusiness(String name);
+
 
 }

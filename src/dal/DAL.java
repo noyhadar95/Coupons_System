@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
 import bl_backend.*;
 
 public class DAL implements IDAL {
@@ -190,6 +191,31 @@ public class DAL implements IDAL {
 	@Override
 	public void updateBusinessOwner(BusinessOwner owner) {
 		String sql =String.format("UPDATE couponsdb.businessowners SET Password='%s', Email='%s',Phone='%s' WHERE Username='%s' ",owner.getPassword(),owner.getEmail(),owner.getPhone(),owner.getUsername()); 
+		executePassiveCommand(sql);
+		
+	}
+
+	@Override
+	public void insertBusiness(Business business) {
+		String sql =String.format("INSERT INTO couponsdb.businesses VALUES ('%s', '%s', '%s','%s','%s','%s')",business.getName(),business.getAddress(),business.getCity(),business.getCategory(),business.getDescription(),business.getOwner()) ;
+		executePassiveCommand(sql);
+		
+	}
+
+	@Override
+	public Business selectBusiness(String name) {
+		String sql =String.format("SELECT * FROM couponsdb.businesses WHERE Name='%s' ",name) ;
+		List businessList=executeActiveCommand(sql);
+		if(businessList.size()==0)
+			return null;
+		HashMap business=(HashMap)businessList.get(0);
+		Business result=new Business((String)business.get("Name"),(String)business.get("Address"),(String)business.get("City"),(String)business.get("Category"),(String)business.get("Description"),(String)business.get("Owner"));
+		return result;
+	}
+
+	@Override
+	public void deleteBusiness(String name) {
+		String sql =String.format("DELETE FROM couponsdb.businesses WHERE Name='%s' ",name) ;
 		executePassiveCommand(sql);
 		
 	}

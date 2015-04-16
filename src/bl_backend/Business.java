@@ -9,6 +9,15 @@ public class Business {
 	private String description;
 	private String owner; //maybe change to owner object?
 	
+	public Business(String name,String address,String city,String category,String description,String owner) {
+		this.name = name;
+		this.address = address;
+		this.city = city;
+		this.category = category;
+		this.description = description;
+		this.owner = owner;
+	}
+	
 	public String getName() {
 		return name;
 	}

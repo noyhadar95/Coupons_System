@@ -75,6 +75,18 @@ public class DALTests {
 		
 	}
 	
+	@Test
+	public void testAddDeleteBusiness() {
+		Business business = new Business("cas","pqwfqwass","asc","wqfqwf","uu","owner1"); //TODO make sure owner exists?
+		dal.insertBusiness(business);
+		Business test_business = dal.selectBusiness(business.getName());
+		assertTrue(test_business.getName().equals(business.getName()));
+		dal.deleteBusiness(business.getName());
+		test_business=dal.selectBusiness(business.getName());
+		assertTrue(test_business==null);
+	}
+	
+	
 
 
 }
