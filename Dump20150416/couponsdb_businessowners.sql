@@ -1,4 +1,4 @@
--- MySQL dump 10.13  Distrib 5.6.23, for Win32 (x86)
+-- MySQL dump 10.13  Distrib 5.6.23, for Win64 (x86_64)
 --
 -- Host: localhost    Database: couponsdb
 -- ------------------------------------------------------
@@ -18,7 +18,7 @@
 --
 -- Table structure for table `businessowners`
 --
-USE couponsdb
+
 DROP TABLE IF EXISTS `businessowners`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -49,4 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-04-16 16:30:45
+-- Dump completed on 2015-04-17  0:42:24

@@ -1,4 +1,4 @@
--- MySQL dump 10.13  Distrib 5.6.23, for Win32 (x86)
+-- MySQL dump 10.13  Distrib 5.6.23, for Win64 (x86_64)
 --
 -- Host: localhost    Database: couponsdb
 -- ------------------------------------------------------
@@ -18,7 +18,7 @@
 --
 -- Table structure for table `customers`
 --
-USE couponsdb
+
 DROP TABLE IF EXISTS `customers`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -37,7 +37,7 @@ CREATE TABLE `customers` (
 
 LOCK TABLES `customers` WRITE;
 /*!40000 ALTER TABLE `customers` DISABLE KEYS */;
-INSERT INTO `customers` VALUES ('closfsfswn','pass','mail@gmail.com','0129712'),('closfsfwwswn','pass','mail@gmail.com','0129712'),('latgfzi','pass','mail@gmail.com','0129712'),('latz','pass','mail@gmail.com','0129712'),('latzi','pass','mail@gmail.com','0129712'),('{0}','{1}','{2}','{3}');
+INSERT INTO `customers` VALUES ('closfsfswn','pass','mail@gmail.com','0129712'),('closfsfwwswn','pass','mail@gmail.com','0129712'),('latgfyS','pass','mail@gmail.com','0129712'),('latgfySi','pass','mail@gmail.com','0129712'),('latgfzi','pass','mail@gmail.com','0129712'),('latz','pass','mail@gmail.com','0129712'),('latzi','pass','mail@gmail.com','0129712'),('{0}','{1}','{2}','{3}');
 /*!40000 ALTER TABLE `customers` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-04-16 16:30:45
+-- Dump completed on 2015-04-17  0:42:23

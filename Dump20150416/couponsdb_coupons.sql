@@ -1,4 +1,4 @@
--- MySQL dump 10.13  Distrib 5.6.23, for Win32 (x86)
+-- MySQL dump 10.13  Distrib 5.6.23, for Win64 (x86_64)
 --
 -- Host: localhost    Database: couponsdb
 -- ------------------------------------------------------
@@ -18,7 +18,7 @@
 --
 -- Table structure for table `coupons`
 --
-USE couponsdb
+
 DROP TABLE IF EXISTS `coupons`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -29,7 +29,10 @@ CREATE TABLE `coupons` (
   `InitialPrice` int(11) NOT NULL,
   `DiscountPrice` int(11) NOT NULL,
   `Rating` int(11) NOT NULL,
-  PRIMARY KEY (`Name`)
+  `Business` varchar(45) NOT NULL,
+  PRIMARY KEY (`Name`),
+  KEY `fk_idx` (`Business`),
+  CONSTRAINT `FK_CouponsBusiness` FOREIGN KEY (`Business`) REFERENCES `businesses` (`Name`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -51,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-04-16 16:30:46
+-- Dump completed on 2015-04-17  0:42:24
