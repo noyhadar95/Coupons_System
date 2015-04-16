@@ -26,7 +26,7 @@ public class DALTests {
 
 	@Test
 	public void testAddCustomer() {
-		Customer customer = new Customer("latgfySi","pass","mail@gmail.com","0129712");
+		Customer customer = new Customer("latgfyS","pass","mail@gmail.com","0129712");
 		dal.insertCustomer(customer);
 		Customer test_customer = dal.selectCustomer(customer.getUsername());
 		assertTrue(test_customer.getUsername().equals(customer.getUsername()));

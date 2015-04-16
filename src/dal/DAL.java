@@ -16,9 +16,8 @@ public class DAL implements IDAL {
 	static final String DB_URL = "jdbc:mysql://localhost:3306/MySQL";
 
 	// Database credentials
-	static final String USER = "root";
-	static final String PASS = "";
-
+	static final String USER = "CouponDB";
+	static final String PASS = "couponpass";
 	public DAL() {
 		//connect();
 	}
