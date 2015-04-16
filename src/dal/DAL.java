@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import bl_backend.Admin;
 import bl_backend.Customer;
 
 public class DAL implements IDAL {
@@ -16,8 +17,8 @@ public class DAL implements IDAL {
 	static final String DB_URL = "jdbc:mysql://localhost:3306/MySQL";
 
 	// Database credentials
-	static final String USER = "CouponDB";
-	static final String PASS = "couponpass";
+	static final String USER = "root";
+	static final String PASS = "";
 	public DAL() {
 		//connect();
 	}
@@ -58,6 +59,8 @@ public class DAL implements IDAL {
 	public Customer selectCustomer(String username) {
 		String sql =String.format("SELECT * FROM couponsdb.customers WHERE Username='%s' ",username) ;
 		List userList=executeActiveCommand(sql);
+		if(userList.size()==0)
+			return null;
 		HashMap user=(HashMap)userList.get(0);
 		Customer result=new Customer((String)user.get("Username"), (String)user.get("pass"), (String)user.get("Email"), (String)user.get("Phone"));
 		return result;
@@ -131,6 +134,38 @@ public class DAL implements IDAL {
 
 		 return list;
 		}
+
+	@Override
+	public void insertAdmin(Admin admin) {
+		String sql =String.format("INSERT INTO couponsdb.administrators VALUES ('%s', '%s', '%s','%s')",admin.getUsername(),admin.getPassword(),admin.getEmail(),admin.getPhone()) ;
+		executePassiveCommand(sql);
+
+		
+	}
+
+	@Override
+	public Admin selectAdmin(String username) {
+		String sql =String.format("SELECT * FROM couponsdb.administrators WHERE Username='%s' ",username) ;
+		List userList=executeActiveCommand(sql);
+		if(userList.size()==0)
+			return null;
+		HashMap user=(HashMap)userList.get(0);
+		Admin result=new Admin((String)user.get("Username"), (String)user.get("pass"), (String)user.get("Email"), (String)user.get("Phone"));
+		return result;
+	}
+
+	@Override
+	public void deleteAdmin(String username) {
+		String sql =String.format("DELETE FROM couponsdb.administrators WHERE Username ='%s'",username) ;
+		executePassiveCommand(sql);
+		
+	}
+
+	@Override
+	public void deleteCustomer(String username) {
+		String sql =String.format("DELETE FROM couponsdb.customers WHERE Username ='%s'",username) ;
+		executePassiveCommand(sql);
+	}
 		
 
 }

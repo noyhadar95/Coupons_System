@@ -18,7 +18,7 @@
 --
 -- Table structure for table `businesses`
 --
-
+USE couponsdb
 DROP TABLE IF EXISTS `businesses`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;

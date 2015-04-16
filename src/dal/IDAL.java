@@ -1,6 +1,6 @@
 package dal;
 
-import bl_backend.Customer;
+import bl_backend.*;
 
 public interface IDAL {
 
@@ -8,5 +8,11 @@ public interface IDAL {
 
 	Customer selectCustomer(String username);
 	
+	void insertAdmin(Admin admin);
 
+	Admin selectAdmin(String username);
+	
+	void deleteAdmin(String username);
+	
+	void deleteCustomer(String username);
 }
