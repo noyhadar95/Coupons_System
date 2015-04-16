@@ -2,6 +2,7 @@ package dal;
 
 import bl_backend.*;
 
+
 public interface IDAL {
 
 	void insertCustomer(Customer cus);
@@ -15,4 +16,10 @@ public interface IDAL {
 	void deleteAdmin(String username);
 	
 	void deleteCustomer(String username);
+
+	void inserBusinessOwner(BusinessOwner owner);
+	BusinessOwner selectBusinessOwner(String username);
+	void deleteBusinessOwner(String username);
+	void updateBusinessOwner(BusinessOwner owner);
+
 }
