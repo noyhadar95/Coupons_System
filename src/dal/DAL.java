@@ -10,7 +10,7 @@ import bl_backend.*;
 public class DAL implements IDAL {
 
 	Connection conn = null;
-	
+
 	// JDBC driver name and database URL
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
 	static final String DB_URL = "jdbc:mysql://localhost:3306/MySQL";
@@ -18,19 +18,19 @@ public class DAL implements IDAL {
 	// Database credentials
 	static final String USER = "root";
 	static final String PASS = "";
+
 	public DAL() {
-		//connect();
+		// connect();
 	}
 
 	public void connect() {
-		
 
 		try {
 			// STEP 2: Register JDBC driver
 			Class.forName("com.mysql.jdbc.Driver");
 
 			// STEP 3: Open a connection
-		//	System.out.println("Connecting to database...");
+			// System.out.println("Connecting to database...");
 			conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
 		} catch (SQLException se) {
@@ -41,184 +41,272 @@ public class DAL implements IDAL {
 			e.printStackTrace();
 		} finally {
 			// finally block used to close resources
-			
-			
+
 		}// end try
 	}
 
 	@Override
 	public void insertCustomer(Customer cus) {
 
-		String sql =String.format("INSERT INTO couponsdb.customers VALUES ('%s', '%s', '%s','%s')",cus.getUsername(),cus.getPassword(),cus.getEmail(),cus.getPhone()) ;
+		String sql = String
+				.format("INSERT INTO couponsdb.customers VALUES ('%s', '%s', '%s','%s')",
+						cus.getUsername(), cus.getPassword(), cus.getEmail(),
+						cus.getPhone());
 		executePassiveCommand(sql);
 
-}
+	}
 
 	@Override
 	public Customer selectCustomer(String username) {
-		String sql =String.format("SELECT * FROM couponsdb.customers WHERE Username='%s' ",username) ;
-		List userList=executeActiveCommand(sql);
-		if(userList.size()==0)
+		String sql = String.format(
+				"SELECT * FROM couponsdb.customers WHERE Username='%s' ",
+				username);
+		List userList = executeActiveCommand(sql);
+		if (userList.size() == 0)
 			return null;
-		HashMap user=(HashMap)userList.get(0);
-		Customer result=new Customer((String)user.get("Username"), (String)user.get("Password"), (String)user.get("Email"), (String)user.get("Phone"));
+		HashMap user = (HashMap) userList.get(0);
+		Customer result = new Customer((String) user.get("Username"),
+				(String) user.get("Password"), (String) user.get("Email"),
+				(String) user.get("Phone"));
 		return result;
 	}
-	
-	
-	private void executePassiveCommand(String query){
+
+	private void executePassiveCommand(String query) {
 		Statement stmt = null;
-		try{
+		try {
 			connect();
 			stmt = conn.createStatement();
 			stmt.executeUpdate(query);
-	} catch (Exception e) {
-		// Handle errors for Class.forName
-		e.printStackTrace();
-	} finally {
-		// finally block used to close resources
-		try {
-			if (stmt != null)
-				stmt.close();
-		} catch (SQLException se2) {
-		}// nothing we can do
-		try {
-			if (conn != null)
-				conn.close();
-		} catch (SQLException se) {
-			se.printStackTrace();
-		}// end finally try
-	}// end try
+		} catch (Exception e) {
+			// Handle errors for Class.forName
+			e.printStackTrace();
+		} finally {
+			// finally block used to close resources
+			try {
+				if (stmt != null)
+					stmt.close();
+			} catch (SQLException se2) {
+			}// nothing we can do
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}// end finally try
+		}// end try
 	}
-	
-	private List executeActiveCommand(String query){
+
+	private List executeActiveCommand(String query) {
 		Statement stmt = null;
-		ResultSet result=null;
-		List list=null;
-		try{
+		ResultSet result = null;
+		List list = null;
+		try {
 			connect();
 			stmt = conn.createStatement();
-			result= stmt.executeQuery(query);
-			list =resultSetToArrayList(result);
-	} catch (Exception e) {
-		// Handle errors for Class.forName
-		e.printStackTrace();
-	} finally {
-		// finally block used to close resources
-		try {
-			if (stmt != null)
-				stmt.close();
-		} catch (SQLException se2) {
-		}// nothing we can do
-		try {
-			if (conn != null)
-				conn.close();
-		} catch (SQLException se) {
-			se.printStackTrace();
-		}// end finally try
-	}// end try
+			result = stmt.executeQuery(query);
+			list = resultSetToArrayList(result);
+		} catch (Exception e) {
+			// Handle errors for Class.forName
+			e.printStackTrace();
+		} finally {
+			// finally block used to close resources
+			try {
+				if (stmt != null)
+					stmt.close();
+			} catch (SQLException se2) {
+			}// nothing we can do
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}// end finally try
+		}// end try
 		return list;
 	}
-	
-	private List resultSetToArrayList(ResultSet rs) throws SQLException{
-		  ResultSetMetaData md = rs.getMetaData();
-		  int columns = md.getColumnCount();
-		  ArrayList list = new ArrayList();
-		  while (rs.next()){
-		     HashMap row = new HashMap(columns);
-		     for(int i=1; i<=columns; ++i){           
-		      row.put(md.getColumnName(i),rs.getObject(i));
-		     }
-		      list.add(row);
-		  }
 
-		 return list;
+	private List resultSetToArrayList(ResultSet rs) throws SQLException {
+		ResultSetMetaData md = rs.getMetaData();
+		int columns = md.getColumnCount();
+		ArrayList list = new ArrayList();
+		while (rs.next()) {
+			HashMap row = new HashMap(columns);
+			for (int i = 1; i <= columns; ++i) {
+				row.put(md.getColumnName(i), rs.getObject(i));
+			}
+			list.add(row);
 		}
 
-	@Override
+		return list;
+	}
 
+	@Override
 	public void insertAdmin(Admin admin) {
-		String sql =String.format("INSERT INTO couponsdb.administrators VALUES ('%s', '%s', '%s','%s')",admin.getUsername(),admin.getPassword(),admin.getEmail(),admin.getPhone()) ;
+		String sql = String
+				.format("INSERT INTO couponsdb.administrators VALUES ('%s', '%s', '%s','%s')",
+						admin.getUsername(), admin.getPassword(),
+						admin.getEmail(), admin.getPhone());
 		executePassiveCommand(sql);
 	}
 
 	@Override
 	public void inserBusinessOwner(BusinessOwner owner) {
-		String sql =String.format("INSERT INTO couponsdb.businessowners VALUES ('%s', '%s', '%s','%s')",owner.getUsername(),owner.getPassword(),owner.getEmail(),owner.getPhone()) ;
+		String sql = String
+				.format("INSERT INTO couponsdb.businessowners VALUES ('%s', '%s', '%s','%s')",
+						owner.getUsername(), owner.getPassword(),
+						owner.getEmail(), owner.getPhone());
 		executePassiveCommand(sql);
 	}
 
 	@Override
 	public Admin selectAdmin(String username) {
-		String sql =String.format("SELECT * FROM couponsdb.administrators WHERE Username='%s' ",username) ;
-		List userList=executeActiveCommand(sql);
-		if(userList.size()==0)
+		String sql = String.format(
+				"SELECT * FROM couponsdb.administrators WHERE Username='%s' ",
+				username);
+		List userList = executeActiveCommand(sql);
+		if (userList.size() == 0)
 			return null;
-		HashMap user=(HashMap)userList.get(0);
-		Admin result=new Admin((String)user.get("Username"), (String)user.get("pass"), (String)user.get("Email"), (String)user.get("Phone"));
+		HashMap user = (HashMap) userList.get(0);
+		Admin result = new Admin((String) user.get("Username"),
+				(String) user.get("pass"), (String) user.get("Email"),
+				(String) user.get("Phone"));
 		return result;
 	}
+
 	@Override
 	public BusinessOwner selectBusinessOwner(String username) {
-		String sql =String.format("SELECT * FROM couponsdb.businessowners WHERE Username='%s' ",username) ;
+		String sql = String.format(
+				"SELECT * FROM couponsdb.businessowners WHERE Username='%s' ",
+				username);
 
-		List userList=executeActiveCommand(sql);
-		if(userList.size()==0)
+		List userList = executeActiveCommand(sql);
+		if (userList.size() == 0)
 			return null;
-		HashMap user=(HashMap)userList.get(0);
-		BusinessOwner result=new BusinessOwner((String)user.get("Username"), (String)user.get("Password"), (String)user.get("Email"), (String)user.get("Phone"));
+		HashMap user = (HashMap) userList.get(0);
+		BusinessOwner result = new BusinessOwner((String) user.get("Username"),
+				(String) user.get("Password"), (String) user.get("Email"),
+				(String) user.get("Phone"));
 
 		return result;
 	}
 
 	@Override
 	public void deleteAdmin(String username) {
-		String sql =String.format("DELETE FROM couponsdb.administrators WHERE Username ='%s'",username) ;
+		String sql = String.format(
+				"DELETE FROM couponsdb.administrators WHERE Username ='%s'",
+				username);
 		executePassiveCommand(sql);
 	}
+
 	@Override
 	public void deleteBusinessOwner(String username) {
-		String sql =String.format("DELETE FROM couponsdb.businessowners WHERE Username='%s' ",username) ;
+		String sql = String.format(
+				"DELETE FROM couponsdb.businessowners WHERE Username='%s' ",
+				username);
 		executePassiveCommand(sql);
-		
+
 	}
 
 	@Override
 	public void deleteCustomer(String username) {
-		String sql =String.format("DELETE FROM couponsdb.customers WHERE Username ='%s'",username) ;
+		String sql = String.format(
+				"DELETE FROM couponsdb.customers WHERE Username ='%s'",
+				username);
 		executePassiveCommand(sql);
 	}
+
 	@Override
 	public void updateBusinessOwner(BusinessOwner owner) {
-		String sql =String.format("UPDATE couponsdb.businessowners SET Password='%s', Email='%s',Phone='%s' WHERE Username='%s' ",owner.getPassword(),owner.getEmail(),owner.getPhone(),owner.getUsername()); 
+		String sql = String
+				.format("UPDATE couponsdb.businessowners SET Password='%s', Email='%s',Phone='%s' WHERE Username='%s' ",
+						owner.getPassword(), owner.getEmail(),
+						owner.getPhone(), owner.getUsername());
 		executePassiveCommand(sql);
-		
+
 	}
 
 	@Override
 	public void insertBusiness(Business business) {
-		String sql =String.format("INSERT INTO couponsdb.businesses VALUES ('%s', '%s', '%s','%s','%s','%s')",business.getName(),business.getAddress(),business.getCity(),business.getCategory(),business.getDescription(),business.getOwner()) ;
+		String sql = String
+				.format("INSERT INTO couponsdb.businesses VALUES ('%s', '%s', '%s','%s','%s','%s')",
+						business.getName(), business.getAddress(),
+						business.getCity(), business.getCategory(),
+						business.getDescription(), business.getOwner());
 		executePassiveCommand(sql);
-		
+
 	}
 
 	@Override
 	public Business selectBusiness(String name) {
-		String sql =String.format("SELECT * FROM couponsdb.businesses WHERE Name='%s' ",name) ;
-		List businessList=executeActiveCommand(sql);
-		if(businessList.size()==0)
+		String sql = String.format(
+				"SELECT * FROM couponsdb.businesses WHERE Name='%s' ", name);
+		List businessList = executeActiveCommand(sql);
+		if (businessList.size() == 0)
 			return null;
-		HashMap business=(HashMap)businessList.get(0);
-		Business result=new Business((String)business.get("Name"),(String)business.get("Address"),(String)business.get("City"),(String)business.get("Category"),(String)business.get("Description"),(String)business.get("Owner"));
+		HashMap business = (HashMap) businessList.get(0);
+		Business result = new Business((String) business.get("Name"),
+				(String) business.get("Address"),
+				(String) business.get("City"),
+				(String) business.get("Category"),
+				(String) business.get("Description"),
+				(String) business.get("Owner"));
 		return result;
 	}
 
 	@Override
 	public void deleteBusiness(String name) {
-		String sql =String.format("DELETE FROM couponsdb.businesses WHERE Name='%s' ",name) ;
+		String sql = String.format(
+				"DELETE FROM couponsdb.businesses WHERE Name='%s' ", name);
 		executePassiveCommand(sql);
-		
-	}
-		
 
+	}
+
+	@Override
+	public void insertCoupon(Coupon coupon) {
+		String sql = String
+				.format("INSERT INTO couponsdb.coupons VALUES ('%s', '%s', '%s', %d, %d, %d,'%s')",
+						coupon.getName(), coupon.getDescription(),
+						coupon.getCategory(), coupon.getInitial_price(),
+						coupon.getDiscount_price(), coupon.getRating(),
+						coupon.getBusiness_name());
+		executePassiveCommand(sql);
+
+	}
+
+	@Override
+	public Coupon selectCoupon(String name) {
+		String sql = String.format(
+				"SELECT * FROM couponsdb.coupons WHERE Name='%s' ", name);
+		List userList = executeActiveCommand(sql);
+		if (userList.size() == 0)
+			return null;
+		HashMap coupon = (HashMap) userList.get(0);
+		Coupon result = new Coupon((String) coupon.get("Name"),
+				(String) coupon.get("Description"),
+				(String) coupon.get("Category"),
+				(int) coupon.get("InitialPrice"),
+				(int) coupon.get("DiscountPrice"), (int) coupon.get("Rating"),
+				(String) coupon.get("Business"));
+		return result;
+	}
+
+	@Override
+	public void deleteCoupon(String name) {
+		String sql = String.format(
+				"DELETE FROM couponsdb.coupons WHERE Name='%s' ", name);
+		executePassiveCommand(sql);
+
+	}
+
+	@Override
+	public void updateCoupon(Coupon coupon) {
+		String sql = String
+				.format("UPDATE couponsdb.coupons SET Description='%s',Category='%s' ,InitialPrice=%d ,DiscountPrice=%d ,Rating=%d ,Business='%s' WHERE Name='%s' ",
+						coupon.getDescription(), coupon.getCategory(),
+						coupon.getInitial_price(), coupon.getDiscount_price(),
+						coupon.getRating(), coupon.getBusiness_name(),
+						coupon.getName());
+		executePassiveCommand(sql);
+
+	}
 }
