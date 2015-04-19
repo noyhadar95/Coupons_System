@@ -87,7 +87,7 @@ public class DALTests {
 		dal.inserBusinessOwner(owner);
 
 		Business business = new Business("cas", "pqwfqwass", "asc", "wqfqwf",
-				"uu", "owner1"); // TODO make sure owner exists?
+				"uu", "owner1");
 		dal.insertBusiness(business);
 		Business test_business = dal.selectBusiness(business.getName());
 		assertTrue(test_business.getName().equals(business.getName()));
