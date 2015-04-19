@@ -16,32 +16,27 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `businesses`
+-- Table structure for table `category`
 --
 
-DROP TABLE IF EXISTS `businesses`;
+DROP TABLE IF EXISTS `category`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `businesses` (
-  `Name` varchar(50) NOT NULL,
-  `Address` varchar(50) NOT NULL,
-  `City` varchar(50) NOT NULL,
-  `Category` varchar(50) NOT NULL,
-  `Description` varchar(50) NOT NULL,
-  `Owner` varchar(50) NOT NULL,
-  PRIMARY KEY (`Name`),
-  KEY `Owner_idx` (`Owner`),
-  CONSTRAINT `FK_Owner` FOREIGN KEY (`Owner`) REFERENCES `businessowners` (`Username`) ON UPDATE CASCADE
+CREATE TABLE `category` (
+  `Id` int(11) NOT NULL,
+  `Name` varchar(45) NOT NULL,
+  PRIMARY KEY (`Id`),
+  UNIQUE KEY `Name_UNIQUE` (`Name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `businesses`
+-- Dumping data for table `category`
 --
 
-LOCK TABLES `businesses` WRITE;
-/*!40000 ALTER TABLE `businesses` DISABLE KEYS */;
-/*!40000 ALTER TABLE `businesses` ENABLE KEYS */;
+LOCK TABLES `category` WRITE;
+/*!40000 ALTER TABLE `category` DISABLE KEYS */;
+/*!40000 ALTER TABLE `category` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -53,4 +48,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-04-19 20:35:10
+-- Dump completed on 2015-04-19 20:35:09

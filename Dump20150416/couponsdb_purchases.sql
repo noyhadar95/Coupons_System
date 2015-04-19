@@ -18,13 +18,13 @@
 --
 -- Table structure for table `purchases`
 --
-USE couponsdb
+
 DROP TABLE IF EXISTS `purchases`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `purchases` (
   `SerialKey` varchar(50) NOT NULL,
-  `Rating` varchar(50) NOT NULL,
+  `Rating` int(11) NOT NULL,
   `ClientName` varchar(50) NOT NULL,
   `CouponName` varchar(50) NOT NULL,
   PRIMARY KEY (`SerialKey`),
@@ -53,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-04-17  0:42:23
+-- Dump completed on 2015-04-19 20:35:09

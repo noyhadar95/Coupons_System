@@ -16,32 +16,29 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `businesses`
+-- Table structure for table `customers_preferences`
 --
 
-DROP TABLE IF EXISTS `businesses`;
+DROP TABLE IF EXISTS `customers_preferences`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `businesses` (
-  `Name` varchar(50) NOT NULL,
-  `Address` varchar(50) NOT NULL,
-  `City` varchar(50) NOT NULL,
-  `Category` varchar(50) NOT NULL,
-  `Description` varchar(50) NOT NULL,
-  `Owner` varchar(50) NOT NULL,
-  PRIMARY KEY (`Name`),
-  KEY `Owner_idx` (`Owner`),
-  CONSTRAINT `FK_Owner` FOREIGN KEY (`Owner`) REFERENCES `businessowners` (`Username`) ON UPDATE CASCADE
+CREATE TABLE `customers_preferences` (
+  `Customer_Username` varchar(50) NOT NULL,
+  `Category_Id` int(11) NOT NULL,
+  PRIMARY KEY (`Category_Id`,`Customer_Username`),
+  KEY `FK_Preference_Customer_idx` (`Customer_Username`),
+  CONSTRAINT `FK_Preference_Category` FOREIGN KEY (`Category_Id`) REFERENCES `category` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_Preference_Customer` FOREIGN KEY (`Customer_Username`) REFERENCES `customers` (`Username`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `businesses`
+-- Dumping data for table `customers_preferences`
 --
 
-LOCK TABLES `businesses` WRITE;
-/*!40000 ALTER TABLE `businesses` DISABLE KEYS */;
-/*!40000 ALTER TABLE `businesses` ENABLE KEYS */;
+LOCK TABLES `customers_preferences` WRITE;
+/*!40000 ALTER TABLE `customers_preferences` DISABLE KEYS */;
+/*!40000 ALTER TABLE `customers_preferences` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
