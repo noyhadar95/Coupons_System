@@ -18,7 +18,7 @@ public class DAL implements IDAL {
 
 	// Database credentials
 	static final String USER = "root";
-	static final String PASS = "";
+	static final String PASS = "root123";
 
 	public DAL() {
 		initialDatabase();
@@ -233,7 +233,7 @@ public class DAL implements IDAL {
 			stmt.executeUpdate(query);
 		} catch (Exception e) {
 			// Handle errors for Class.forName
-			e.printStackTrace();
+			//e.printStackTrace();
 		} finally {
 			// finally block used to close resources
 			try {

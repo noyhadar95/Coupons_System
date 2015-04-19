@@ -253,13 +253,29 @@ public class DALTests {
 		dal.deleteCustomer(customer.getUsername());
 	}
 
-	/*
+	/**
 	 * test that one can't add a business without a business owner. we insert a
 	 * business without a business owner and check that it throws exception.
 	 */
 	@Test
 	public void testBusinessOwnerFKBusiness() {
-//		dal.sele(owner.getUsername());
+
+		// first make sure that the business owner for the business we add
+		// does
+		// no already exist in the db
+		String businessOwnerUserName = "user1";
+		BusinessOwner temp_owner = dal
+				.selectBusinessOwner(businessOwnerUserName);
+		assertTrue(temp_owner == null);
+
+		Business business = new Business("business_name", "pqwfqwass", "asc",
+				"wqfqwf", "uu", businessOwnerUserName);
+		dal.insertBusiness(business);
+
+		// test that the business wasn't inserted
+		Business test_business = dal.selectBusiness(business.getName());
+		assertTrue(test_business == null);
+
 	}
 
 }
