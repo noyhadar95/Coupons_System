@@ -13,14 +13,168 @@ public class DAL implements IDAL {
 
 	// JDBC driver name and database URL
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-	static final String DB_URL = "jdbc:mysql://localhost:3306/MySQL";
+	static final String DB_URL = "jdbc:mysql://localhost/";
+	 String db_name="";
 
 	// Database credentials
 	static final String USER = "root";
 	static final String PASS = "";
 
 	public DAL() {
-		// connect();
+		initialDatabase();
+	}
+
+	private void initialDatabase() {
+
+		initializeCouponsDatabase();
+
+		initializeAdministratorsTable();
+
+		initializeBusinessOwnersTable();
+
+		initializeBusinessesTable();
+
+		initializeCategoryTable();
+
+		initializeCustomersTable();
+
+		initializeCouponsTable();
+
+		initializeCustomersPrefencesTable();
+
+		initializePurchasesTable();
+
+	}
+
+	private void initializeCouponsDatabase() {
+		String query = "DROP DATABASE IF EXISTS couponsdb";
+		executePassiveCommand(query);
+
+		query = "CREATE DATABASE couponsdb";
+		executePassiveCommand(query);
+
+		db_name = "couponsdb";
+	}
+
+	private void initializePurchasesTable() {
+		String query;
+		query = "DROP TABLE IF EXISTS `purchases`;";
+		executePassiveCommand(query);
+		query = "CREATE TABLE `purchases` ("
+				+ "`SerialKey` varchar(50) NOT NULL,"
+				+ "`Rating` int(11) NOT NULL,"
+				+ "`CustomerName` varchar(50) NOT NULL,"
+				+ "`CouponName` varchar(50) NOT NULL,"
+				+ "PRIMARY KEY (`SerialKey`),"
+				+ "KEY `FK_Purchase_Customers_idx` (`CustomerName`),"
+				+ "KEY `FK_Purchase_Coupon_idx` (`CouponName`),"
+				+ "CONSTRAINT `FK_Purchase_Coupon` FOREIGN KEY (`CouponName`) REFERENCES `coupons` (`Name`) ON DELETE NO ACTION ON UPDATE CASCADE,"
+				+ "CONSTRAINT `FK_Purchase_Customers` FOREIGN KEY (`CustomerName`) REFERENCES `customers` (`Username`) ON DELETE NO ACTION ON UPDATE CASCADE"
+				+ ")";
+		executePassiveCommand(query);
+	}
+
+	private void initializeCustomersPrefencesTable() {
+		String query;
+		query = "DROP TABLE IF EXISTS `customers_preferences`;";
+		executePassiveCommand(query);
+		query = "CREATE TABLE `customers_preferences` ("
+				+ "`Customer_Username` varchar(50) NOT NULL,"
+				+ "`Category_Id` int(11) NOT NULL,"
+				+ "PRIMARY KEY (`Category_Id`,`Customer_Username`),"
+				+ "KEY `FK_Preference_Customer_idx` (`Customer_Username`),"
+				+ "CONSTRAINT `FK_Preference_Category` FOREIGN KEY (`Category_Id`) REFERENCES `category` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE,"
+				+ "CONSTRAINT `FK_Preference_Customer` FOREIGN KEY (`Customer_Username`) REFERENCES `customers` (`Username`) ON DELETE CASCADE ON UPDATE CASCADE"
+				+ ")";
+		executePassiveCommand(query);
+	}
+
+	private void initializeCouponsTable() {
+		String query;
+		query = "DROP TABLE IF EXISTS `coupons`;";
+		executePassiveCommand(query);
+		query = "CREATE TABLE `coupons` ("
+				+ "`Name` varchar(50) NOT NULL,"
+				+ "`Description` varchar(50) NOT NULL,"
+				+ "`Category` int(11) NOT NULL,"
+				+ "`InitialPrice` int(11) NOT NULL,"
+				+ "`DiscountPrice` int(11) NOT NULL,"
+				+ "`Rating` int(11) NOT NULL,"
+				+ "`Business` varchar(45) NOT NULL,"
+				+ "PRIMARY KEY (`Name`),"
+				+ "KEY `fk_idx` (`Business`),"
+				+ "KEY `FK-CouponCategory_idx` (`Category`),"
+				+ "CONSTRAINT `FK-CouponCategory` FOREIGN KEY (`Category`) REFERENCES `category` (`Id`) ON DELETE RESTRICT ON UPDATE CASCADE,"
+				+ "CONSTRAINT `FK_CouponsBusiness` FOREIGN KEY (`Business`) REFERENCES `businesses` (`Name`) ON DELETE CASCADE ON UPDATE CASCADE"
+				+ ") ";
+		executePassiveCommand(query);
+	}
+
+	private void initializeCustomersTable() {
+		String query;
+		query = "DROP TABLE IF EXISTS `customers`;";
+		executePassiveCommand(query);
+		query = "CREATE TABLE `customers` ("
+				+ "`Username` varchar(50) NOT NULL,"
+				+ "`Password` varchar(50) NOT NULL,"
+				+ "`Email` varchar(45) NOT NULL,"
+				+ "`Phone` varchar(50) NOT NULL," + "PRIMARY KEY (`Username`)"
+				+ ")";
+		executePassiveCommand(query);
+	}
+
+	private void initializeCategoryTable() {
+		String query;
+		query = "DROP TABLE IF EXISTS `category`;";
+		executePassiveCommand(query);
+		query = "CREATE TABLE `category` (" + "`Id` int(11) NOT NULL,"
+				+ "`Name` varchar(45) NOT NULL," + "PRIMARY KEY (`Id`),"
+				+ "UNIQUE KEY `Name_UNIQUE` (`Name`)" + ") ";
+		executePassiveCommand(query);
+	}
+
+	private void initializeBusinessesTable() {
+		String query;
+		query = "DROP TABLE IF EXISTS `businesses`;";
+		executePassiveCommand(query);
+		query = " CREATE TABLE `businesses` ("
+				+ "`Name` varchar(50) NOT NULL,"
+				+ "`Address` varchar(50) NOT NULL,"
+				+ "`City` varchar(50) NOT NULL,"
+				+ "`Category` varchar(50) NOT NULL,"
+				+ "`Description` varchar(50) NOT NULL,"
+				+ "`Owner` varchar(50) NOT NULL,"
+				+ "PRIMARY KEY (`Name`),"
+				+ "KEY `Owner_idx` (`Owner`),"
+				+ "CONSTRAINT `FK_Owner` FOREIGN KEY (`Owner`) REFERENCES `businessowners` (`Username`) ON UPDATE CASCADE"
+				+ ")";
+		executePassiveCommand(query);
+	}
+
+	private void initializeBusinessOwnersTable() {
+		String query;
+		query = "DROP TABLE IF EXISTS `businessowners`;";
+		executePassiveCommand(query);
+		query = " CREATE TABLE `businessowners` ("
+				+ "`Username` varchar(50) NOT NULL,"
+				+ "`Password` varchar(50) NOT NULL,"
+				+ "`Email` varchar(50) NOT NULL,"
+				+ "`Phone` varchar(50) NOT NULL," + "PRIMARY KEY (`Username`)"
+				+ ")";
+		executePassiveCommand(query);
+	}
+
+	private void initializeAdministratorsTable() {
+		String query;
+		query = "DROP TABLE IF EXISTS couponsdb.administrators";
+		executePassiveCommand(query);
+		query = " CREATE TABLE `administrators` ("
+				+ "  `Username` varchar(50) NOT NULL,"
+				+ " `Password` varchar(50) NOT NULL,"
+				+ " `Email` varchar(50) NOT NULL,"
+				+ "   `Phone` varchar(50) NOT NULL,"
+				+ "  PRIMARY KEY (`Username`)" + " )";
+		executePassiveCommand(query);
 	}
 
 	public void connect() {
@@ -31,7 +185,7 @@ public class DAL implements IDAL {
 
 			// STEP 3: Open a connection
 			// System.out.println("Connecting to database...");
-			conn = DriverManager.getConnection(DB_URL, USER, PASS);
+			conn = DriverManager.getConnection(DB_URL+db_name, USER, PASS);
 
 		} catch (SQLException se) {
 			// Handle errors for JDBC
@@ -264,7 +418,7 @@ public class DAL implements IDAL {
 	@Override
 	public void insertCoupon(Coupon coupon) {
 		String sql = String
-				.format("INSERT INTO couponsdb.coupons VALUES ('%s', '%s', '%s', %d, %d, %d,'%s')",
+				.format("INSERT INTO couponsdb.coupons VALUES ('%s', '%s', %d, %d, %d, %d,'%s')",
 						coupon.getName(), coupon.getDescription(),
 						coupon.getCategory(), coupon.getInitial_price(),
 						coupon.getDiscount_price(), coupon.getRating(),
@@ -283,8 +437,7 @@ public class DAL implements IDAL {
 		HashMap coupon = (HashMap) userList.get(0);
 		Coupon result = new Coupon((String) coupon.get("Name"),
 				(String) coupon.get("Description"),
-				(String) coupon.get("Category"),
-				(int) coupon.get("InitialPrice"),
+				(int) coupon.get("Category"), (int) coupon.get("InitialPrice"),
 				(int) coupon.get("DiscountPrice"), (int) coupon.get("Rating"),
 				(String) coupon.get("Business"));
 		return result;
@@ -301,11 +454,73 @@ public class DAL implements IDAL {
 	@Override
 	public void updateCoupon(Coupon coupon) {
 		String sql = String
-				.format("UPDATE couponsdb.coupons SET Description='%s',Category='%s' ,InitialPrice=%d ,DiscountPrice=%d ,Rating=%d ,Business='%s' WHERE Name='%s' ",
+				.format("UPDATE couponsdb.coupons SET Description='%s',Category=%d ,InitialPrice=%d ,DiscountPrice=%d ,Rating=%d ,Business='%s' WHERE Name='%s' ",
 						coupon.getDescription(), coupon.getCategory(),
 						coupon.getInitial_price(), coupon.getDiscount_price(),
 						coupon.getRating(), coupon.getBusiness_name(),
 						coupon.getName());
+		executePassiveCommand(sql);
+
+	}
+
+	@Override
+	public void insertPurchase(Purchase purchase) {
+		String sql = String
+				.format("INSERT INTO couponsdb.purchases VALUES ('%s', %d, '%s', '%s')",
+						purchase.getSerialKey(), purchase.getRating(),
+						purchase.getCustomerName(), purchase.getCouponName());
+		executePassiveCommand(sql);
+
+	}
+
+	@Override
+	public Purchase selectPurchase(String serialKey) {
+		String sql = String.format(
+				"SELECT * FROM couponsdb.purchases WHERE SerialKey='%s' ",
+				serialKey);
+		List userList = executeActiveCommand(sql);
+		if (userList.size() == 0)
+			return null;
+		HashMap purchase = (HashMap) userList.get(0);
+		Purchase result = new Purchase((String) purchase.get("SerialKey"),
+				(int) purchase.get("Rating"),
+				(String) purchase.get("CustomerName"),
+				(String) purchase.get("CouponName"));
+		return result;
+	}
+
+	@Override
+	public void deletePurchase(String serialKey) {
+		String sql = String.format(
+				"DELETE FROM couponsdb.purchases WHERE SerialKey='%s' ",
+				serialKey);
+		executePassiveCommand(sql);
+
+	}
+
+	@Override
+	public void updatePurchase(Purchase purchase) {
+		String sql = String
+				.format("UPDATE couponsdb.purchases SET Rating=%d ,CustomerName='%s',CouponName='%s' WHERE SerialKey='%s' ",
+						purchase.getRating(), purchase.getCustomerName(),
+						purchase.getCouponName(), purchase.getSerialKey());
+		executePassiveCommand(sql);
+
+	}
+
+	@Override
+	public void insertCategory(Category category) {
+		String sql = String.format(
+				"INSERT INTO couponsdb.category VALUES (%d, '%s')",
+				category.getId(), category.getName());
+		executePassiveCommand(sql);
+
+	}
+
+	@Override
+	public void deleteCategory(int id) {
+		String sql = String.format(
+				"DELETE FROM couponsdb.category WHERE Id=%d ", id);
 		executePassiveCommand(sql);
 
 	}

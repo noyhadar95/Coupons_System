@@ -4,13 +4,13 @@ public class Coupon {
 
 	private String name;
 	private String description;
-	private String category;
+	private int category;
 	private int initial_price;
 	private int discount_price;
 	private int rating;
 	private String business_name;
 
-	public Coupon(String name, String description, String category,
+	public Coupon(String name, String description, int category,
 			int initial_price, int discount_price, int rating,
 			String business_name) {
 		this.name = name;
@@ -30,7 +30,7 @@ public class Coupon {
 		return description;
 	}
 
-	public String getCategory() {
+	public int getCategory() {
 		return category;
 	}
 

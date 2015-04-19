@@ -15,6 +15,10 @@ public interface IDAL {
 
 	void insertCoupon(Coupon coupon);
 
+	void insertPurchase(Purchase purchase);
+
+	void insertCategory(Category category);
+
 	// select
 	Customer selectCustomer(String username);
 
@@ -25,6 +29,8 @@ public interface IDAL {
 	Business selectBusiness(String name);
 
 	Coupon selectCoupon(String name);
+
+	Purchase selectPurchase(String serialKey);
 
 	// delete
 	void deleteCustomer(String username);
@@ -37,9 +43,15 @@ public interface IDAL {
 
 	void deleteCoupon(String name);
 
+	void deletePurchase(String serialKey);
+
+	void deleteCategory(int id);
+
 	// update
 	void updateBusinessOwner(BusinessOwner owner);
 
 	void updateCoupon(Coupon coupon);
+
+	void updatePurchase(Purchase purchase);
 
 }

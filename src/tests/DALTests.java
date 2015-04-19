@@ -102,16 +102,18 @@ public class DALTests {
 	@Test
 	public void testAddDeleteCoupon() {
 		// insert business owner and business before insert a coupon because
-		// coupon has a foreign key to business name.
+		// coupon has a foreign key to business name. And insert a category.
 		BusinessOwner owner = new BusinessOwner("owner1", "pass",
 				"mail@gmail.com", "0129712");
 		dal.inserBusinessOwner(owner);
 		Business business = new Business("business_name", "pqwfqwass", "asc",
 				"wqfqwf", "uu", "owner1");
 		dal.insertBusiness(business);
+		Category category = new Category(1, "cat1");
+		dal.insertCategory(category);
 
-		Coupon coupon = new Coupon("coupon_name", "description", "category1",
-				40, 20, 4, "business_name");
+		Coupon coupon = new Coupon("coupon_name", "description", 1, 40, 20, 4,
+				"business_name");
 		dal.insertCoupon(coupon);
 		Coupon test_coupon = dal.selectCoupon(coupon.getName());
 		assertTrue(test_coupon.getName().equals(coupon.getName()));
@@ -119,6 +121,8 @@ public class DALTests {
 		test_coupon = dal.selectCoupon(coupon.getName());
 		assertTrue(test_coupon == null);
 
+		// delete category
+		dal.deleteCategory(category.getId());
 		// delete business
 		dal.deleteBusiness(business.getName());
 		// delete business owner
@@ -128,17 +132,19 @@ public class DALTests {
 	@Test
 	public void testUpdateCoupon() {
 		// insert business owner and business before insert a coupon because
-		// coupon has a foreign key to business name.
+		// coupon has a foreign key to business name. And insert a category.
 		BusinessOwner owner = new BusinessOwner("owner1", "pass",
 				"mail@gmail.com", "0129712");
 		dal.inserBusinessOwner(owner);
 		Business business = new Business("business_name", "pqwfqwass", "asc",
 				"wqfqwf", "uu", "owner1");
 		dal.insertBusiness(business);
+		Category category = new Category(1, "cat1");
+		dal.insertCategory(category);
 
 		// insert coupon
-		Coupon coupon = new Coupon("coupon_name", "description", "category1",
-				40, 20, 4, "business_name");
+		Coupon coupon = new Coupon("coupon_name", "description", 1, 40, 20, 4,
+				"business_name");
 		dal.insertCoupon(coupon);
 
 		// update the coupon
@@ -153,11 +159,107 @@ public class DALTests {
 
 		// delete the coupon
 		dal.deleteCoupon(coupon.getName());
+		// delete category
+		dal.deleteCategory(category.getId());
 		// delete business
 		dal.deleteBusiness(business.getName());
 		// delete business owner
 		dal.deleteBusinessOwner(owner.getUsername());
 
+	}
+
+	@Test
+	public void testAddDeletePurchase() {
+		// insert business owner and business before insert a coupon because
+		// coupon has a foreign key to business name. And then insert coupon and
+		// customer in order to insert a purchase.
+		Customer customer = new Customer("cust1", "pass", "mail@gmail.com",
+				"0129712");
+		dal.insertCustomer(customer);
+		BusinessOwner owner = new BusinessOwner("owner1", "pass",
+				"mail@gmail.com", "0129712");
+		dal.inserBusinessOwner(owner);
+		Business business = new Business("business_name", "pqwfqwass", "asc",
+				"wqfqwf", "uu", "owner1");
+		dal.insertBusiness(business);
+		Category category = new Category(1, "cat1");
+		dal.insertCategory(category);
+		Coupon coupon = new Coupon("coupon1", "description", 1, 40, 20, 4,
+				"business_name");
+		dal.insertCoupon(coupon);
+
+		Purchase purchase = new Purchase("serial_key", 4, "cust1", "coupon1");
+		dal.insertPurchase(purchase);
+		Purchase test_purchase = dal.selectPurchase(purchase.getSerialKey());
+		assertTrue(test_purchase.getSerialKey().equals(purchase.getSerialKey()));
+		dal.deletePurchase(purchase.getSerialKey());
+		test_purchase = dal.selectPurchase(purchase.getSerialKey());
+		assertTrue(test_purchase == null);
+
+		// delete the coupon
+		dal.deleteCoupon(coupon.getName());
+		// delete category
+		dal.deleteCategory(category.getId());
+		// delete business
+		dal.deleteBusiness(business.getName());
+		// delete business owner
+		dal.deleteBusinessOwner(owner.getUsername());
+		// delete customer
+		dal.deleteCustomer(customer.getUsername());
+	}
+
+	@Test
+	public void testUpdatePurchase() {
+		// insert business owner and business before insert a coupon because
+		// coupon has a foreign key to business name. And then insert coupon and
+		// customer in order to insert a purchase.
+		Customer customer = new Customer("cust1", "pass", "mail@gmail.com",
+				"0129712");
+		dal.insertCustomer(customer);
+		BusinessOwner owner = new BusinessOwner("owner1", "pass",
+				"mail@gmail.com", "0129712");
+		dal.inserBusinessOwner(owner);
+		Business business = new Business("business_name", "pqwfqwass", "asc",
+				"wqfqwf", "uu", "owner1");
+		dal.insertBusiness(business);
+		Category category = new Category(1, "cat1");
+		dal.insertCategory(category);
+		Coupon coupon = new Coupon("coupon1", "description", 1, 40, 20, 4,
+				"business_name");
+		dal.insertCoupon(coupon);
+
+		Purchase purchase = new Purchase("serial_key", 4, "cust1", "coupon1");
+		dal.insertPurchase(purchase);
+
+		// update the purchase
+		purchase.setRating(1);
+
+		dal.updatePurchase(purchase);
+
+		Purchase test_purchase = dal.selectPurchase(purchase.getSerialKey());
+		assertTrue((test_purchase.getRating() == purchase.getRating()));
+
+		// delete the purchase
+		dal.deletePurchase(purchase.getSerialKey());
+		// delete the coupon
+		dal.deleteCoupon(coupon.getName());
+		// delete category
+		dal.deleteCategory(category.getId());
+		// delete business
+		dal.deleteBusiness(business.getName());
+		// delete business owner
+		dal.deleteBusinessOwner(owner.getUsername());
+		// delete customer
+		dal.deleteCustomer(customer.getUsername());
+	}
+
+	/*
+	 * test that one can't add a business without a business owner. we insert a
+	 * business without a business owner and check that it throws exception.
+	 */
+	@Test
+	public void testBusinessOwnerFKBusiness() {
+//		dal.sele(owner.getUsername());
 	}
 
 }
