@@ -6,14 +6,14 @@ import javax.swing.*;
  
 public class CardLayoutDemo implements ItemListener {
     JPanel cards; //a panel that uses CardLayout
-    final static String ADD = "Add";
-    final static String EDIT = "Edit";
+    final static String COUPON = "Coupon";
+    final static String BUSINESSOWNER = "Business Owner";
     final static String DELETE = "Delete";
      
     public void addComponentToPane(Container pane) {
         //Put the JComboBox in a JPanel to get a nicer look.
         JPanel comboBoxPane = new JPanel(); //use FlowLayout
-        String comboBoxItems[] = { ADD,EDIT,DELETE };
+        String comboBoxItems[] = { COUPON,BUSINESSOWNER,DELETE };
         JComboBox cb = new JComboBox(comboBoxItems);
         cb.setEditable(false);
         cb.addItemListener(this);
@@ -31,9 +31,9 @@ public class CardLayoutDemo implements ItemListener {
         JPanel card3=new AdminAddPanel();
         //Create the panel that contains the "cards".
         cards = new JPanel(new CardLayout());
-        cards.add(card3, ADD);
+        cards.add(card3, COUPON);
         cards.add(card1, DELETE);
-        cards.add(card2, EDIT);
+        cards.add(card2, BUSINESSOWNER);
          
         pane.add(comboBoxPane, BorderLayout.PAGE_START);
         pane.add(cards, BorderLayout.CENTER);

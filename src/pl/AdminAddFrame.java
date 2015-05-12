@@ -75,7 +75,23 @@ public class AdminAddFrame extends JFrame implements ItemListener{
     }
      
     public static void main(String[] args) {
-        /* Use an appropriate Look and Feel */
+        initFrame();
+    }
+	/*public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					AdminAddFrame frame = new AdminAddFrame();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}*/
+
+	private static void initFrame() {
+		/* Use an appropriate Look and Feel */
         try {
             //UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
             UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
@@ -112,19 +128,7 @@ public class AdminAddFrame extends JFrame implements ItemListener{
 				}
             }
         });
-    }
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AdminAddFrame frame = new AdminAddFrame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
+	}
 
 	/**
 	 * Create the frame.
@@ -137,6 +141,7 @@ public class AdminAddFrame extends JFrame implements ItemListener{
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		//initFrame();
 	}
 
 }

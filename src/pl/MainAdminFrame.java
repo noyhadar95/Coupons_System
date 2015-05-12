@@ -52,8 +52,16 @@ public class MainAdminFrame extends JFrame {
 		JButton btnAdd = new JButton("Add");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AdminAddFrame addFrame=new AdminAddFrame();
-				addFrame.setVisible(true);
+				AdminAddFrame addFrame = new AdminAddFrame();
+				addFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		         
+		        //Create and set up the content pane.
+		        CardLayoutDemo demo = new CardLayoutDemo();
+		        demo.addComponentToPane(addFrame.getContentPane());
+		         
+		        //Display the window.
+		        addFrame.pack();
+		        addFrame.setVisible(true);
 			}
 		});
 		
