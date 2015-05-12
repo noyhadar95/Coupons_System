@@ -17,6 +17,8 @@ import dal.IDAL;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 
+import bl.BL;
+import bl.IBL;
 import bl_backend.Customer;
 
 import java.awt.SystemColor;
@@ -27,7 +29,7 @@ public class LoginFrame extends JFrame {
 
 	private final int WINDOW_WIDTH = 700, WINDOW_HEIGHT = 550;
 	private JPanel contentPane;
-	private IDAL dal;
+	private IBL bl;
 	private JTextField textFieldUsername;
 	private JTextField textFieldPassword;
 
@@ -61,6 +63,8 @@ public class LoginFrame extends JFrame {
 		
 		setContentPane(contentPane);
 		
+		bl = new BL();
+		
 		JButton btnLogin = new JButton("login");
 		btnLogin.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnLogin.addActionListener(new ActionListener() {
@@ -72,17 +76,17 @@ public class LoginFrame extends JFrame {
 							"enter all fields");
 				}
 				else{
-					// TODO: login stuff
-					// TODO: pass the username and password that was entered to be check on the BL
+					// pass the username and password that was entered to be check on the BL
 					String tryUsername = textFieldUsername.getText();
-					Customer cust = dal.selectCustomer(tryUsername);
-					if(cust.getUsername().equals(tryUsername)&&cust.getPassword().equals(textFieldPassword.getText())){
+					String tryPassword = textFieldPassword.getText();
+					boolean success = bl.tryLogin(tryUsername, tryPassword);
+					if(success){
 						JOptionPane.showMessageDialog((Component) e.getSource(),
 								"success");
 					}
 					else{
 						JOptionPane.showMessageDialog((Component) e.getSource(),
-								"fail");
+								"incorrect information, please try again");
 					}
 				}
 				
@@ -156,30 +160,27 @@ public class LoginFrame extends JFrame {
 
 		
 	}
-
 }
 
 /*
-
-public class LoginFrame extends JFrame implements ActionListener {
-	
-	public LoginFrame(IDAL dal) {
-		
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.getContentPane().setLayout(new BorderLayout());
-		this.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-
-		this.setResizable(false);
-		
-		this.dal = dal;
-		
-		this.getContentPane().add(new JPanel(), BorderLayout.CENTER);
-
-		this.setFocusable(true);
-		this.setVisible(true);
-
-	}
-
-}
-
-*/
+ * 
+ * public class LoginFrame extends JFrame implements ActionListener {
+ * 
+ * public LoginFrame(IDAL dal) {
+ * 
+ * this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+ * this.getContentPane().setLayout(new BorderLayout());
+ * this.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+ * 
+ * this.setResizable(false);
+ * 
+ * this.dal = dal;
+ * 
+ * this.getContentPane().add(new JPanel(), BorderLayout.CENTER);
+ * 
+ * this.setFocusable(true); this.setVisible(true);
+ * 
+ * }
+ * 
+ * }
+ */
