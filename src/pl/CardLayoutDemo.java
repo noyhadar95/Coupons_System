@@ -28,7 +28,7 @@ public class CardLayoutDemo implements ItemListener {
         JPanel card2 = new JPanel();
         card2.add(new JTextField("TextField", 20));
          
-        JPanel card3=new AdminAddPanel();
+        JPanel card3=new AddCouponPanel();
         //Create the panel that contains the "cards".
         cards = new JPanel(new CardLayout());
         cards.add(card3, COUPON);
