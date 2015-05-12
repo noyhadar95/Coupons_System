@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 public class MainFrame extends JFrame implements ActionListener {
 
 	private final int WINDOW_WIDTH = 900, WINDOW_HEIGHT = 700;
+	private int x = 5;
 	
 	public MainFrame() {
 		super("Coupons For You");
