@@ -1,9 +1,14 @@
 package dal;
 
+import static org.junit.Assert.assertTrue;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Vector;
+
+import javax.swing.table.DefaultTableModel;
 
 import bl_backend.*;
 
@@ -18,7 +23,7 @@ public class DAL implements IDAL {
 
 	// Database credentials
 	static final String USER = "root";
-	static final String PASS = "root123";
+	static final String PASS = "";
 
 	public DAL() {
 		initialDatabase();
@@ -224,7 +229,61 @@ public class DAL implements IDAL {
 				(String) user.get("Phone"));
 		return result;
 	}
+	
+	public DefaultTableModel getResultset(String table){
+		String sql = String.format(
+				"SELECT * FROM couponsdb.%s",
+				table);
+		return executeResultSet(sql);
+	}
 
+	
+	public void testAddDeleteCoupon() {
+		// insert business owner and business before insert a coupon because
+		// coupon has a foreign key to business name. And insert a category.
+		BusinessOwner owner = new BusinessOwner("owner1", "pass",
+				"mail@gmail.com", "0129712");
+		inserBusinessOwner(owner);
+		Business business = new Business("business_name", "pqwfqwass", "asc",
+				"wqfqwf", "uu", "owner1");
+		insertBusiness(business);
+		Category category = new Category(1, "cat1");
+		insertCategory(category);
+
+		Coupon coupon = new Coupon("coupon_name", "description", 1, 40, 20, 4,
+				"business_name");
+		insertCoupon(coupon);
+		
+		Customer customer = new Customer("cust1", "pass", "mail@gmail.com",
+				"0129712");
+		insertCustomer(customer);
+		customer = new Customer("cust2", "pass", "mail2@gmail.com",
+				"20129712");
+		insertCustomer(customer);
+		 owner = new BusinessOwner("owner1", "pass",
+				"mail@gmail.com", "0129712");
+		inserBusinessOwner(owner);
+		 business = new Business("business_name", "pqwfqwass", "asc",
+				"wqfqwf", "uu", "owner1");
+		insertBusiness(business);
+		 category = new Category(1, "cat1");
+		insertCategory(category);
+		 coupon = new Coupon("coupon1", "description", 1, 40, 20, 4,
+				"business_name");
+		insertCoupon(coupon);
+
+		Purchase purchase = new Purchase("serial_key", 4, "cust1", "coupon1");
+		insertPurchase(purchase);
+		purchase = new Purchase("serial_key1", 4, "cust1", "coupon1");
+		insertPurchase(purchase);
+		purchase = new Purchase("serial_key2", 4, "cust2", "coupon1");
+		insertPurchase(purchase);
+		
+	}
+
+	
+	
+	
 	private void executePassiveCommand(String query) {
 		Statement stmt = null;
 		try {
@@ -294,6 +353,55 @@ public class DAL implements IDAL {
 		return list;
 	}
 
+	
+	private DefaultTableModel executeResultSet(String query) {
+		Statement stmt = null;
+		ResultSet result = null;
+		List list = null;
+		ResultSetMetaData metaData=null;
+		try {
+			connect();
+			stmt = conn.createStatement();
+			result = stmt.executeQuery(query);
+		    metaData = result.getMetaData();
+		    Vector<String> columnNames = new Vector<String>();
+		    int columnCount = metaData.getColumnCount();
+		    for (int column = 1; column <= columnCount; column++) {
+		        columnNames.add(metaData.getColumnName(column));
+		    }
+
+		    // data of the table
+		    Vector<Vector<Object>> data = new Vector<Vector<Object>>();
+		    while (result.next()) {
+		        Vector<Object> vector = new Vector<Object>();
+		        for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++) {
+		            vector.add(result.getObject(columnIndex));
+		        }
+		        data.add(vector);
+		    }
+
+		    return new DefaultTableModel(data, columnNames);
+		} catch (Exception e) {
+			// Handle errors for Class.forName
+			e.printStackTrace();
+		} finally {
+			// finally block used to close resources
+			try {
+				if (stmt != null)
+					stmt.close();
+			} catch (SQLException se2) {
+			}// nothing we can do
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}// end finally try
+		}// end try
+		return null;
+		
+	}
+	
 	@Override
 	public void insertAdmin(Admin admin) {
 		String sql = String
