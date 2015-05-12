@@ -1,5 +1,9 @@
 package dal;
 
+import java.sql.ResultSet;
+
+import javax.swing.table.DefaultTableModel;
+
 import bl_backend.*;
 
 public interface IDAL {
@@ -53,5 +57,7 @@ public interface IDAL {
 	void updateCoupon(Coupon coupon);
 
 	void updatePurchase(Purchase purchase);
+
+	DefaultTableModel getResultset(String string);
 
 }
