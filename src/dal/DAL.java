@@ -22,8 +22,8 @@ public class DAL implements IDAL {
 	 String db_name="";
 
 	// Database credentials
-	static final String USER = "root";
-	static final String PASS = "";
+	static final String USER = "Shai";
+	static final String PASS = "root";
 
 	public DAL() {
 		//initialDatabase();
@@ -235,6 +235,10 @@ public class DAL implements IDAL {
 				"SELECT * FROM couponsdb.%s",
 				table);
 		return executeResultSet(sql);
+	}
+	
+	public DefaultTableModel getResultSetFromQuery(String query){
+		return executeResultSet(query);
 	}
 
 	
