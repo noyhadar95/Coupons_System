@@ -2,6 +2,8 @@ package pl;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.util.Arrays;
 import java.util.Vector;
 
@@ -13,6 +15,8 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
 import javax.swing.text.TabExpander;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JScrollPane;
@@ -54,12 +58,22 @@ public class CustomersCoupons extends JFrame {
 		String query="SELECT CouponName,Rating FROM couponsdb.purchases WHERE CustomerName='"+name+"'";
 		DefaultTableModel coupons=((DAL)dal).getResultSetFromQuery(query);
 
+		String[] btnArray = new String[coupons.getRowCount()];
+		
+		for(int i=0; i<btnArray.length; i++){
+			btnArray[i] = "Use";
+		}
+		
+		
+		coupons.addColumn("Use Coupon", btnArray);
+		
 		int colcount = coupons.getColumnCount();
 		
 		Vector<String> colNames = new Vector<String>();
-		    for(int col = 0;col < colcount;col++) {
+		    for(int col = 0;col < colcount;col++) { //the plus one is for the button
 		       colNames.add(coupons.getColumnName(col));
 		    }
+		
 		
         DefaultTableModel model = new DefaultTableModel(coupons.getDataVector(),colNames)
         {
@@ -73,6 +87,21 @@ public class CustomersCoupons extends JFrame {
             }
         };
         final JTable table = new JTable(model);
+        
+        Action use = new AbstractAction()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                JTable table = (JTable)e.getSource();
+                int modelRow = Integer.valueOf( e.getActionCommand() );
+                ((DefaultTableModel)table.getModel()).removeRow(modelRow);
+            }
+        };
+         
+        ButtonColumn buttonColumn = new ButtonColumn(table, use, 2);
+        buttonColumn.setMnemonic(KeyEvent.VK_D);
+        
+       
         table.putClientProperty("terminateEditOnFocusLost", true);
         table.getDefaultEditor(String.class).addCellEditorListener(
                 new CellEditorListener() {
