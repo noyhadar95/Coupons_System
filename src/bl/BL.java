@@ -49,15 +49,19 @@ public class BL implements IBL {
 	}
 
 	@Override
-	public DefaultTableModel getCouponsDetails() {
-		// TODO: implement
-		return null;
+	public DefaultTableModel getCouponsNamesRatings(String customerName) {
+		return dal.selectCouponsNamesRatingsByCustomer(customerName);
 	}
 
 	@Override
 	public boolean updateCoupon(Coupon coupon) {
 		dal.updateCoupon(coupon);
 		return true;
+	}
+
+	@Override
+	public DefaultTableModel getCouponsDetails() {
+		return dal.selectAllCoupons();
 	}
 
 }

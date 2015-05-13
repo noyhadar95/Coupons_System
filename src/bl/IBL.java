@@ -10,8 +10,10 @@ public interface IBL {
 
 	boolean updateCouponRating(String couponName, int rating);
 
-	DefaultTableModel getCouponsDetails();
+	DefaultTableModel getCouponsNamesRatings(String customerName);
 
 	boolean updateCoupon(Coupon coupon);
+
+	DefaultTableModel getCouponsDetails();
 
 }

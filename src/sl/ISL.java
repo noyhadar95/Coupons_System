@@ -58,5 +58,7 @@ public interface ISL {
 	 * @return a DefaultTableModel object.
 	 */
 	DefaultTableModel getCouponsDetails();
+	
+	
 
 }

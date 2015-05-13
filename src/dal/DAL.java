@@ -1,7 +1,5 @@
 package dal;
 
-import static org.junit.Assert.assertTrue;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -654,5 +652,17 @@ public class DAL implements IDAL {
 				"DELETE FROM couponsdb.category WHERE Id=%d ", id);
 		executePassiveCommand(sql);
 
+	}
+
+	@Override
+	public DefaultTableModel selectCouponsNamesRatingsByCustomer(
+			String customerName) {
+		String query="SELECT CouponName,Rating FROM couponsdb.purchases WHERE CustomerName='"+customerName+"'";
+		return getResultSetFromQuery(query);
+	}
+
+	@Override
+	public DefaultTableModel selectAllCoupons() {
+		return getResultset("coupons");
 	}
 }

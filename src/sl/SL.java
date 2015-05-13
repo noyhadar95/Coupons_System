@@ -21,8 +21,7 @@ public class SL implements ISL {
 
 	@Override
 	public DefaultTableModel getCouponsNamesRatings(String customerName) {
-		// TODO Auto-generated method stub
-		return null;
+		return bl.getCouponsNamesRatings(customerName);
 	}
 
 	@Override
