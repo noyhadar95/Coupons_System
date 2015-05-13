@@ -21,15 +21,16 @@ public interface ISL {
 	boolean tryLogin(String username, String password, String authType);
 
 	/**
-	 * updates the rating field of a specific coupon according to a given name.
+	 * updates the rating field of a specific purchase according to a given
+	 * purchase serial key.
 	 * 
-	 * @param couponName
-	 *            the name of the coupon.
+	 * @param serialKey
+	 *            the serial key (id) of the purchase.
 	 * @param rating
 	 *            the new rating to be set
 	 * @return true on success, false otherwise.
 	 */
-	boolean updateCouponRating(String couponName, int rating);
+	boolean updatePurchaseRating(String serialKey, int rating);
 
 	/**
 	 * returns a DefaultTableModel containing the details of all coupon names
@@ -58,7 +59,14 @@ public interface ISL {
 	 * @return a DefaultTableModel object.
 	 */
 	DefaultTableModel getCouponsDetails();
-	
-	
+
+	/**
+	 * update the status of the coupon in the given purchase to used.
+	 * 
+	 * @param serialKey
+	 *            the serial key of a purchase.
+	 * @return true on success, false otherwise.
+	 */
+	boolean useCoupon(String serialKey);
 
 }
