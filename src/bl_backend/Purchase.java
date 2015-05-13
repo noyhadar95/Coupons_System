@@ -37,5 +37,9 @@ public class Purchase {
 		this.rating = rating;
 
 	}
+	
+	public int getUsed() {
+		return used;
+	}
 
 }

@@ -22,11 +22,12 @@ public class DAL implements IDAL {
 	 String db_name="";
 
 	// Database credentials
-	static final String USER = "root";
-	static final String PASS = "";
+	static final String USER = "Shai";
+	static final String PASS = "root";
 
 	public DAL() {
-		//initialDatabase();
+		initialDatabase();
+		testAddDeleteCoupon();
 	}
 
 	private void initialDatabase() {
@@ -541,11 +542,11 @@ public class DAL implements IDAL {
 	@Override
 	public void insertCoupon(Coupon coupon) {
 		String sql = String
-				.format("INSERT INTO couponsdb.coupons VALUES ('%s', '%s', %d, %d, %d, %d,'%s')",
+				.format("INSERT INTO couponsdb.coupons VALUES ('%s', '%s', %d, %d, %d, %d,'%s', %d)",
 						coupon.getName(), coupon.getDescription(),
 						coupon.getCategory(), coupon.getInitial_price(),
 						coupon.getDiscount_price(), coupon.getRating(),
-						coupon.getBusiness_name());
+						coupon.getBusiness_name(),coupon.getApproved());
 		executePassiveCommand(sql);
 
 	}
@@ -596,9 +597,9 @@ public class DAL implements IDAL {
 	@Override
 	public void insertPurchase(Purchase purchase) {
 		String sql = String
-				.format("INSERT INTO couponsdb.purchases VALUES ('%s', %d, '%s', '%s')",
+				.format("INSERT INTO couponsdb.purchases VALUES ('%s', %d, '%s', '%s', %d)",
 						purchase.getSerialKey(), purchase.getRating(),
-						purchase.getCustomerName(), purchase.getCouponName());
+						purchase.getCustomerName(), purchase.getCouponName(), purchase.getUsed());
 		executePassiveCommand(sql);
 
 	}
