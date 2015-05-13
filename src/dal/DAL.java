@@ -26,8 +26,8 @@ public class DAL implements IDAL {
 	static final String PASS = "root";
 
 	public DAL() {
-		initialDatabase();
-		testAddDeleteCoupon();
+	//	initialDatabase();
+	//	testAddDeleteCoupon();
 	}
 
 	private void initialDatabase() {

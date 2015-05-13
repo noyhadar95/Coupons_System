@@ -70,7 +70,7 @@ public class CustomersCoupons extends JFrame {
 		int colcount = coupons.getColumnCount();
 		
 		Vector<String> colNames = new Vector<String>();
-		    for(int col = 0;col < colcount;col++) { //the plus one is for the button
+		    for(int col = 0;col < colcount;col++) { 
 		       colNames.add(coupons.getColumnName(col));
 		    }
 		
