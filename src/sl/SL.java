@@ -25,8 +25,8 @@ public class SL implements ISL {
 	}
 
 	@Override
-	public boolean updateCouponRating(String couponName, int rating) {
-		return bl.updateCouponRating(couponName, rating);
+	public boolean updatePurchaseRating(String serialKey, int rating) {
+		return bl.updatePurchaseRating(serialKey, rating);
 	}
 
 	@Override
@@ -37,5 +37,10 @@ public class SL implements ISL {
 	@Override
 	public DefaultTableModel getCouponsDetails() {
 		return bl.getCouponsDetails();
+	}
+
+	@Override
+	public boolean useCoupon(String serialKey) {
+		return bl.useCoupon(serialKey);
 	}
 }
