@@ -2,13 +2,24 @@ package pl;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.util.Arrays;
+import java.util.Vector;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.CellEditorListener;
+import javax.swing.event.ChangeEvent;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellEditor;
+import javax.swing.text.TabExpander;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
+
+import dal.DAL;
+import dal.IDAL;
 
 public class CustomersCoupons extends JFrame {
 
@@ -35,29 +46,57 @@ public class CustomersCoupons extends JFrame {
 	 * Create the frame.
 	 */
 	public CustomersCoupons() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 652, 487);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
 		
-		table = new JTable();
-		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(table, GroupLayout.PREFERRED_SIZE, 580, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(32, Short.MAX_VALUE))
-		);
-		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-					.addContainerGap(97, Short.MAX_VALUE)
-					.addComponent(table, GroupLayout.PREFERRED_SIZE, 244, GroupLayout.PREFERRED_SIZE)
-					.addGap(89))
-		);
-		contentPane.setLayout(gl_contentPane);
-	}
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        IDAL dal = new DAL();
+		String name="cust1";
+		String query="SELECT CouponName,Rating FROM couponsdb.purchases WHERE CustomerName='"+name+"'";
+		DefaultTableModel coupons=((DAL)dal).getResultSetFromQuery(query);
+
+		int colcount = coupons.getColumnCount();
+		
+		Vector<String> colNames = new Vector<String>();
+		    for(int col = 0;col < colcount;col++) {
+		       colNames.add(coupons.getColumnName(col));
+		    }
+		
+        DefaultTableModel model = new DefaultTableModel(coupons.getDataVector(),colNames)
+        {
+        	@Override
+			public boolean isCellEditable(int row, int column)
+            {
+               if (column == 1)
+            	   return true;
+               else
+            	   return false;
+            }
+        };
+        final JTable table = new JTable(model);
+        table.putClientProperty("terminateEditOnFocusLost", true);
+        table.getDefaultEditor(String.class).addCellEditorListener(
+                new CellEditorListener() {
+                    public void editingCanceled(ChangeEvent e) {
+                    	System.out.println("canceled: apply additional action");
+                    }
+
+                    public void editingStopped(ChangeEvent e) {
+                        System.out.println("editingStopped: apply additional action");
+                        int row = table.getSelectedRow();
+                        int col = table.getSelectedColumn();
+                        
+                        String result = table.getValueAt(row, col).toString();
+                        // id is the primary key of my DB
+                        String name = table.getValueAt(row, 0).toString();
+                        
+                        System.out.println("Update: " + name + " with rating: " + result);
+                    }
+                });
+
+        add(new JScrollPane(table));
+        setLocationByPlatform(true);
+        pack();
+        setVisible(true);
+
+}
 }
