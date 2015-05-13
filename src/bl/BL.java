@@ -1,5 +1,7 @@
 package bl;
 
+import javax.swing.table.DefaultTableModel;
+
 import bl_backend.*;
 import dal.DAL;
 import dal.IDAL;
@@ -15,41 +17,51 @@ public class BL implements IBL {
 	@Override
 	public boolean tryLogin(String username, String password, String authType) {
 		boolean successFlag = false;
+		User user = null;
 
 		switch (authType) {
 		case "Admin":
-			Admin admin = dal.selectAdmin(username);
-
-			if (admin != null && admin.getUsername().equals(username)
-					&& admin.getPassword().equals(password)) {
-				successFlag = true;
-			}
+			user = dal.selectAdmin(username);
 			break;
-
 		case "Customer":
-			Customer cust = dal.selectCustomer(username);
-
-			if (cust != null && cust.getUsername().equals(username)
-					&& cust.getPassword().equals(password)) {
-				successFlag = true;
-			}
+			user = dal.selectCustomer(username);
 			break;
-
 		case "Bussines Owner":
-			BusinessOwner businessOwner = dal.selectBusinessOwner(username);
-
-			if (businessOwner != null
-					&& businessOwner.getUsername().equals(username)
-					&& businessOwner.getPassword().equals(password)) {
-				successFlag = true;
-			}
+			user = dal.selectBusinessOwner(username);
 			break;
-
 		default:
 			break;
 		}
 
+		if (user != null && user.getUsername().equals(username)
+				&& user.getPassword().equals(password)) {
+			successFlag = true;
+		}
+
 		return successFlag;
+	}
+
+	@Override
+	public boolean updateCouponRating(String couponName, int rating) {
+		Coupon coupon = dal.selectCoupon(couponName);
+		dal.updateCoupon(coupon);
+		return false;
+	}
+
+	@Override
+	public DefaultTableModel getCouponsNamesRatings(String customerName) {
+		return dal.selectCouponsNamesRatingsByCustomer(customerName);
+	}
+
+	@Override
+	public boolean updateCoupon(Coupon coupon) {
+		dal.updateCoupon(coupon);
+		return true;
+	}
+
+	@Override
+	public DefaultTableModel getCouponsDetails() {
+		return dal.selectAllCoupons();
 	}
 
 }
