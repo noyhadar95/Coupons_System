@@ -42,25 +42,10 @@ public class BL implements IBL {
 	}
 
 	@Override
-	public boolean updatePurchaseRating(String serialKey, int rating) {
-		Purchase purchase = dal.selectPurchase(serialKey);
-		if (purchase == null)
-			return false;
-		// update the rating of the purchase
-		purchase.setRating(rating);
-		dal.updatePurchase(purchase);
-
-		// calculate average rating for the newly rated coupon in the coupons
-		// table
-		String couponName = purchase.getCouponName();
+	public boolean updateCouponRating(String couponName, int rating) {
 		Coupon coupon = dal.selectCoupon(couponName);
-		int avgRating = (coupon.getRating() + rating) / 2;
-		coupon.setRating(avgRating);
-
-		// update the rating of the coupon
 		dal.updateCoupon(coupon);
-
-		return true;
+		return false;
 	}
 
 	@Override
@@ -77,19 +62,6 @@ public class BL implements IBL {
 	@Override
 	public DefaultTableModel getCouponsDetails() {
 		return dal.selectAllCoupons();
-	}
-
-	@Override
-	public boolean useCoupon(String serialKey) {
-		Purchase purchase = dal.selectPurchase(serialKey);
-		if (purchase == null)
-			return false;
-
-		// update the used field of the purchase to 1 ("used")
-		purchase.setUsed(1);
-		dal.updatePurchase(purchase);
-
-		return true;
 	}
 
 }

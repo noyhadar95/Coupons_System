@@ -20,8 +20,8 @@ public class DAL implements IDAL {
 	 String db_name="";
 
 	// Database credentials
-	static final String USER = "root";
-	static final String PASS = "root123";
+	static final String USER = "Shai";
+	static final String PASS = "root";
 
 	public DAL() {
 	//	initialDatabase();
