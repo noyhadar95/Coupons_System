@@ -60,4 +60,7 @@ public class Coupon {
 		this.description = description;
 	}
 
+	public int getApproved() {
+		return approved;
+	}
 }
