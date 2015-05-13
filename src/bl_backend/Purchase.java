@@ -9,12 +9,12 @@ public class Purchase {
 	private int used;
 
 	public Purchase(String serial_key, int rating, String customer_name,
-			String coupon_name,int used) {
+			String coupon_name, int used) {
 		this.serial_key = serial_key;
 		this.rating = rating;
 		this.customer_name = customer_name;
 		this.coupon_name = coupon_name;
-		this.used=used;
+		this.used = used;
 	}
 
 	public String getSerialKey() {
@@ -33,13 +33,17 @@ public class Purchase {
 		return coupon_name;
 	}
 
+	public int getUsed() {
+		return used;
+	}
+
 	public void setRating(int rating) {
 		this.rating = rating;
 
 	}
-	
-	public int getUsed() {
-		return used;
+
+	public void setUsed(int used) {
+		this.used = used;
 	}
 
 }
