@@ -22,8 +22,8 @@ public class DAL implements IDAL {
 	 String db_name="";
 
 	// Database credentials
-	static final String USER = "Shai";
-	static final String PASS = "root";
+	static final String USER = "root";
+	static final String PASS = "";
 
 	public DAL() {
 		//initialDatabase();
@@ -70,6 +70,7 @@ public class DAL implements IDAL {
 				+ "`Rating` int(11) NOT NULL,"
 				+ "`CustomerName` varchar(50) NOT NULL,"
 				+ "`CouponName` varchar(50) NOT NULL,"
+				+ "`Used` int(1) NOT NULL,"
 				+ "PRIMARY KEY (`SerialKey`),"
 				+ "KEY `FK_Purchase_Customers_idx` (`CustomerName`),"
 				+ "KEY `FK_Purchase_Coupon_idx` (`CouponName`),"
@@ -106,6 +107,7 @@ public class DAL implements IDAL {
 				+ "`DiscountPrice` int(11) NOT NULL,"
 				+ "`Rating` int(11) NOT NULL,"
 				+ "`Business` varchar(45) NOT NULL,"
+				+ "`Approved` int(1) NOT NULL,"
 				+ "PRIMARY KEY (`Name`),"
 				+ "KEY `fk_idx` (`Business`),"
 				+ "KEY `FK-CouponCategory_idx` (`Category`),"
@@ -255,16 +257,16 @@ public class DAL implements IDAL {
 		insertCategory(category);
 
 		Coupon coupon = new Coupon("coupon_name", "description", 1, 40, 20, 4,
-				"business_name");
+				"business_name",0);
 		insertCoupon(coupon);
 		coupon = new Coupon("qwe", "description", 1, 40, 20, 4,
-				"business_name");
+				"business_name",0);
 		insertCoupon(coupon);
 		coupon = new Coupon("fgh", "description", 1, 40, 20, 4,
-				"business_name");
+				"business_name",0);
 		insertCoupon(coupon);
 		coupon = new Coupon("hjk", "description", 1, 40, 20, 4,
-				"business_name");
+				"business_name",0);
 		insertCoupon(coupon);
 		
 		Customer customer = new Customer("cust1", "pass", "mail@gmail.com",
@@ -282,14 +284,14 @@ public class DAL implements IDAL {
 		 category = new Category(1, "cat1");
 		insertCategory(category);
 		 coupon = new Coupon("coupon1", "description", 1, 40, 20, 4,
-				"business_name");
+				"business_name",0);
 		insertCoupon(coupon);
 
-		Purchase purchase = new Purchase("serial_key", 4, "cust1", "coupon1");
+		Purchase purchase = new Purchase("serial_key", 4, "cust1", "coupon1",0);
 		insertPurchase(purchase);
-		purchase = new Purchase("serial_key1", 4, "cust1", "coupon1");
+		purchase = new Purchase("serial_key1", 4, "cust1", "coupon1",0);
 		insertPurchase(purchase);
-		purchase = new Purchase("serial_key2", 4, "cust2", "coupon1");
+		purchase = new Purchase("serial_key2", 4, "cust2", "coupon1",0);
 		insertPurchase(purchase);
 		
 	}
@@ -560,7 +562,7 @@ public class DAL implements IDAL {
 				(String) coupon.get("Description"),
 				(int) coupon.get("Category"), (int) coupon.get("InitialPrice"),
 				(int) coupon.get("DiscountPrice"), (int) coupon.get("Rating"),
-				(String) coupon.get("Business"));
+				(String) coupon.get("Business"),(int) coupon.get("Approved"));
 		return result;
 	}
 	
@@ -613,7 +615,7 @@ public class DAL implements IDAL {
 		Purchase result = new Purchase((String) purchase.get("SerialKey"),
 				(int) purchase.get("Rating"),
 				(String) purchase.get("CustomerName"),
-				(String) purchase.get("CouponName"));
+				(String) purchase.get("CouponName"),(int) purchase.get("Used"));
 		return result;
 	}
 

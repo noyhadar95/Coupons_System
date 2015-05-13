@@ -113,7 +113,7 @@ public class DALTests {
 		dal.insertCategory(category);
 
 		Coupon coupon = new Coupon("coupon_name", "description", 1, 40, 20, 4,
-				"business_name");
+				"business_name",0);
 		dal.insertCoupon(coupon);
 		Coupon test_coupon = dal.selectCoupon(coupon.getName());
 		assertTrue(test_coupon.getName().equals(coupon.getName()));
@@ -144,7 +144,7 @@ public class DALTests {
 
 		// insert coupon
 		Coupon coupon = new Coupon("coupon_name", "description", 1, 40, 20, 4,
-				"business_name");
+				"business_name",0);
 		dal.insertCoupon(coupon);
 
 		// update the coupon
@@ -185,10 +185,10 @@ public class DALTests {
 		Category category = new Category(1, "cat1");
 		dal.insertCategory(category);
 		Coupon coupon = new Coupon("coupon1", "description", 1, 40, 20, 4,
-				"business_name");
+				"business_name",0);
 		dal.insertCoupon(coupon);
 
-		Purchase purchase = new Purchase("serial_key", 4, "cust1", "coupon1");
+		Purchase purchase = new Purchase("serial_key", 4, "cust1", "coupon1",0);
 		dal.insertPurchase(purchase);
 		Purchase test_purchase = dal.selectPurchase(purchase.getSerialKey());
 		assertTrue(test_purchase.getSerialKey().equals(purchase.getSerialKey()));
@@ -225,10 +225,10 @@ public class DALTests {
 		Category category = new Category(1, "cat1");
 		dal.insertCategory(category);
 		Coupon coupon = new Coupon("coupon1", "description", 1, 40, 20, 4,
-				"business_name");
+				"business_name",0);
 		dal.insertCoupon(coupon);
 
-		Purchase purchase = new Purchase("serial_key", 4, "cust1", "coupon1");
+		Purchase purchase = new Purchase("serial_key", 4, "cust1", "coupon1",0);
 		dal.insertPurchase(purchase);
 
 		// update the purchase

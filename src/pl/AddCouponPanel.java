@@ -182,7 +182,7 @@ public class AddCouponPanel extends JPanel {
 				int discount=Integer.parseInt(txtDiscount.getText());
 				int rating=Integer.parseInt(txtRating.getText());
 				String business=txtBusiness.getText();
-				dal.insertCoupon(new Coupon(name, desc, cat, initial, discount, rating, business));
+				dal.insertCoupon(new Coupon(name, desc, cat, initial, discount, rating, business,0));
 				
 			}
 		});

@@ -9,10 +9,11 @@ public class Coupon {
 	private int discount_price;
 	private int rating;
 	private String business_name;
+	private int approved;
 
 	public Coupon(String name, String description, int category,
 			int initial_price, int discount_price, int rating,
-			String business_name) {
+			String business_name,int approved) {
 		this.name = name;
 		this.description = description;
 		this.category = category;
@@ -20,6 +21,7 @@ public class Coupon {
 		this.discount_price = discount_price;
 		this.rating = rating;
 		this.business_name = business_name;
+		this.approved=approved;
 	}
 
 	public String getName() {
