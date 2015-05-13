@@ -80,7 +80,7 @@ public class CustomersCoupons extends JFrame {
         	@Override
 			public boolean isCellEditable(int row, int column)
             {
-               if (column == 1)
+               if (column >= 1)
             	   return true;
                else
             	   return false;

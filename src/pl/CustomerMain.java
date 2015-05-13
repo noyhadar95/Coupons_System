@@ -49,7 +49,7 @@ public class CustomerMain extends JFrame {
 	 */
 	public CustomerMain() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 649, 486);
+		setBounds(100, 100, 598, 490);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -80,10 +80,11 @@ public class CustomerMain extends JFrame {
 		JButton btnObserveMyCoupons = new JButton("Observe My Coupons");
 		GroupLayout groupLayout = new GroupLayout(contentPane);
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
+			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(table, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(lblSearch)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
@@ -93,14 +94,12 @@ public class CustomerMain extends JFrame {
 							.addGap(18)
 							.addComponent(cmbx_By, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(btn_search)
-							.addContainerGap(67, Short.MAX_VALUE))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(table, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addGap(67))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(btnObserveMyCoupons, GroupLayout.PREFERRED_SIZE, 552, GroupLayout.PREFERRED_SIZE)
-							.addContainerGap(57, Short.MAX_VALUE))))
+							.addComponent(btn_search)))
+					.addContainerGap(16, Short.MAX_VALUE))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap(143, Short.MAX_VALUE)
+					.addComponent(btnObserveMyCoupons, GroupLayout.PREFERRED_SIZE, 294, GroupLayout.PREFERRED_SIZE)
+					.addGap(133))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -114,8 +113,8 @@ public class CustomerMain extends JFrame {
 						.addComponent(btn_search))
 					.addGap(18)
 					.addComponent(table, GroupLayout.PREFERRED_SIZE, 149, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 178, Short.MAX_VALUE)
-					.addComponent(btnObserveMyCoupons)
+					.addPreferredGap(ComponentPlacement.RELATED, 165, Short.MAX_VALUE)
+					.addComponent(btnObserveMyCoupons, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
 		);
 		contentPane.setLayout(groupLayout);
