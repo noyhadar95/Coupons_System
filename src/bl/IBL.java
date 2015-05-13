@@ -8,12 +8,14 @@ public interface IBL {
 
 	boolean tryLogin(String username, String password, String authType);
 
-	boolean updateCouponRating(String couponName, int rating);
+	boolean updatePurchaseRating(String serialKey, int rating);
 
 	DefaultTableModel getCouponsNamesRatings(String customerName);
 
 	boolean updateCoupon(Coupon coupon);
 
 	DefaultTableModel getCouponsDetails();
+
+	boolean useCoupon(String serialKey);
 
 }
