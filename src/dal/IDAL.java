@@ -1,6 +1,7 @@
 package dal;
 
 import java.sql.ResultSet;
+import java.util.List;
 
 import javax.swing.table.DefaultTableModel;
 
@@ -60,4 +61,5 @@ public interface IDAL {
 
 	DefaultTableModel getResultset(String string);
 
+    List getTableArrayList(String table);
 }

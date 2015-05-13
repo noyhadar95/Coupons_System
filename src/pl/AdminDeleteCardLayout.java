@@ -4,35 +4,28 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
  
-public class CardLayoutDemo implements ItemListener {
+public class AdminDeleteCardLayout implements ItemListener {
     JPanel cards; //a panel that uses CardLayout
     final static String COUPON = "Coupon";
-    final static String BUSINESSOWNER = "Business Owner";
-    final static String DELETE = "Delete";
+    final static String BUSINESS = "Business";
      
     public void addComponentToPane(Container pane) {
         //Put the JComboBox in a JPanel to get a nicer look.
         JPanel comboBoxPane = new JPanel(); //use FlowLayout
-        String comboBoxItems[] = { COUPON,BUSINESSOWNER,DELETE };
+        String comboBoxItems[] = { COUPON,BUSINESS };
         JComboBox cb = new JComboBox(comboBoxItems);
         cb.setEditable(false);
         cb.addItemListener(this);
         comboBoxPane.add(cb);
          
         //Create the "cards".
-        JPanel card1 = new JPanel();
-        card1.add(new JButton("Button 1"));
-        card1.add(new JButton("Button 2"));
-        card1.add(new JButton("Button 3"));
+        JPanel card2 = new DeleteBusinessPanel();
          
-        JPanel card2 = new AddBusinessOwnerPanel();
-         
-        JPanel card3=new AddCouponPanel();
+        JPanel card3=new DeleteCouponPanel();
         //Create the panel that contains the "cards".
         cards = new JPanel(new CardLayout());
         cards.add(card3, COUPON);
-        cards.add(card1, DELETE);
-        cards.add(card2, BUSINESSOWNER);
+        cards.add(card2, BUSINESS);
          
         pane.add(comboBoxPane, BorderLayout.PAGE_START);
         pane.add(cards, BorderLayout.CENTER);

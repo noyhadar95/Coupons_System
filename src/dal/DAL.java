@@ -26,7 +26,7 @@ public class DAL implements IDAL {
 	static final String PASS = "";
 
 	public DAL() {
-		initialDatabase();
+		//initialDatabase();
 	}
 
 	private void initialDatabase() {
@@ -251,6 +251,15 @@ public class DAL implements IDAL {
 		insertCategory(category);
 
 		Coupon coupon = new Coupon("coupon_name", "description", 1, 40, 20, 4,
+				"business_name");
+		insertCoupon(coupon);
+		coupon = new Coupon("qwe", "description", 1, 40, 20, 4,
+				"business_name");
+		insertCoupon(coupon);
+		coupon = new Coupon("fgh", "description", 1, 40, 20, 4,
+				"business_name");
+		insertCoupon(coupon);
+		coupon = new Coupon("hjk", "description", 1, 40, 20, 4,
 				"business_name");
 		insertCoupon(coupon);
 		
@@ -549,6 +558,13 @@ public class DAL implements IDAL {
 				(int) coupon.get("DiscountPrice"), (int) coupon.get("Rating"),
 				(String) coupon.get("Business"));
 		return result;
+	}
+	
+	public List getTableArrayList(String table) {
+		String sql = String.format(
+				"SELECT * FROM couponsdb."+table);
+		List list = executeActiveCommand(sql);
+		return list;
 	}
 
 	@Override
