@@ -1,7 +1,7 @@
-package bl;
+package sl;
 
-public interface IBL {
+public interface ISL {
 
 	boolean tryLogin(String username, String password, String authType);
-
+	
 }

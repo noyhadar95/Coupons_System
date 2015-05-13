@@ -25,13 +25,21 @@ import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JComboBox;
+
+import sl.ISL;
+import sl.SL;
+
 public class LoginFrame extends JFrame {
 
 	private final int WINDOW_WIDTH = 700, WINDOW_HEIGHT = 550;
+	private final String[] authTypes = { "Admin", "Customer", "Bussines Owner"};
 	private JPanel contentPane;
-	private IBL bl;
+	private ISL sl;
 	private JTextField textFieldUsername;
 	private JTextField textFieldPassword;
+	private JComboBox authTypeCB;
 
 	/**
 	 * Launch the application.
@@ -63,7 +71,7 @@ public class LoginFrame extends JFrame {
 		
 		setContentPane(contentPane);
 		
-		bl = new BL();
+		sl = new SL();
 		
 		JButton btnLogin = new JButton("login");
 		btnLogin.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -79,7 +87,9 @@ public class LoginFrame extends JFrame {
 					// pass the username and password that was entered to be check on the BL
 					String tryUsername = textFieldUsername.getText();
 					String tryPassword = textFieldPassword.getText();
-					boolean success = bl.tryLogin(tryUsername, tryPassword);
+					String authType = (String) authTypeCB.getSelectedItem();
+					boolean success = sl.tryLogin(tryUsername, tryPassword, authType);
+					
 					if(success){
 						JOptionPane.showMessageDialog((Component) e.getSource(),
 								"success");
@@ -108,6 +118,8 @@ public class LoginFrame extends JFrame {
 		textFieldPassword = new JTextField();
 		textFieldPassword.setColumns(10);
 		
+		authTypeCB = new JComboBox(authTypes);
+		
 		
 		GroupLayout groupLayout = new GroupLayout(contentPane);
 		groupLayout.setHorizontalGroup(
@@ -118,69 +130,51 @@ public class LoginFrame extends JFrame {
 							.addGap(202)
 							.addComponent(lblWelcomeToCoupons))
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(257)
-							.addComponent(btnLogin, GroupLayout.PREFERRED_SIZE, 254, GroupLayout.PREFERRED_SIZE))
-						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(156)
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(lblPassword, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
-									.addGap(38)
-									.addComponent(textFieldPassword, GroupLayout.PREFERRED_SIZE, 254, GroupLayout.PREFERRED_SIZE))
-								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(lblUsername, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE)
-									.addGap(5)
-									.addComponent(textFieldUsername, GroupLayout.PREFERRED_SIZE, 254, GroupLayout.PREFERRED_SIZE)))))
+							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+									.addGroup(groupLayout.createSequentialGroup()
+										.addComponent(lblPassword)
+										.addGap(38)
+										.addComponent(textFieldPassword, GroupLayout.PREFERRED_SIZE, 254, GroupLayout.PREFERRED_SIZE))
+									.addGroup(groupLayout.createSequentialGroup()
+										.addComponent(lblUsername, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.UNRELATED)
+										.addComponent(textFieldUsername, GroupLayout.PREFERRED_SIZE, 254, GroupLayout.PREFERRED_SIZE)))
+								.addComponent(btnLogin, GroupLayout.PREFERRED_SIZE, 254, GroupLayout.PREFERRED_SIZE))))
 					.addGap(163))
+				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+					.addContainerGap(390, Short.MAX_VALUE)
+					.addComponent(authTypeCB, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(256))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(39)
 					.addComponent(lblWelcomeToCoupons, GroupLayout.PREFERRED_SIZE, 67, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(75)
+							.addGap(8)
 							.addComponent(textFieldUsername, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(67)
-							.addComponent(lblUsername, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)))
+						.addComponent(lblUsername, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE))
 					.addGap(91)
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(textFieldPassword, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(textFieldPassword, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
-							.addGap(78)
-							.addComponent(btnLogin, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE))
-						.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
-							.addComponent(lblPassword, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
-							.addGap(132))))
+							.addGap(2)
+							.addComponent(lblPassword, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)))
+					.addGap(53)
+					.addComponent(authTypeCB, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(50)
+					.addComponent(btnLogin, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE))
 		);
 		contentPane.setLayout(groupLayout);
 		
 
 		
 	}
+	
 }
 
-/*
- * 
- * public class LoginFrame extends JFrame implements ActionListener {
- * 
- * public LoginFrame(IDAL dal) {
- * 
- * this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
- * this.getContentPane().setLayout(new BorderLayout());
- * this.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
- * 
- * this.setResizable(false);
- * 
- * this.dal = dal;
- * 
- * this.getContentPane().add(new JPanel(), BorderLayout.CENTER);
- * 
- * this.setFocusable(true); this.setVisible(true);
- * 
- * }
- * 
- * }
- */
