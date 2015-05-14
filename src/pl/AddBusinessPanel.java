@@ -12,6 +12,7 @@ import java.awt.Insets;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
+import sl.TempAdminSL;
 import bl_backend.Business;
 import dal.DAL;
 import dal.IDAL;
@@ -26,7 +27,7 @@ public class AddBusinessPanel extends JPanel {
 	private JTextField txtCat;
 	private JTextField txtDesc;
 	private JTextField txtOwner;
-	private IDAL dal=new DAL();
+	private TempAdminSL sl=new TempAdminSL();
 
 	/**
 	 * Create the panel.
@@ -158,7 +159,7 @@ public class AddBusinessPanel extends JPanel {
 				String cat=txtCat.getText();
 				String desc=txtDesc.getText();
 				String owner=txtOwner.getText();
-				dal.insertBusiness(new Business(name, address, city, cat, desc, owner));
+				sl.insertBusiness(new Business(name, address, city, cat, desc, owner));
 			}
 		});
 		GridBagConstraints gbc_btnAdd = new GridBagConstraints();
