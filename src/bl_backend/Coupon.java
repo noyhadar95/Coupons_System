@@ -63,4 +63,8 @@ public class Coupon {
 	public int getApproved() {
 		return approved;
 	}
+	
+	public void setApproved(int app){
+		approved = app;
+	}
 }

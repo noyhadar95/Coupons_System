@@ -20,6 +20,8 @@ import javax.swing.event.CellEditorListener;
 import javax.swing.event.ChangeEvent;
 import javax.swing.table.DefaultTableModel;
 
+import bl_backend.Coupon;
+
 import com.mysql.jdbc.ResultSetMetaData;
 
 import javax.swing.JLabel;
@@ -27,19 +29,22 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import sl.ISL;
+import sl.SL;
+
 
 
 public class AdminEditCoupons extends JPanel {
 	private JTable table;
-
+	private ISL isl;
 	/**
 	 * Create the panel.
 	 */
 	public AdminEditCoupons() {//ActionListener actionListener
-		IDAL dal=new DAL();
+		isl = new SL();
 		final int APPROVE_COLUMN = 7;
-		((DAL)(dal)).testAddDeleteCoupon();
-		DefaultTableModel coupons=dal.getResultset("coupons");
+		
+		DefaultTableModel coupons=isl.getCouponsDetails();
 		
 int colcount = coupons.getColumnCount();
 		
@@ -103,7 +108,7 @@ int colcount = coupons.getColumnCount();
 	                        // id is the primary key of my DB
 	                        String name = table.getValueAt(row, 0).toString();
 	                        
-	                        System.out.println("Update: " + name + " with result: " + result);
+	                        isl.updateCouponByAdmin(getCouponFromRow(row, table));
 	                    }
 	                });
 	        
@@ -114,7 +119,11 @@ int colcount = coupons.getColumnCount();
 	            {
 	                JTable table = (JTable)e.getSource();
 	                int modelRow = Integer.valueOf( e.getActionCommand() );
-	                ((DefaultTableModel)table.getModel()).removeRow(modelRow);
+	                Coupon coup = getCouponFromRow(modelRow, table);
+	                coup.setApproved(1);
+	                isl.updateCouponByAdmin(coup);
+	                //((DefaultTableModel)table.getModel()).removeRow(modelRow);
+	                
 	            }
 	        };
 	         
@@ -145,5 +154,13 @@ int colcount = coupons.getColumnCount();
 		 spTable.setVisible(true);
 		
 
+	}
+	
+	private Coupon getCouponFromRow(int row, JTable table){
+
+		Coupon coup = new Coupon(table.getValueAt(row, 0).toString(), table.getValueAt(row, 1).toString(), (int)table.getValueAt(row, 2), Integer.parseInt(table.getValueAt(row, 3).toString()), Integer.parseInt(table.getValueAt(row, 4).toString()), Integer.parseInt(table.getValueAt(row, 5).toString()), table.getValueAt(row, 6).toString(), 0);
+		if((String)table.getValueAt(row, 7) != "Approve")
+			coup.setApproved(1);
+		return coup;
 	}
 }

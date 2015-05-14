@@ -583,10 +583,10 @@ public class DAL implements IDAL {
 	@Override
 	public void updateCoupon(Coupon coupon) {
 		String sql = String
-				.format("UPDATE couponsdb.coupons SET Description='%s',Category=%d ,InitialPrice=%d ,DiscountPrice=%d ,Rating=%d ,Business='%s' WHERE Name='%s' ",
+				.format("UPDATE couponsdb.coupons SET Description='%s',Category=%d ,InitialPrice=%d ,DiscountPrice=%d ,Rating=%d ,Business='%s', Approved=%d WHERE Name='%s' ",
 						coupon.getDescription(), coupon.getCategory(),
 						coupon.getInitial_price(), coupon.getDiscount_price(),
-						coupon.getRating(), coupon.getBusiness_name(),
+						coupon.getRating(), coupon.getBusiness_name(), coupon.getApproved(),
 						coupon.getName());
 		executePassiveCommand(sql);
 
