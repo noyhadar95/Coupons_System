@@ -42,7 +42,7 @@ public class tempFrame extends JFrame {
 		this.getContentPane().setLayout(new BorderLayout());
 		 this.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 
-		 ViewPurchases v=new ViewPurchases();
+		 AdminEditCoupons v=new AdminEditCoupons();
 		 this.getContentPane().add(v, BorderLayout.CENTER);
 		 
 		this.setResizable(false);

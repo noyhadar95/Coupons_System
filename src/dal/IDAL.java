@@ -37,6 +37,10 @@ public interface IDAL {
 
 	Purchase selectPurchase(String serialKey);
 
+	DefaultTableModel selectCouponsNamesRatingsByCustomer(String customerName);
+
+	DefaultTableModel selectAllCoupons();
+
 	// delete
 	void deleteCustomer(String username);
 
@@ -59,7 +63,9 @@ public interface IDAL {
 
 	void updatePurchase(Purchase purchase);
 
+	// others
 	DefaultTableModel getResultset(String string);
 
-    List getTableArrayList(String table);
+	List getTableArrayList(String table);
+
 }

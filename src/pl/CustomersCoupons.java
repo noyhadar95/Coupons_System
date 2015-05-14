@@ -22,14 +22,15 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-import dal.DAL;
-import dal.IDAL;
+import sl.ISL;
+import sl.SL;
+
 
 public class CustomersCoupons extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
-
+	private ISL isl;
 	/**
 	 * Launch the application.
 	 */
@@ -52,25 +53,19 @@ public class CustomersCoupons extends JFrame {
 	public CustomersCoupons() {
 		
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        IDAL dal = new DAL();
+        final int USE_COLUMN = 3;
+        
+        isl = new SL();
+        
 		String name="cust1";
-		String query="SELECT CouponName,Rating FROM couponsdb.purchases WHERE CustomerName='"+name+"'";
-		DefaultTableModel coupons=((DAL)dal).getResultSetFromQuery(query);
+		DefaultTableModel coupons=isl.getCouponsNamesRatings(name);
 
-		String[] btnArray = new String[coupons.getRowCount()];
 		
-		for(int i=0; i<btnArray.length; i++){
-			btnArray[i] = "Use";
-		}
-		
-		
-		coupons.addColumn("Use Coupon", btnArray);
 		
 		int colcount = coupons.getColumnCount();
 		
 		Vector<String> colNames = new Vector<String>();
-		    for(int col = 0;col < colcount;col++) { //the plus one is for the button
+		    for(int col = 0;col < colcount;col++) { 
 		       colNames.add(coupons.getColumnName(col));
 		    }
 		
@@ -80,12 +75,32 @@ public class CustomersCoupons extends JFrame {
         	@Override
 			public boolean isCellEditable(int row, int column)
             {
-               if (column >= 1)
+        		if(column==USE_COLUMN)
+        		{
+        			Object o =  this.getValueAt(row, column);
+        			if((String)o == "Use")
+        				return true;
+        			else 
+        				return false;
+        		}
+        		
+               if (column >= 2)
             	   return true;
                else
             	   return false;
             }
         };
+        
+        
+for(int i=0;i<model.getRowCount(); i++){
+        	
+        	if((int)model.getValueAt(i, USE_COLUMN) == 0)
+        			model.setValueAt("Use", i, USE_COLUMN);
+        	else
+        		model.setValueAt("Used", i, USE_COLUMN);
+
+        }
+        
         final JTable table = new JTable(model);
         
         Action use = new AbstractAction()
@@ -94,11 +109,13 @@ public class CustomersCoupons extends JFrame {
             {
                 JTable table = (JTable)e.getSource();
                 int modelRow = Integer.valueOf( e.getActionCommand() );
-                ((DefaultTableModel)table.getModel()).removeRow(modelRow);
+
+                if(isl.useCoupon(table.getValueAt(modelRow, 0).toString()))
+                	table.setValueAt("Used", modelRow, USE_COLUMN);
             }
         };
          
-        ButtonColumn buttonColumn = new ButtonColumn(table, use, 2);
+        ButtonColumn buttonColumn = new ButtonColumn(table, use, 3);
         buttonColumn.setMnemonic(KeyEvent.VK_D);
         
        
@@ -116,9 +133,9 @@ public class CustomersCoupons extends JFrame {
                         
                         String result = table.getValueAt(row, col).toString();
                         // id is the primary key of my DB
-                        String name = table.getValueAt(row, 0).toString();
-                        
-                        System.out.println("Update: " + name + " with rating: " + result);
+                        String serialKey = table.getValueAt(row, 0).toString();
+                        isl.updatePurchaseRating(serialKey, Integer.parseInt(result));
+                       
                     }
                 });
 

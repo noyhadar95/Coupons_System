@@ -1,7 +1,5 @@
 package dal;
 
-import static org.junit.Assert.assertTrue;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,11 +20,12 @@ public class DAL implements IDAL {
 	 String db_name="";
 
 	// Database credentials
-	static final String USER = "root";
-	static final String PASS = "";
+	static final String USER = "Shai";
+	static final String PASS = "root";
 
 	public DAL() {
-		//initialDatabase();
+	//	initialDatabase();
+	//	testAddDeleteCoupon();
 	}
 
 	private void initialDatabase() {
@@ -541,11 +540,11 @@ public class DAL implements IDAL {
 	@Override
 	public void insertCoupon(Coupon coupon) {
 		String sql = String
-				.format("INSERT INTO couponsdb.coupons VALUES ('%s', '%s', %d, %d, %d, %d,'%s')",
+				.format("INSERT INTO couponsdb.coupons VALUES ('%s', '%s', %d, %d, %d, %d,'%s', %d)",
 						coupon.getName(), coupon.getDescription(),
 						coupon.getCategory(), coupon.getInitial_price(),
 						coupon.getDiscount_price(), coupon.getRating(),
-						coupon.getBusiness_name());
+						coupon.getBusiness_name(),coupon.getApproved());
 		executePassiveCommand(sql);
 
 	}
@@ -584,10 +583,10 @@ public class DAL implements IDAL {
 	@Override
 	public void updateCoupon(Coupon coupon) {
 		String sql = String
-				.format("UPDATE couponsdb.coupons SET Description='%s',Category=%d ,InitialPrice=%d ,DiscountPrice=%d ,Rating=%d ,Business='%s' WHERE Name='%s' ",
+				.format("UPDATE couponsdb.coupons SET Description='%s',Category=%d ,InitialPrice=%d ,DiscountPrice=%d ,Rating=%d ,Business='%s', Approved=%d WHERE Name='%s' ",
 						coupon.getDescription(), coupon.getCategory(),
 						coupon.getInitial_price(), coupon.getDiscount_price(),
-						coupon.getRating(), coupon.getBusiness_name(),
+						coupon.getRating(), coupon.getBusiness_name(), coupon.getApproved(),
 						coupon.getName());
 		executePassiveCommand(sql);
 
@@ -596,9 +595,9 @@ public class DAL implements IDAL {
 	@Override
 	public void insertPurchase(Purchase purchase) {
 		String sql = String
-				.format("INSERT INTO couponsdb.purchases VALUES ('%s', %d, '%s', '%s')",
+				.format("INSERT INTO couponsdb.purchases VALUES ('%s', %d, '%s', '%s', %d)",
 						purchase.getSerialKey(), purchase.getRating(),
-						purchase.getCustomerName(), purchase.getCouponName());
+						purchase.getCustomerName(), purchase.getCouponName(), purchase.getUsed());
 		executePassiveCommand(sql);
 
 	}
@@ -631,9 +630,9 @@ public class DAL implements IDAL {
 	@Override
 	public void updatePurchase(Purchase purchase) {
 		String sql = String
-				.format("UPDATE couponsdb.purchases SET Rating=%d ,CustomerName='%s',CouponName='%s' WHERE SerialKey='%s' ",
+				.format("UPDATE couponsdb.purchases SET Rating=%d ,CustomerName='%s',CouponName='%s', Used=%d WHERE SerialKey='%s' ",
 						purchase.getRating(), purchase.getCustomerName(),
-						purchase.getCouponName(), purchase.getSerialKey());
+						purchase.getCouponName(), purchase.getUsed(), purchase.getSerialKey());
 		executePassiveCommand(sql);
 
 	}
@@ -653,5 +652,17 @@ public class DAL implements IDAL {
 				"DELETE FROM couponsdb.category WHERE Id=%d ", id);
 		executePassiveCommand(sql);
 
+	}
+
+	@Override
+	public DefaultTableModel selectCouponsNamesRatingsByCustomer(
+			String customerName) {
+		String query="SELECT SerialKey,CouponName,Rating,Used FROM couponsdb.purchases WHERE CustomerName='"+customerName+"'";
+		return getResultSetFromQuery(query);
+	}
+
+	@Override
+	public DefaultTableModel selectAllCoupons() {
+		return getResultset("coupons");
 	}
 }
