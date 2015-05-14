@@ -22,14 +22,15 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-import dal.DAL;
-import dal.IDAL;
+import sl.ISL;
+import sl.SL;
+
 
 public class CustomersCoupons extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
-
+	private ISL isl;
 	/**
 	 * Launch the application.
 	 */
@@ -53,10 +54,11 @@ public class CustomersCoupons extends JFrame {
 		
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        IDAL dal = new DAL();
+        
+        isl = new SL();
+        
 		String name="cust1";
-		String query="SELECT CouponName,Rating FROM couponsdb.purchases WHERE CustomerName='"+name+"'";
-		DefaultTableModel coupons=((DAL)dal).getResultSetFromQuery(query);
+		DefaultTableModel coupons=isl.getCouponsNamesRatings(name);
 
 		String[] btnArray = new String[coupons.getRowCount()];
 		
@@ -117,8 +119,8 @@ public class CustomersCoupons extends JFrame {
                         String result = table.getValueAt(row, col).toString();
                         // id is the primary key of my DB
                         String name = table.getValueAt(row, 0).toString();
-                        
-                        System.out.println("Update: " + name + " with rating: " + result);
+                        isl.updateCouponRating(name, Integer.parseInt(result));
+                       
                     }
                 });
 
