@@ -672,4 +672,32 @@ public class DAL implements IDAL {
 		List list= executeActiveCommand(query);
 		return list.size();
 	}
+
+	@Override
+	public DefaultTableModel getApprovedCoupons() {
+		String query="SELECT * FROM couponsdb.coupons WHERE Approved=1";
+		return getResultSetFromQuery(query);
+	}
+
+	@Override
+	public DefaultTableModel getCouponsByFilter(String text, int filter) {
+		String query = String.format("SELECT * FROM couponsdb.coupons WHERE $s=%s", filter, text);
+		return getResultSetFromQuery(query);
+	}
+
+	@Override
+	public DefaultTableModel getBusinessByFilter(String text, int filter) {
+		String query = String.format("SELECT * FROM couponsdb.businesses WHERE $s=%s", filter, text);
+		return getResultSetFromQuery(query);
+	}
+
+	@Override
+	public DefaultTableModel getCouponsByPreference(String customerName) {
+		String query = String.format("SELECT couponsdb.coupons.Name, couponsdb.coupons.Description, couponsdb.coupons.Category, "+
+									"couponsdb.coupons.InitialPrice, couponsdb.coupons.DiscountPrice, couponsdb.coupons.Rating, couponsdb.coupons.Business, couponsdb.coupons.Approved "+
+									"FROM  couponsdb.customer_preferences join couponsdb.coupons "+
+									"WHERE Customer_Username = $s",
+									customerName);
+		return getResultSetFromQuery(query);
+	}
 }

@@ -4,6 +4,8 @@ import javax.swing.table.DefaultTableModel;
 
 import bl.BL;
 import bl.IBL;
+import bl_backend.Business;
+import bl_backend.BusinessOwner;
 import bl_backend.Coupon;
 
 public class SL implements ISL {
@@ -59,4 +61,51 @@ public class SL implements ISL {
 	public String getEmailByUsername(String username, String authType) {
 		return bl.getEmailByUsername(username, authType);
 	}
+
+	public void insertBusinessOwner(BusinessOwner owner) {
+		bl.insertBusinessOwner(owner);
+	}
+
+	public void insertBusiness(Business business) {
+		bl.insertBusiness(business);
+	}
+
+	public void insertCoupon(Coupon coupon) {
+		bl.insertCoupon(coupon);
+	}
+
+	public int getNumOfUnapprovedCoupons() {
+		return bl.getNumOfUnapprovedCoupons();
+	}
+
+	public DefaultTableModel getResultset(String table) {
+		return bl.getResultset(table);
+	}
+
+	@Override
+	public DefaultTableModel getApprovedCoupons() {
+		return bl.getApprovedCoupons();
+	}
+
+	@Override
+	public DefaultTableModel getCouponsByFilter(String text, int filter) {
+		return bl.getCouponsByFilter(text, filter);
+	}
+
+	@Override
+	public DefaultTableModel getBusinessByFilter(String text, int filter) {
+		return bl.getBusinessByFilter(text, filter);
+	}
+
+	@Override
+	public void purchaseCoupon(String couponName, String customerName) {
+		bl.purchaseCoupon(couponName, customerName);
+
+	}
+
+	@Override
+	public DefaultTableModel getCouponsByPreference(String customerName) {
+		return bl.getCouponsByPreference(customerName);
+	}
+
 }
