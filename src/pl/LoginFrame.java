@@ -155,7 +155,8 @@ public class LoginFrame extends JFrame {
 							"enter all fields in order to sign up");
 				}
 				else if(textFieldEmail.getText() == null || textFieldEmail.getText().equals("") ||
-						textFieldPhone.getText() == null || textFieldPhone.getText().equals("")){
+						!textFieldEmail.isVisible() || textFieldPhone.getText() == null ||
+						textFieldPhone.getText().equals("") || !textFieldPhone.isVisible()){
 					setSignUpPanelVisibility(true);
 					JOptionPane.showMessageDialog((Component) e.getSource(),
 							"enter all fields in order to sign up");
