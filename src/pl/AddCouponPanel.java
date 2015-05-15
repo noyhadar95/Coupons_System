@@ -14,6 +14,7 @@ import java.awt.Insets;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
+import sl.TempAdminSL;
 import bl_backend.Coupon;
 import bl_backend.Customer;
 import dal.DAL;
@@ -32,7 +33,7 @@ public class AddCouponPanel extends JPanel {
 	private JTextField txtBusiness;
 	private JLabel lblAddCoupon;
 	private JButton btnAdd;
-	private IDAL dal=new DAL();
+	private TempAdminSL sl=new TempAdminSL();
 
 	/**
 	 * Create the panel.
@@ -170,7 +171,7 @@ public class AddCouponPanel extends JPanel {
 		gbc_txtBusiness.gridx = 4;
 		gbc_txtBusiness.gridy = 8;
 		add(txtBusiness, gbc_txtBusiness);
-		((DAL)(dal)).testAddDeleteCoupon();
+		//((DAL)(dal)).testAddDeleteCoupon();
 		btnAdd = new JButton("Add");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -182,7 +183,7 @@ public class AddCouponPanel extends JPanel {
 				int discount=Integer.parseInt(txtDiscount.getText());
 				int rating=Integer.parseInt(txtRating.getText());
 				String business=txtBusiness.getText();
-				dal.insertCoupon(new Coupon(name, desc, cat, initial, discount, rating, business,0));
+				sl.insertCoupon(new Coupon(name, desc, cat, initial, discount, rating, business,0));
 				
 			}
 		});

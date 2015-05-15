@@ -18,4 +18,10 @@ public interface IBL {
 
 	boolean useCoupon(String serialKey);
 
+	boolean signUp(String username, String password, String email, String phone);
+
+	String getPasswordByUsername(String username, String authType);
+
+	String getEmailByUsername(String username, String authType);
+
 }

@@ -20,12 +20,12 @@ public class DAL implements IDAL {
 	 String db_name="";
 
 	// Database credentials
-	static final String USER = "Shai";
-	static final String PASS = "root";
+	static final String USER = "root";
+	static final String PASS = "";
 
 	public DAL() {
-	//	initialDatabase();
-	//	testAddDeleteCoupon();
+		//initialDatabase();
+		//testAddDeleteCoupon();
 	}
 
 	private void initialDatabase() {
@@ -664,5 +664,12 @@ public class DAL implements IDAL {
 	@Override
 	public DefaultTableModel selectAllCoupons() {
 		return getResultset("coupons");
+	}
+
+	@Override
+	public int getNumOfUnapprovedCoupons() {
+		String query="SELECT * FROM couponsdb.coupons WHERE Approved=0";
+		List list= executeActiveCommand(query);
+		return list.size();
 	}
 }
