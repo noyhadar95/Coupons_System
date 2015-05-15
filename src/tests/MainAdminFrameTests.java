@@ -29,7 +29,7 @@ public class MainAdminFrameTests {
 			Random r=new Random();
 			int x=r.nextInt(1000);
 			int y=r.nextInt(1000);
-		for (int i = 0; i < 10000; i++) {
+		for (int i = 0; i < 1000; i++) {
 			/*bot.mouseMove(50,50);
 			try{Thread.sleep(15);}catch(InterruptedException e){}
 			bot.mouseMove(150,150);
