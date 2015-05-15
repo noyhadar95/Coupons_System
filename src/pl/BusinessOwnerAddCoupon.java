@@ -36,7 +36,6 @@ public class BusinessOwnerAddCoupon extends JFrame {
 	private JTextField txtCategory;
 	private JTextField txtInitialPrice;
 	private JTextField txtDiscount;
-	private JTextField txtRating;
 	private IDAL dal=new DAL();
 	private JComboBox comboBox;
 	/**
@@ -66,9 +65,9 @@ public class BusinessOwnerAddCoupon extends JFrame {
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[]{0, 0, 0, 0};
-		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gbl_contentPane.columnWeights = new double[]{0.0, 1.0, 1.0, Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 		
 		JLabel lblAddCoupon = new JLabel("Add Coupon !");
@@ -165,29 +164,12 @@ public class BusinessOwnerAddCoupon extends JFrame {
 		contentPane.add(txtDiscount, gbc_txtDiscount);
 		txtDiscount.setColumns(10);
 		
-		JLabel lblRating = new JLabel("Rating");
-		GridBagConstraints gbc_lblRating = new GridBagConstraints();
-		gbc_lblRating.anchor = GridBagConstraints.EAST;
-		gbc_lblRating.insets = new Insets(0, 0, 5, 5);
-		gbc_lblRating.gridx = 0;
-		gbc_lblRating.gridy = 7;
-		contentPane.add(lblRating, gbc_lblRating);
-		
-		txtRating = new JTextField();
-		GridBagConstraints gbc_txtRating = new GridBagConstraints();
-		gbc_txtRating.insets = new Insets(0, 0, 5, 5);
-		gbc_txtRating.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtRating.gridx = 1;
-		gbc_txtRating.gridy = 7;
-		contentPane.add(txtRating, gbc_txtRating);
-		txtRating.setColumns(10);
-		
 		JLabel lblBusiness = new JLabel("Business:");
 		GridBagConstraints gbc_lblBusiness = new GridBagConstraints();
 		gbc_lblBusiness.anchor = GridBagConstraints.EAST;
 		gbc_lblBusiness.insets = new Insets(0, 0, 5, 5);
 		gbc_lblBusiness.gridx = 0;
-		gbc_lblBusiness.gridy = 8;
+		gbc_lblBusiness.gridy = 7;
 		contentPane.add(lblBusiness, gbc_lblBusiness);
 		
 		JButton btnAddCoupon = new JButton("Add Your Coupon !");
@@ -198,7 +180,7 @@ public class BusinessOwnerAddCoupon extends JFrame {
 				int cat=Integer.parseInt(txtCategory.getText());
 				int initial=Integer.parseInt(txtInitialPrice.getText());
 				int discount=Integer.parseInt(txtDiscount.getText());
-				int rating=Integer.parseInt(txtRating.getText());
+				int rating=0;
 				String business=comboBox.getSelectedItem().toString();
 				dal.insertCoupon(new Coupon(name, desc, cat, initial, discount, rating, business,0));
 			}
@@ -209,12 +191,12 @@ public class BusinessOwnerAddCoupon extends JFrame {
 		gbc_comboBox.insets = new Insets(0, 0, 5, 5);
 		gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBox.gridx = 1;
-		gbc_comboBox.gridy = 8;
+		gbc_comboBox.gridy = 7;
 		contentPane.add(comboBox, gbc_comboBox);
 		GridBagConstraints gbc_btnAddCoupon = new GridBagConstraints();
 		gbc_btnAddCoupon.insets = new Insets(0, 0, 5, 5);
 		gbc_btnAddCoupon.gridx = 1;
-		gbc_btnAddCoupon.gridy = 9;
+		gbc_btnAddCoupon.gridy = 8;
 		contentPane.add(btnAddCoupon, gbc_btnAddCoupon);
 		
 		String owner="owner1";

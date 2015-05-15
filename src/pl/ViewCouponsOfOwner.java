@@ -19,7 +19,7 @@ public class ViewCouponsOfOwner extends JPanel {
 TempAdminSL sl=new TempAdminSL();
 		
 		//((DAL)(dal)).testAddDeleteCoupon();
-		String query="(select Name,Owner From businesses) b Join coupons on b.Name=coupons.business where b.Owner='owner1'";
+		String query="coupons Join (select Name,Owner From couponsdb.businesses) b  on b.Name=coupons.business where b.Owner='owner1'";
 		DefaultTableModel coupons=sl.getResultset(query);
 		 table = new JTable(coupons);
 		 JScrollPane spTable = new JScrollPane(table);

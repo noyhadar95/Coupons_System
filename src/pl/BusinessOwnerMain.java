@@ -72,10 +72,6 @@ public class BusinessOwnerMain extends JFrame {
 				BusinessOwnerAddCoupon addFrame = new BusinessOwnerAddCoupon();
 				addFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		         
-		        //Create and set up the content pane.
-		        CardLayoutDemo demo = new CardLayoutDemo();
-		        demo.addComponentToPane(addFrame.getContentPane());
-		         
 		        //Display the window.
 		        addFrame.pack();
 		        addFrame.setVisible(true);
@@ -123,6 +119,15 @@ public class BusinessOwnerMain extends JFrame {
 		JButton btnObserveCoupon = new JButton("Observe Coupon");
 		btnObserveCoupon.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				JFrame frame=new JFrame();
+				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				frame.getContentPane().setLayout(new BorderLayout());
+				frame.setSize(900, 700);
+				 ViewCouponsOfOwner v=new ViewCouponsOfOwner();
+				 frame.getContentPane().add(v, BorderLayout.CENTER);
+				 frame.pack();
+				 frame.setVisible(true);
+				
 			}
 		});
 		GridBagConstraints gbc_btnObserveCoupon = new GridBagConstraints();
