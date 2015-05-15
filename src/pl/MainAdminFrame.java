@@ -20,11 +20,14 @@ import java.awt.event.ActionEvent;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+
 import javax.swing.SwingConstants;
+
+import sl.TempAdminSL;
 
 public class MainAdminFrame extends JFrame {
 
-	private IDAL dal=new DAL();
+	private TempAdminSL sl=new TempAdminSL();
 	private JPanel contentPane;
 	private final int WINDOW_WIDTH = 900, WINDOW_HEIGHT = 700;
 
@@ -49,7 +52,7 @@ public class MainAdminFrame extends JFrame {
 	 */
 	public MainAdminFrame() {
 		super("Admin");
-		((DAL)(dal)).testAddDeleteCoupon();
+		//((DAL)(dal)).testAddDeleteCoupon();
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.getContentPane().setLayout(new BorderLayout());
 		 this.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -93,13 +96,13 @@ public class MainAdminFrame extends JFrame {
 		gbc_btnAdd.gridy = 2;
 		contentPane.add(btnAdd, gbc_btnAdd);
 		
-		JButton btnEdit = new JButton("Edit");
+		JButton btnEdit = new JButton("Edit Coupons");
 		btnEdit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JFrame frame = new JFrame();
 				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		         
-				JPanel panel=new EditCouponsPanel();
+				JPanel panel=new AdminEditCoupons();
 				frame.add(panel);
 		         
 		        //Display the window.
@@ -152,5 +155,14 @@ public class MainAdminFrame extends JFrame {
 		btnApproveCoupons.setEnabled(false);
 		
 		//TODO: check if there are coupons to approve
+		int toApprove=sl.getNumOfUnapprovedCoupons();
+		if(toApprove>0){
+			lblApprove.setText("You Have "+toApprove+" Coupons to Approve!");
+			
+		}
+		else{
+			lblApprove.setText("You Have No Coupons to Approve!");
+		}
+		lblApprove.setVisible(true);
 	}
 }

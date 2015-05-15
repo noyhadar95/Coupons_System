@@ -9,6 +9,7 @@ import javax.swing.JTable;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.table.DefaultTableModel;
 
+import sl.TempAdminSL;
 import dal.DAL;
 import dal.IDAL;
 
@@ -20,10 +21,10 @@ public class ViewBusinessesPanel extends JPanel {
 	 */
 	public ViewBusinessesPanel() {
 
-			IDAL dal=new DAL();
+			TempAdminSL sl=new TempAdminSL();
 			
-			((DAL)(dal)).testAddDeleteCoupon();
-			DefaultTableModel businesses=dal.getResultset("businesses");
+			//((DAL)(dal)).testAddDeleteCoupon();
+			DefaultTableModel businesses=sl.getResultset("businesses");
 			 table = new JTable(businesses);
 			 JScrollPane spTable = new JScrollPane(table);
 			 //JOptionPane.showMessageDialog(null, spTable);

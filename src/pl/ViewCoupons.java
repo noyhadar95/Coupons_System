@@ -13,17 +13,16 @@ import sl.TempAdminSL;
 import dal.DAL;
 import dal.IDAL;
 
-public class ViewPurchases extends JPanel {
+public class ViewCoupons extends JPanel {
 	private JTable table;
 	/**
 	 * Create the panel.
 	 */
-	public ViewPurchases() {
+	public ViewCoupons() {
 	TempAdminSL sl=new TempAdminSL();
 		
 		//((DAL)(dal)).testAddDeleteCoupon();
-		String name="cust1";
-		String query="purchases WHERE CustomerName='"+name+"'";
+		String query="coupons";
 		DefaultTableModel coupons=sl.getResultset(query);
 		 table = new JTable(coupons);
 		 JScrollPane spTable = new JScrollPane(table);

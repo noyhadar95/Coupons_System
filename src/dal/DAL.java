@@ -20,12 +20,12 @@ public class DAL implements IDAL {
 	 String db_name="";
 
 	// Database credentials
-	static final String USER = "Shai";
-	static final String PASS = "root";
+	static final String USER = "root";
+	static final String PASS = "";
 
 	public DAL() {
-	//	initialDatabase();
-	//	testAddDeleteCoupon();
+		//initialDatabase();
+		//testAddDeleteCoupon();
 	}
 
 	private void initialDatabase() {
@@ -583,10 +583,10 @@ public class DAL implements IDAL {
 	@Override
 	public void updateCoupon(Coupon coupon) {
 		String sql = String
-				.format("UPDATE couponsdb.coupons SET Description='%s',Category=%d ,InitialPrice=%d ,DiscountPrice=%d ,Rating=%d ,Business='%s' WHERE Name='%s' ",
+				.format("UPDATE couponsdb.coupons SET Description='%s',Category=%d ,InitialPrice=%d ,DiscountPrice=%d ,Rating=%d ,Business='%s', Approved=%d WHERE Name='%s' ",
 						coupon.getDescription(), coupon.getCategory(),
 						coupon.getInitial_price(), coupon.getDiscount_price(),
-						coupon.getRating(), coupon.getBusiness_name(),
+						coupon.getRating(), coupon.getBusiness_name(), coupon.getApproved(),
 						coupon.getName());
 		executePassiveCommand(sql);
 
@@ -630,9 +630,9 @@ public class DAL implements IDAL {
 	@Override
 	public void updatePurchase(Purchase purchase) {
 		String sql = String
-				.format("UPDATE couponsdb.purchases SET Rating=%d ,CustomerName='%s',CouponName='%s' WHERE SerialKey='%s' ",
+				.format("UPDATE couponsdb.purchases SET Rating=%d ,CustomerName='%s',CouponName='%s', Used=%d WHERE SerialKey='%s' ",
 						purchase.getRating(), purchase.getCustomerName(),
-						purchase.getCouponName(), purchase.getSerialKey());
+						purchase.getCouponName(), purchase.getUsed(), purchase.getSerialKey());
 		executePassiveCommand(sql);
 
 	}
@@ -657,12 +657,19 @@ public class DAL implements IDAL {
 	@Override
 	public DefaultTableModel selectCouponsNamesRatingsByCustomer(
 			String customerName) {
-		String query="SELECT CouponName,Rating FROM couponsdb.purchases WHERE CustomerName='"+customerName+"'";
+		String query="SELECT SerialKey,CouponName,Rating,Used FROM couponsdb.purchases WHERE CustomerName='"+customerName+"'";
 		return getResultSetFromQuery(query);
 	}
 
 	@Override
 	public DefaultTableModel selectAllCoupons() {
 		return getResultset("coupons");
+	}
+
+	@Override
+	public int getNumOfUnapprovedCoupons() {
+		String query="SELECT * FROM couponsdb.coupons WHERE Approved=0";
+		List list= executeActiveCommand(query);
+		return list.size();
 	}
 }
