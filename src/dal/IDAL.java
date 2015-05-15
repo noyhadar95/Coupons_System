@@ -67,5 +67,7 @@ public interface IDAL {
 	DefaultTableModel getResultset(String string);
 
 	List getTableArrayList(String table);
+	
+	int getNumOfUnapprovedCoupons();
 
 }

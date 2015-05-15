@@ -1,5 +1,7 @@
 package sl;
 
+import javax.swing.table.DefaultTableModel;
+
 import dal.DAL;
 import bl.BL;
 import bl_backend.Business;
@@ -18,5 +20,12 @@ public class TempAdminSL {
 	public void insertCoupon(Coupon coupon) {
 		dal.insertCoupon(coupon);
 	}
-
+	
+	public int getNumOfUnapprovedCoupons(){
+		return dal.getNumOfUnapprovedCoupons();
+	}
+	
+	public DefaultTableModel getResultset(String table){
+		return dal.getResultset(table);
+	}
 }
