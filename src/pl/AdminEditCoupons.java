@@ -158,7 +158,7 @@ int colcount = coupons.getColumnCount();
 	
 	private Coupon getCouponFromRow(int row, JTable table){
 
-		Coupon coup = new Coupon(table.getValueAt(row, 0).toString(), table.getValueAt(row, 1).toString(), (int)table.getValueAt(row, 2), Integer.parseInt(table.getValueAt(row, 3).toString()), Integer.parseInt(table.getValueAt(row, 4).toString()), Integer.parseInt(table.getValueAt(row, 5).toString()), table.getValueAt(row, 6).toString(), 0);
+		Coupon coup = new Coupon(table.getValueAt(row, 0).toString(), table.getValueAt(row, 1).toString(), Integer.parseInt(table.getValueAt(row, 2).toString()), Integer.parseInt(table.getValueAt(row, 3).toString()), Integer.parseInt(table.getValueAt(row, 4).toString()), Integer.parseInt(table.getValueAt(row, 5).toString()), table.getValueAt(row, 6).toString(), 0);
 		if((String)table.getValueAt(row, 7) != "Approve")
 			coup.setApproved(1);
 		return coup;

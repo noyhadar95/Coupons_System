@@ -11,7 +11,7 @@ public interface ISL {
 	 * authorization, according to auth type.
 	 * 
 	 * @param username
-	 *            password to login with.
+	 *            username to login with.
 	 * @param password
 	 *            password to login with.
 	 * @param authType
@@ -68,5 +68,24 @@ public interface ISL {
 	 * @return true on success, false otherwise.
 	 */
 	boolean useCoupon(String serialKey);
+
+	/**
+	 * sign up a new user account in the database with the given fields.
+	 * 
+	 * @param username
+	 *            username to login with.
+	 * @param password
+	 *            password to login with.
+	 * @param email
+	 *            email to login with.
+	 * @param phone
+	 *            phone to login with.
+	 * @return true on success, false otherwise.
+	 */
+	boolean signUp(String username, String password, String email, String phone);
+
+	String getPasswordByUsername(String username, String authType);
+
+	String getEmailByUsername(String username, String authType);
 
 }

@@ -54,7 +54,7 @@ public class DeleteCouponPanel extends JPanel {
 				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				frame.getContentPane().setLayout(new BorderLayout());
 				frame.setSize(900, 700);
-				 AdminEditCoupons v=new AdminEditCoupons();
+				 ViewCoupons v=new ViewCoupons();
 				 frame.getContentPane().add(v, BorderLayout.CENTER);
 				 frame.pack();
 				 frame.setVisible(true);
