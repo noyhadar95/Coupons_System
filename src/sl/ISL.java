@@ -2,6 +2,8 @@ package sl;
 
 import javax.swing.table.DefaultTableModel;
 
+import bl_backend.Business;
+import bl_backend.BusinessOwner;
 import bl_backend.Coupon;
 
 public interface ISL {
@@ -84,8 +86,43 @@ public interface ISL {
 	 */
 	boolean signUp(String username, String password, String email, String phone);
 
+	/**
+	 * return the password of a specific user by it's username.
+	 * 
+	 * @param username
+	 *            the user's username.
+	 * @param authType
+	 *            the authorization type of the user.
+	 * @return
+	 */
 	String getPasswordByUsername(String username, String authType);
 
+	/**
+	 * 
+	 * @param username
+	 * @param authType
+	 * @return
+	 */
 	String getEmailByUsername(String username, String authType);
+
+	void insertBusinessOwner(BusinessOwner owner);
+
+	void insertBusiness(Business business);
+
+	void insertCoupon(Coupon coupon);
+
+	int getNumOfUnapprovedCoupons();
+
+	DefaultTableModel getResultset(String table);
+	
+	DefaultTableModel getApprovedCoupons();
+	
+	DefaultTableModel getCouponsByFilter(String text, int filter);
+	
+	DefaultTableModel getBusinessByFilter(String text, int filter);
+	
+	void purchaseCoupon(String couponName, String customerName);
+	
+	DefaultTableModel getCouponsByPreference(String customerName);
 
 }

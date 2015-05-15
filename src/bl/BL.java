@@ -1,5 +1,7 @@
 package bl;
 
+import java.util.UUID;
+
 import javax.swing.table.DefaultTableModel;
 
 import bl_backend.*;
@@ -131,6 +133,68 @@ public class BL implements IBL {
 		}
 
 		return email;
+	}
+
+	@Override
+	public void insertBusinessOwner(BusinessOwner owner) {
+		dal.inserBusinessOwner(owner);
+
+	}
+
+	@Override
+	public void insertBusiness(Business business) {
+		dal.insertBusiness(business);
+
+	}
+
+	@Override
+	public void insertCoupon(Coupon coupon) {
+		dal.insertCoupon(coupon);
+
+	}
+
+	@Override
+	public int getNumOfUnapprovedCoupons() {
+		return dal.getNumOfUnapprovedCoupons();
+	}
+
+	@Override
+	public DefaultTableModel getResultset(String table) {
+		return dal.getResultset(table);
+	}
+
+	@Override
+	public DefaultTableModel getApprovedCoupons() {
+		return dal.getApprovedCoupons();
+	}
+
+	@Override
+	public DefaultTableModel getCouponsByFilter(String text, int filter) {
+		return dal.getCouponsByFilter(text, filter);
+	}
+
+	@Override
+	public DefaultTableModel getBusinessByFilter(String text, int filter) {
+		return dal.getBusinessByFilter(text, filter);
+	}
+
+	@Override
+	public void purchaseCoupon(String couponName, String customerName) {
+		String serial_key = genSerialKey();
+		Purchase purchase = new Purchase(serial_key, 0, customerName,
+				couponName, 0);
+		dal.insertPurchase(purchase);
+	}
+
+	// returns a new special serial key.
+	private String genSerialKey() {
+		return UUID.randomUUID().toString().toUpperCase();
+
+	}
+
+	@Override
+	public DefaultTableModel getCouponsByPreference(String customerName) {
+		return dal.getCouponsByPreference(customerName);
 	}
 
 }
