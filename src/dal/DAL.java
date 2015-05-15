@@ -20,8 +20,8 @@ public class DAL implements IDAL {
 	 String db_name="";
 
 	// Database credentials
-	static final String USER = "root";
-	static final String PASS = "";
+	static final String USER = "Shai";
+	static final String PASS = "root";
 
 	public DAL() {
 		//initialDatabase();
@@ -695,8 +695,8 @@ public class DAL implements IDAL {
 	public DefaultTableModel getCouponsByPreference(String customerName) {
 		String query = String.format("SELECT couponsdb.coupons.Name, couponsdb.coupons.Description, couponsdb.coupons.Category, "+
 									"couponsdb.coupons.InitialPrice, couponsdb.coupons.DiscountPrice, couponsdb.coupons.Rating, couponsdb.coupons.Business, couponsdb.coupons.Approved "+
-									"FROM  couponsdb.customer_preferences join couponsdb.coupons "+
-									"WHERE Customer_Username = $s",
+									"FROM  couponsdb.customers_preferences join couponsdb.coupons "+
+									"WHERE Customer_Username = '%s'",
 									customerName);
 		return getResultSetFromQuery(query);
 	}

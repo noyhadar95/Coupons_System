@@ -27,9 +27,13 @@ import java.awt.event.ActionEvent;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.JTable;
 
+import sl.ISL;
+import sl.SL;
 import sl.TempL;
 import sl.TempSL;
 
@@ -38,7 +42,7 @@ public class CustomerMain extends JFrame {
 	private JPanel contentPane;
 	private JTextField txt_search;
 	private JTable table;
-	private TempSL isl;
+	private ISL isl;
 	private DefaultTableModel lastModel;
 
 	/**
@@ -61,12 +65,20 @@ public class CustomerMain extends JFrame {
 	 * Create the frame.
 	 */
 	public CustomerMain() { 
-		this.isl = new TempL();
+		this.isl = new SL();
 		lastModel = isl.getCouponsByPreference("cust1");
 		
-		
-		checkNotificationByPreference();
-		
+		Timer timer = new Timer ();
+		TimerTask hourlyTask = new TimerTask () {
+		    @Override
+		    public void run () {
+		        checkNotificationByPreference();
+		    }
+		};
+
+		// schedule the task to run starting now and then every hour...
+		timer.schedule (hourlyTask, 0l, 1000*60*60);   // 1000*10*60 every 10 minut
+		//timer.schedule (hourlyTask, 0l, 60*60); 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 766, 524);
 		contentPane = new JPanel();
@@ -99,7 +111,7 @@ public class CustomerMain extends JFrame {
 			}
 		});
 		
-		DefaultTableModel coupons=isl.getAllCoupons();
+		DefaultTableModel coupons=isl.getApprovedCoupons();
 		
 		table = new JTable(coupons);
 		
@@ -117,7 +129,7 @@ public class CustomerMain extends JFrame {
 	                JTable table = (JTable)e.getSource();
 	                int modelRow = Integer.valueOf( e.getActionCommand() );
 
-	               isl.purchaseCoupon("cust1", (String)table.getValueAt(modelRow, 0));
+	               isl.purchaseCoupon((String)table.getValueAt(modelRow, 0), "cust1");
 	    
 	               JOptionPane.showMessageDialog((JFrame)cmbx_By.getTopLevelAncestor(), "cust1 bought " + (String)table.getValueAt(modelRow, 0));
 
@@ -194,7 +206,7 @@ public class CustomerMain extends JFrame {
 		DefaultTableModel newModel = isl.getCouponsByPreference("Cust1");
 		ArrayList<String> list = new ArrayList<>();
 		for(int i=0; i < newModel.getRowCount(); i++){
-			if(newModel.getValueAt(i, 0)!=lastModel.getValueAt(i, 0))
+			if(inTable((String)newModel.getValueAt(i, 0), lastModel)==true) 
 				list.add((String)newModel.getValueAt(i, 0));
 				
 		}
@@ -207,5 +219,13 @@ public class CustomerMain extends JFrame {
 		
 			JOptionPane.showMessageDialog(this, newCoupons, "NEW COUPONS",JOptionPane.INFORMATION_MESSAGE);
 		}	
+	}
+	
+	private boolean inTable(String item,DefaultTableModel table){
+		for (int i = 0; i < table.getRowCount(); i++) {
+			if(table.getValueAt(i, 0).equals(item))
+				return true;
+		}
+		return false;
 	}
 }
