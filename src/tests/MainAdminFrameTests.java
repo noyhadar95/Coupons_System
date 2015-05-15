@@ -40,8 +40,8 @@ public class MainAdminFrameTests {
 			try{Thread.sleep(15);}catch(InterruptedException e){}*/
 			bot.mouseMove(x,y);
 			try{Thread.sleep(15);}catch(InterruptedException e){}
-			x=r.nextInt(601);
-			y=r.nextInt(601);
+			x=r.nextInt(1000);
+			y=r.nextInt(1000);
 		}
 		//bot.mouseMove(10,10);
 		//bot.mousePress(InputEvent.BUTTON1_MASK);
