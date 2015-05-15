@@ -12,14 +12,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import dal.IDAL;
-
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 
-import bl.BL;
-import bl.IBL;
-import bl_backend.Customer;
 import bl_backend.EmailSender;
 
 import java.awt.SystemColor;
@@ -101,8 +96,27 @@ public class LoginFrame extends JFrame {
 					boolean success = sl.tryLogin(tryUsername, tryPassword, authType);
 					
 					if(success){
-						JOptionPane.showMessageDialog((Component) e.getSource(),
-								"success");
+						switch (authType) {
+						case "Customer":
+							JFrame customerFrame = new CustomerMain();
+							customerFrame.setLocation(getLocation()); 
+							customerFrame.setVisible(true);
+							// close current frame
+							setVisible(false);
+							break;
+						case "Admin":
+//							JFrame adminFrame = new MainAdminFrame();
+//							adminFrame.setVisible(true);
+							JOptionPane.showMessageDialog((Component) e.getSource(),
+									"move to admin frame");
+							break;
+						case "Bussines Owner":
+							JOptionPane.showMessageDialog((Component) e.getSource(),
+									"move to business owner frame");
+							break;
+						default:
+							break;
+						}
 					}
 					else{
 						JOptionPane.showMessageDialog((Component) e.getSource(),
