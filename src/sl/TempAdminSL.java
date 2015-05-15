@@ -9,7 +9,7 @@ import bl_backend.BusinessOwner;
 import bl_backend.Coupon;
 
 public class TempAdminSL {
-	DAL dal=new DAL();
+	DAL dal=new DAL();//
 	public void inserBusinessOwner(BusinessOwner owner){
 		dal.inserBusinessOwner(owner);
 	}
