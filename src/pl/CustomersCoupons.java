@@ -52,7 +52,7 @@ public class CustomersCoupons extends JFrame {
 	 */
 	public CustomersCoupons() {
 		
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         final int USE_COLUMN = 3;
         
         isl = new SL();
