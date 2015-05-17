@@ -17,6 +17,8 @@ import javax.swing.event.CellEditorListener;
 import javax.swing.event.ChangeEvent;
 import javax.swing.table.DefaultTableModel;
 
+import dal.DAL;
+import dal.IDAL;
 import bl_backend.Business;
 import bl_backend.Coupon;
 import sl.ISL;
@@ -24,16 +26,17 @@ import sl.SL;
 
 public class BusinessOwnerEditBusiness extends JPanel {
 
+	private  IDAL dal= new DAL();
 	private JTable table;
 	private ISL isl;
 	/**
 	 * Create the panel.
 	 */
-	public BusinessOwnerEditBusiness() {
-		isl = new SL();
+	public BusinessOwnerEditBusiness(ISL sl) {
+		isl =sl;
 		
-		
-		DefaultTableModel business=isl.getBusinessesDetails();
+		String owner = sl.getUsername();
+		DefaultTableModel business=dal.getResultset("businesses WHERE owner='"+owner+"'");
 		
 int colcount = business.getColumnCount();
 		
@@ -49,7 +52,7 @@ int colcount = business.getColumnCount();
 			public boolean isCellEditable(int row, int column)
             {
         		
-               if ((column>=0 && column<=4))
+               if ((column>=1 && column<=4))
             	   return true;
                else
             	   return false;

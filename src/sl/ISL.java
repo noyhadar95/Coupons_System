@@ -1,15 +1,13 @@
 package sl;
 
+import java.util.List;
+
 import javax.swing.table.DefaultTableModel;
 
-<<<<<<< HEAD
 import bl_backend.Admin;
 import bl_backend.Business;
 import bl_backend.BusinessOwner;
 import bl_backend.Category;
-=======
-import bl_backend.Business;
->>>>>>> BusineseesOwnerMain
 import bl_backend.Coupon;
 import bl_backend.Customer;
 import bl_backend.Purchase;
@@ -113,7 +111,6 @@ public interface ISL {
 	 */
 	String getEmailByUsername(String username, String authType);
 
-<<<<<<< HEAD
 	void insertBusinessOwner(BusinessOwner owner);
 
 	void insertBusiness(Business business);
@@ -179,7 +176,6 @@ public interface ISL {
 	void setUsername(String username);
 	
 	String getUsername();
-=======
 	/**
 	 * returns a DefaultTableModel object that contains the details of all the
 	 * businesses in the db.
@@ -190,6 +186,7 @@ public interface ISL {
 	DefaultTableModel getBusinessesDetails();
 
 	void updateBusinessByOwner(Business business);
->>>>>>> BusineseesOwnerMain
+
+	List getTableArrayList(String string);
 
 }

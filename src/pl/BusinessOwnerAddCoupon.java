@@ -28,8 +28,11 @@ import java.util.HashMap;
 
 import javax.swing.JComboBox;
 
+import sl.ISL;
+
 public class BusinessOwnerAddCoupon extends JFrame {
 
+	private static ISL sl;
 	private JPanel contentPane;
 	private JTextField txtDesc;
 	private JTextField txtName;
@@ -45,7 +48,7 @@ public class BusinessOwnerAddCoupon extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					BusinessOwnerAddCoupon frame = new BusinessOwnerAddCoupon();
+					BusinessOwnerAddCoupon frame = new BusinessOwnerAddCoupon(sl);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -57,7 +60,8 @@ public class BusinessOwnerAddCoupon extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public BusinessOwnerAddCoupon() {
+	public BusinessOwnerAddCoupon(ISL sl) {
+		this.sl=sl;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -199,7 +203,7 @@ public class BusinessOwnerAddCoupon extends JFrame {
 		gbc_btnAddCoupon.gridy = 8;
 		contentPane.add(btnAddCoupon, gbc_btnAddCoupon);
 		
-		String owner="owner1";
+		String owner=sl.getUsername();
 		
 		List data=dal.getTableArrayList("businesses WHERE owner='"+owner+"'");
 		for (int i = 0; i < data.size(); i++) {

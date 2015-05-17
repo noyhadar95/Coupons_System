@@ -8,18 +8,20 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.table.DefaultTableModel;
 
-import sl.TempAdminSL;
+import sl.ISL;
+import sl.SL;
 
 public class ViewCouponsOfOwner extends JPanel {
+	private ISL sl;
 	private JTable table;
 	/**
 	 * Create the panel.
 	 */
-	public ViewCouponsOfOwner() {
-TempAdminSL sl=new TempAdminSL();
+	public ViewCouponsOfOwner(ISL sl) {
+		this.sl=sl;
 		
 		//((DAL)(dal)).testAddDeleteCoupon();
-		String query="coupons Join (select Name,Owner From couponsdb.businesses) b  on b.Name=coupons.business where b.Owner='owner1'";
+		String query="coupons Join (select Name,Owner From couponsdb.businesses) b  on b.Name=coupons.business where b.Owner='"+sl.getUsername()+"'";
 		DefaultTableModel coupons=sl.getResultset(query);
 		 table = new JTable(coupons);
 		 JScrollPane spTable = new JScrollPane(table);

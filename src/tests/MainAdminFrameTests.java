@@ -21,7 +21,7 @@ public class MainAdminFrameTests {
 	public void tearDown() throws Exception {
 	}
 
-	@Test
+	/*@Test
 	public final void test() {
 		Robot bot;
 		try {
@@ -37,7 +37,7 @@ public class MainAdminFrameTests {
 			bot.mouseMove(150,50);
 			try{Thread.sleep(15);}catch(InterruptedException e){}
 			bot.mouseMove(50,150);
-			try{Thread.sleep(15);}catch(InterruptedException e){}*/
+			try{Thread.sleep(15);}catch(InterruptedException e){}
 			bot.mouseMove(x,y);
 			try{Thread.sleep(15);}catch(InterruptedException e){}
 			x=r.nextInt(1000);
@@ -54,6 +54,6 @@ public class MainAdminFrameTests {
 			e1.printStackTrace();
 		}
 		fail("Not yet implemented"); // TODO
-	}
+	}*/
 
 }

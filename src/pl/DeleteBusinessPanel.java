@@ -15,18 +15,19 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import sl.ISL;
 import dal.DAL;
 import dal.IDAL;
 
 public class DeleteBusinessPanel extends JPanel {
 
-	private IDAL dal=new DAL();
+	private ISL sl;
 	
 	/**
 	 * Create the panel.
 	 */
-	public DeleteBusinessPanel() {
-
+	public DeleteBusinessPanel(final ISL sl) {
+		this.sl=sl;
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
@@ -48,7 +49,7 @@ public class DeleteBusinessPanel extends JPanel {
 				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				frame.getContentPane().setLayout(new BorderLayout());
 				frame.setSize(900, 700);
-				 ViewBusinessesPanel v=new ViewBusinessesPanel();
+				 ViewBusinessesPanel v=new ViewBusinessesPanel(sl);
 				 frame.getContentPane().add(v, BorderLayout.CENTER);
 				 frame.pack();
 				 frame.setVisible(true);
@@ -83,7 +84,7 @@ public class DeleteBusinessPanel extends JPanel {
 				String toDelete=comboBox.getSelectedItem().toString();
 				label.setText(toDelete);
 				int index=comboBox.getSelectedIndex();
-				dal.deleteBusiness(toDelete);
+				sl.deleteBusiness(toDelete);
 				comboBox.removeItemAt(index);
 				//JOptionPane.showMessageDialog(null, "deleted!");
 				
@@ -96,7 +97,7 @@ public class DeleteBusinessPanel extends JPanel {
 		add(btnDelete, gbc_btnDelete);
 		
 		
-		List data=dal.getTableArrayList("businesses");
+		List data=sl.getTableArrayList("businesses");
 		for (int i = 0; i < data.size(); i++) {
 			HashMap business = (HashMap) data.get(i);
 			label.setText(label.getText()+" "+(String) business.get("Name"));

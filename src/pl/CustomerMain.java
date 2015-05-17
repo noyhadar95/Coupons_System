@@ -41,7 +41,6 @@ public class CustomerMain extends JFrame {
 	private JPanel contentPane;
 	private JTextField txt_search;
 	private JTable table;
-	private ISL isl;
 	private DefaultTableModel lastModel;
 	private static ISL sl;
 
@@ -66,8 +65,8 @@ public class CustomerMain extends JFrame {
 	 * Create the frame.
 	 */
 	public CustomerMain(final ISL sl) { 
-		this.isl =sl;
-		lastModel = isl.getCouponsByPreference(sl.getUsername());
+		this.sl =sl;
+		lastModel = sl.getCouponsByPreference(sl.getUsername());
 		
 		Timer timer = new Timer ();
 		TimerTask hourlyTask = new TimerTask () {
@@ -126,13 +125,13 @@ public class CustomerMain extends JFrame {
 				if(cmbx_Type.getSelectedIndex() == 0){
 				switch (cmbx_By.getSelectedIndex()) {
 				case 0:
-					 model = isl.getCouponsByFilter("Business", txt_search.getText()); 
+					 model = sl.getCouponsByFilter("Business", txt_search.getText()); 
 					break;
 				case 1:
-					 model = isl.getCouponsByFilter("Category", txt_search.getText()); 
+					 model = sl.getCouponsByFilter("Category", txt_search.getText()); 
 				
 				default:
-					model = isl.getApprovedCoupons();
+					model = sl.getApprovedCoupons();
 					break;
 				}
 				
@@ -150,7 +149,7 @@ for(int i=0;i<table.getRowCount(); i++){
 			                JTable table = (JTable)e.getSource();
 			                int modelRow = Integer.valueOf( e.getActionCommand() );
 
-			               isl.purchaseCoupon((String)table.getValueAt(modelRow, 0), sl.getUsername());
+			               sl.purchaseCoupon((String)table.getValueAt(modelRow, 0), sl.getUsername());
 			    
 			               JOptionPane.showMessageDialog((JFrame)cmbx_By.getTopLevelAncestor(), sl.getUsername()+" bought " + (String)table.getValueAt(modelRow, 0));
 
@@ -162,13 +161,13 @@ for(int i=0;i<table.getRowCount(); i++){
 				else{
 					switch (cmbx_By.getSelectedIndex()) {
 					case 0:
-						 model = isl.getBusinessByFilter("Category", txt_search.getText()); 
+						 model = sl.getBusinessByFilter("Category", txt_search.getText()); 
 						break;
 					case 1:
-						 model = isl.getBusinessByFilter("City", txt_search.getText()); 
+						 model = sl.getBusinessByFilter("City", txt_search.getText()); 
 						 break;
 					default:
-						model = isl.getBusinessByFilter("Name", "");
+						model = sl.getBusinessByFilter("Name", "");
 						break;
 					}
 				}
@@ -184,7 +183,7 @@ for(int i=0;i<table.getRowCount(); i++){
 		});
 		
 	
-		DefaultTableModel coupons=isl.getApprovedCoupons();
+		DefaultTableModel coupons=sl.getApprovedCoupons();
 		table = new JTable(coupons);
 		table.getColumnModel().getColumn(1).setHeaderValue("Name");
 		
@@ -202,7 +201,7 @@ for(int i=0;i<table.getRowCount(); i++){
 	                JTable table = (JTable)e.getSource();
 	                int modelRow = Integer.valueOf( e.getActionCommand() );
 
-	               isl.purchaseCoupon((String)table.getValueAt(modelRow, 0), sl.getUsername());
+	               sl.purchaseCoupon((String)table.getValueAt(modelRow, 0), sl.getUsername());
 	    
 	               JOptionPane.showMessageDialog((JFrame)cmbx_By.getTopLevelAncestor(), sl.getUsername()+" bought " + (String)table.getValueAt(modelRow, 0));
 
@@ -227,10 +226,19 @@ for(int i=0;i<table.getRowCount(); i++){
 				
 			}
 		});
+		
+		JButton btnLogout = new JButton("logout");
+		btnLogout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFrame f=new LoginFrame();
+				setVisible(false);
+				f.setVisible(true);
+			}
+		});
 		GroupLayout groupLayout = new GroupLayout(contentPane);
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addComponent(table, GroupLayout.PREFERRED_SIZE, 698, GroupLayout.PREFERRED_SIZE)
@@ -243,10 +251,12 @@ for(int i=0;i<table.getRowCount(); i++){
 							.addGap(18)
 							.addComponent(cmbx_By, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(btn_search)))
-					.addContainerGap(28, Short.MAX_VALUE))
+							.addComponent(btn_search)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnLogout)))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap(227, Short.MAX_VALUE)
+					.addContainerGap(245, Short.MAX_VALUE)
 					.addComponent(btnObserveMyCoupons, GroupLayout.PREFERRED_SIZE, 294, GroupLayout.PREFERRED_SIZE)
 					.addGap(217))
 		);
@@ -259,10 +269,11 @@ for(int i=0;i<table.getRowCount(); i++){
 						.addComponent(cmbx_Type, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(txt_search, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(cmbx_By, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btn_search))
+						.addComponent(btn_search)
+						.addComponent(btnLogout))
 					.addGap(18)
 					.addComponent(table, GroupLayout.PREFERRED_SIZE, 149, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 199, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, 226, Short.MAX_VALUE)
 					.addComponent(btnObserveMyCoupons, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
 		);
@@ -279,16 +290,16 @@ for(int i=0;i<table.getRowCount(); i++){
 	
 	
 	void checkNotificationByPreference(){
-		DefaultTableModel newModel = isl.getCouponsByPreference(sl.getUsername());
+		DefaultTableModel newModel = sl.getCouponsByPreference(sl.getUsername());
 		ArrayList<String> list = new ArrayList<>();
 		for(int i=0; i < newModel.getRowCount(); i++){
-			if(inTable((String)newModel.getValueAt(i, 0), lastModel)==true) 
+			if(inTable((String)newModel.getValueAt(i, 0), lastModel)==false) 
 				list.add((String)newModel.getValueAt(i, 0));
 				
 		}
 		
 		if(!list.isEmpty()){
-			String newCoupons = "There are new coupons: ";
+			String newCoupons = "There are new coupons: \n";
 			for (int i = 0; i < list.size(); i++) {
 				newCoupons+= list.get(i) + "\n";
 			}

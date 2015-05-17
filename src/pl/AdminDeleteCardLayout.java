@@ -27,7 +27,7 @@ public class AdminDeleteCardLayout implements ItemListener {
         comboBoxPane.add(cb);
          
         //Create the "cards".
-        JPanel card2 = new DeleteBusinessPanel();
+        JPanel card2 = new DeleteBusinessPanel(sl);
          
         JPanel card3=new DeleteCouponPanel();
         //Create the panel that contains the "cards".

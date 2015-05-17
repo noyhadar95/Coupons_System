@@ -1,5 +1,6 @@
 package bl;
 
+import java.util.List;
 import java.util.UUID;
 
 import javax.swing.table.DefaultTableModel;
@@ -320,6 +321,11 @@ public class BL implements IBL {
 	public void updatePurchase(Purchase purchase) {
 		dal.updatePurchase(purchase);
 		
+	}
+
+	@Override
+	public List getTableArrayList(String string) {
+		return dal.getTableArrayList(string);
 	}
 
 }

@@ -8,23 +8,22 @@ import javax.swing.JTable;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.table.DefaultTableModel;
 
+import sl.ISL;
 import dal.DAL;
 import dal.IDAL;
 
 public class ViewBusinessesOfOwnerPanel extends JPanel {
 
-	
+	private ISL sl;
 	private JTable table;
 	/**
 	 * Create the panel.
 	 */
-	public ViewBusinessesOfOwnerPanel() {
-		IDAL dal=new DAL();
+	public ViewBusinessesOfOwnerPanel(ISL sl) {
+		this.sl=sl;
+		String owner =sl.getUsername();
 		
-		String owner ="owner1";
-		
-		((DAL)(dal)).testAddDeleteCoupon();
-		DefaultTableModel businesses=dal.getResultset("businesses WHERE owner='"+owner+"'");
+		DefaultTableModel businesses=sl.getResultset("businesses WHERE owner='"+owner+"'");
 		 table = new JTable(businesses);
 		 JScrollPane spTable = new JScrollPane(table);
 		 //JOptionPane.showMessageDialog(null, spTable);

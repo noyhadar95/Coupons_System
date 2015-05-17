@@ -6,17 +6,26 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import java.awt.GridBagLayout;
+
 import javax.swing.JLabel;
+
 import java.awt.GridBagConstraints;
 import java.awt.Font;
 import java.awt.Insets;
+
 import javax.swing.JButton;
+
+import sl.ISL;
+import sl.SL;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class BusinessOwnerMain extends JFrame {
 
+	static ISL sl;
 	private JPanel contentPane;
 
 	/**
@@ -26,7 +35,7 @@ public class BusinessOwnerMain extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					BusinessOwnerMain frame = new BusinessOwnerMain();
+					BusinessOwnerMain frame = new BusinessOwnerMain(sl);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -38,7 +47,8 @@ public class BusinessOwnerMain extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public BusinessOwnerMain() {
+	public BusinessOwnerMain(final ISL sl) {
+		this.sl=sl;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -56,8 +66,23 @@ public class BusinessOwnerMain extends JFrame {
 		GridBagConstraints gbc_lblHello = new GridBagConstraints();
 		gbc_lblHello.insets = new Insets(0, 0, 5, 5);
 		gbc_lblHello.gridx = 1;
-		gbc_lblHello.gridy = 0;
+		gbc_lblHello.gridy = 1;
 		contentPane.add(lblHello, gbc_lblHello);
+		
+		JButton btnLogout = new JButton("logout");
+		btnLogout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFrame f=new LoginFrame();
+				setVisible(false);
+				f.setVisible(true);
+				sl.setUsername("");
+			}
+		});
+		GridBagConstraints gbc_btnLogout = new GridBagConstraints();
+		gbc_btnLogout.insets = new Insets(0, 0, 5, 0);
+		gbc_btnLogout.gridx = 3;
+		gbc_btnLogout.gridy = 1;
+		contentPane.add(btnLogout, gbc_btnLogout);
 		
 		JLabel lblYouCanAdd = new JLabel("you can add a new coupon here ->");
 		GridBagConstraints gbc_lblYouCanAdd = new GridBagConstraints();
@@ -69,7 +94,7 @@ public class BusinessOwnerMain extends JFrame {
 		JButton btnAddCoupon = new JButton("Add Coupon");
 		btnAddCoupon.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				BusinessOwnerAddCoupon addFrame = new BusinessOwnerAddCoupon();
+				BusinessOwnerAddCoupon addFrame = new BusinessOwnerAddCoupon(sl);
 				addFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		         
 		        //Display the window.
@@ -97,7 +122,7 @@ public class BusinessOwnerMain extends JFrame {
 				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				frame.getContentPane().setLayout(new BorderLayout());
 				frame.setSize(900, 700);
-				 ViewBusinessesOfOwnerPanel v=new ViewBusinessesOfOwnerPanel();
+				 ViewBusinessesOfOwnerPanel v=new ViewBusinessesOfOwnerPanel(sl);
 				 frame.getContentPane().add(v, BorderLayout.CENTER);
 				 frame.pack();
 				 frame.setVisible(true);
@@ -123,7 +148,7 @@ public class BusinessOwnerMain extends JFrame {
 				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				frame.getContentPane().setLayout(new BorderLayout());
 				frame.setSize(900, 700);
-				 ViewCouponsOfOwner v=new ViewCouponsOfOwner();
+				 ViewCouponsOfOwner v=new ViewCouponsOfOwner(sl);
 				 frame.getContentPane().add(v, BorderLayout.CENTER);
 				 frame.pack();
 				 frame.setVisible(true);
@@ -142,7 +167,7 @@ public class BusinessOwnerMain extends JFrame {
 				JFrame frame = new JFrame();
 				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		         
-				JPanel panel=new BusinessOwnerEditBusiness();
+				JPanel panel=new BusinessOwnerEditBusiness(sl);
 				frame.getContentPane().add(panel);
 		         
 		        //Display the window.

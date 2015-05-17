@@ -244,7 +244,7 @@ public class DAL implements IDAL {
 	}
 
 	
-	public void testAddDeleteCoupon() {
+	public void testAddDeleteCoupon1() {
 		// insert business owner and business before insert a coupon because
 		// coupon has a foreign key to business name. And insert a category.
 		BusinessOwner owner = new BusinessOwner("owner1", "pass",
@@ -595,7 +595,7 @@ public class DAL implements IDAL {
 	
 	public void updateBusiness(Business business){
 		String sql = String
-				.format("UPDATE couponsdb.businesses SET Name='%s',Address=%s ,City=%s ,Category=%s ,Description=%s WHERE Name='%s' ",
+				.format("UPDATE couponsdb.businesses SET Name='%s',Address='%s' ,City='%s' ,Category='%s' ,Description='%s' WHERE Name='%s' ",
 						business.getName(), business.getAddress(),business.getCity(),business.getCategory(),business.getDescription(),business.getName());
 		executePassiveCommand(sql);
 		

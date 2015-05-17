@@ -112,8 +112,11 @@ public class LoginFrame extends JFrame {
 							setVisible(false);
 							break;
 						case "Bussines Owner":
-							JOptionPane.showMessageDialog((Component) e.getSource(),
-									"move to business owner frame");
+							JFrame ownerFrame = new BusinessOwnerMain(sl);
+							ownerFrame.setLocation(getLocation()); 
+							ownerFrame.setVisible(true);
+							// close current frame
+							setVisible(false);
 							break;
 						default:
 							break;

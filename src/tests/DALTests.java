@@ -263,12 +263,12 @@ public class DALTests {
 		// first make sure that the business owner for the business we add
 		// does
 		// no already exist in the db
-		String businessOwnerUserName = "user1";
+		String businessOwnerUserName = "userqw1";
 		BusinessOwner temp_owner = dal
 				.selectBusinessOwner(businessOwnerUserName);
 		assertTrue(temp_owner == null);
 
-		Business business = new Business("business_name", "pqwfqwass", "asc",
+		Business business = new Business("business_nameqwq", "pqwfqwass", "asc",
 				"wqfqwf", "uu", businessOwnerUserName);
 		dal.insertBusiness(business);
 

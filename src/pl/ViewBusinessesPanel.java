@@ -12,14 +12,15 @@ import javax.swing.table.DefaultTableModel;
 
 
 public class ViewBusinessesPanel extends JPanel {
+	private ISL sl;
 
 	private JTable table;
 	/**
 	 * Create the panel.
 	 */
-	public ViewBusinessesPanel() {
+	public ViewBusinessesPanel(ISL sl) {
 
-			ISL sl=new SL();
+			this.sl=sl;
 			
 			//((DAL)(dal)).testAddDeleteCoupon();
 			DefaultTableModel businesses=sl.getResultset("businesses");
