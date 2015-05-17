@@ -444,7 +444,7 @@ public class DAL implements IDAL {
 			return null;
 		HashMap user = (HashMap) userList.get(0);
 		Admin result = new Admin((String) user.get("Username"),
-				(String) user.get("pass"), (String) user.get("Email"),
+				(String) user.get("Password"), (String) user.get("Email"),
 				(String) user.get("Phone"));
 		return result;
 	}

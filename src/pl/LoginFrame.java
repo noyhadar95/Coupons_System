@@ -105,10 +105,11 @@ public class LoginFrame extends JFrame {
 							setVisible(false);
 							break;
 						case "Admin":
-//							JFrame adminFrame = new MainAdminFrame();
-//							adminFrame.setVisible(true);
-							JOptionPane.showMessageDialog((Component) e.getSource(),
-									"move to admin frame");
+							JFrame adminFrame = new MainAdminFrame();
+							adminFrame.setLocation(getLocation()); 
+							adminFrame.setVisible(true);
+							// close current frame
+							setVisible(false);
 							break;
 						case "Bussines Owner":
 							JOptionPane.showMessageDialog((Component) e.getSource(),
