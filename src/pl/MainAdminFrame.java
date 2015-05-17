@@ -84,7 +84,7 @@ public class MainAdminFrame extends JFrame {
 			}
 		});
 		
-		JLabel lblWelconeAdmin = new JLabel("Welcone, Admin!");
+		JLabel lblWelconeAdmin = new JLabel("Welcone, "+sl.getUsername()+"!");
 		GridBagConstraints gbc_lblWelconeAdmin = new GridBagConstraints();
 		gbc_lblWelconeAdmin.anchor = GridBagConstraints.NORTHWEST;
 		gbc_lblWelconeAdmin.insets = new Insets(0, 0, 5, 5);

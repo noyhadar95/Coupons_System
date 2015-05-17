@@ -43,6 +43,7 @@ public class CustomerMain extends JFrame {
 	private JTable table;
 	private ISL isl;
 	private DefaultTableModel lastModel;
+	private static ISL sl;
 
 	/**
 	 * Launch the application.
@@ -51,7 +52,8 @@ public class CustomerMain extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CustomerMain frame = new CustomerMain();
+					
+					CustomerMain frame = new CustomerMain(sl);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -63,9 +65,9 @@ public class CustomerMain extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CustomerMain() { 
-		this.isl = new SL();
-		lastModel = isl.getCouponsByPreference("cust1");
+	public CustomerMain(final ISL sl) { 
+		this.isl =sl;
+		lastModel = isl.getCouponsByPreference(sl.getUsername());
 		
 		Timer timer = new Timer ();
 		TimerTask hourlyTask = new TimerTask () {
@@ -148,9 +150,9 @@ for(int i=0;i<table.getRowCount(); i++){
 			                JTable table = (JTable)e.getSource();
 			                int modelRow = Integer.valueOf( e.getActionCommand() );
 
-			               isl.purchaseCoupon((String)table.getValueAt(modelRow, 0), "cust1");
+			               isl.purchaseCoupon((String)table.getValueAt(modelRow, 0), sl.getUsername());
 			    
-			               JOptionPane.showMessageDialog((JFrame)cmbx_By.getTopLevelAncestor(), "cust1 bought " + (String)table.getValueAt(modelRow, 0));
+			               JOptionPane.showMessageDialog((JFrame)cmbx_By.getTopLevelAncestor(), sl.getUsername()+" bought " + (String)table.getValueAt(modelRow, 0));
 
 			            }
 			        };
@@ -200,9 +202,9 @@ for(int i=0;i<table.getRowCount(); i++){
 	                JTable table = (JTable)e.getSource();
 	                int modelRow = Integer.valueOf( e.getActionCommand() );
 
-	               isl.purchaseCoupon((String)table.getValueAt(modelRow, 0), "cust1");
+	               isl.purchaseCoupon((String)table.getValueAt(modelRow, 0), sl.getUsername());
 	    
-	               JOptionPane.showMessageDialog((JFrame)cmbx_By.getTopLevelAncestor(), "cust1 bought " + (String)table.getValueAt(modelRow, 0));
+	               JOptionPane.showMessageDialog((JFrame)cmbx_By.getTopLevelAncestor(), sl.getUsername()+" bought " + (String)table.getValueAt(modelRow, 0));
 
 	            }
 	        };
@@ -221,7 +223,7 @@ for(int i=0;i<table.getRowCount(); i++){
 		JButton btnObserveMyCoupons = new JButton("Observe My Coupons");
 		btnObserveMyCoupons.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				JFrame newFrame = new CustomersCoupons();
+				JFrame newFrame = new CustomersCoupons(sl);
 				
 			}
 		});
@@ -277,7 +279,7 @@ for(int i=0;i<table.getRowCount(); i++){
 	
 	
 	void checkNotificationByPreference(){
-		DefaultTableModel newModel = isl.getCouponsByPreference("Cust1");
+		DefaultTableModel newModel = isl.getCouponsByPreference(sl.getUsername());
 		ArrayList<String> list = new ArrayList<>();
 		for(int i=0; i < newModel.getRowCount(); i++){
 			if(inTable((String)newModel.getValueAt(i, 0), lastModel)==true) 

@@ -30,7 +30,7 @@ public class CustomersCoupons extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
-	private ISL isl;
+	private static ISL isl;
 	/**
 	 * Launch the application.
 	 */
@@ -38,7 +38,7 @@ public class CustomersCoupons extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CustomersCoupons frame = new CustomersCoupons();
+					CustomersCoupons frame = new CustomersCoupons(isl);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -50,12 +50,12 @@ public class CustomersCoupons extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CustomersCoupons() {
+	public CustomersCoupons(ISL sl) {
 		
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         final int USE_COLUMN = 3;
         
-        isl = new SL();
+        isl = sl;
         
 		String name="cust1";
 		DefaultTableModel coupons=isl.getCouponsNamesRatings(name);

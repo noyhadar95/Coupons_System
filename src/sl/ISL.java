@@ -170,5 +170,9 @@ public interface ISL {
 	Purchase selectPurchase(String serialKey);
 
 	void updatePurchase(Purchase purchase);
+	
+	void setUsername(String username);
+	
+	String getUsername();
 
 }

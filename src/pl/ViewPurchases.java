@@ -13,14 +13,13 @@ import sl.*;
 
 public class ViewPurchases extends JPanel {
 	private JTable table;
+	private ISL sl;
 	/**
 	 * Create the panel.
 	 */
-	public ViewPurchases() {
-	ISL sl=new SL();
-		
-		//((DAL)(dal)).testAddDeleteCoupon();
-		String name="cust1";
+	public ViewPurchases(ISL sl) {
+		this.sl=sl;
+		String name=sl.getUsername();
 		String query="purchases WHERE CustomerName='"+name+"'";
 		DefaultTableModel coupons=sl.getResultset(query);
 		 table = new JTable(coupons);

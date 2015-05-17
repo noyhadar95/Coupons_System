@@ -24,7 +24,10 @@ public class SL implements ISL {
 
 	@Override
 	public boolean tryLogin(String username, String password, String authType) {
-		return bl.tryLogin(username, password, authType);
+		boolean result= bl.tryLogin(username, password, authType);
+		if(result)
+			this.username=username;
+		return result;
 	}
 
 	@Override
@@ -231,6 +234,17 @@ public class SL implements ISL {
 	public void updatePurchase(Purchase purchase) {
 		bl.updatePurchase(purchase);
 		
+	}
+
+	@Override
+	public void setUsername(String username) {
+		this.username=username;
+		
+	}
+
+	@Override
+	public String getUsername() {
+		return username;
 	}
 
 }
