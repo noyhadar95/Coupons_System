@@ -12,34 +12,45 @@ import javax.mail.internet.MimeMessage;
 
 public class EmailSender {
 
-	private String smtpHost;
+	private static String PASSWORD = "couponsforyoupsagot"; // GMail password
 
 	public EmailSender() {
-		smtpHost = "smtp.gmail.com";
+
 	}
 
 	public boolean sendEmail(String to, String from, String subject, String text) {
 		boolean successFlag = true;
+
+		Properties props = System.getProperties();
+		String host = "smtp.gmail.com";
+		props.put("mail.smtp.starttls.enable", "true");
+		props.put("mail.smtp.host", host);
+		props.put("mail.smtp.user", from);
+		props.put("mail.smtp.password", PASSWORD);
+		props.put("mail.smtp.port", "587");
+		props.put("mail.smtp.auth", "true");
+
+		Session session = Session.getDefaultInstance(props);
+		MimeMessage message = new MimeMessage(session);
+
 		try {
-			Properties properties = new Properties();
-			properties.put("mail.smtp.host", smtpHost);
-			Session emailSession = Session.getDefaultInstance(properties);
+			message.setFrom(new InternetAddress(from));
+			InternetAddress toAddress = new InternetAddress(to);
 
-			Message emailMessage = new MimeMessage(emailSession);
-			emailMessage.addRecipient(Message.RecipientType.TO,
-					new InternetAddress(to));
-			// emailMessage.addRecipient(Message.RecipientType.CC,
-			// new InternetAddress(cc));
-			emailMessage.setFrom(new InternetAddress(from));
-			emailMessage.setSubject(subject);
-			emailMessage.setText(text);
+			message.addRecipient(Message.RecipientType.TO, toAddress);
 
-			emailSession.setDebug(true);
+			message.setSubject(subject);
+			message.setText(text);
+			Transport transport = session.getTransport("smtp");
+			transport.connect(host, from, PASSWORD);
+			transport.sendMessage(message, message.getAllRecipients());
+			transport.close();
 
-			Transport.send(emailMessage);
 		} catch (AddressException e) {
 			successFlag = false;
+			System.out.println("1");
 		} catch (MessagingException e) {
+			System.out.println("2");
 			successFlag = false;
 		}
 
