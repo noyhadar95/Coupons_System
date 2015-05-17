@@ -28,7 +28,7 @@ import sl.SL;
 
 public class MainAdminFrame extends JFrame {
 
-	private ISL sl=new SL();
+	private ISL sl;
 	private JPanel contentPane;
 	private final int WINDOW_WIDTH = 900, WINDOW_HEIGHT = 700;
 
@@ -39,8 +39,8 @@ public class MainAdminFrame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MainAdminFrame frame = new MainAdminFrame();
-					frame.setVisible(true);
+				//	MainAdminFrame frame = new MainAdminFrame();
+				//	frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -51,8 +51,9 @@ public class MainAdminFrame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public MainAdminFrame() {
+	public MainAdminFrame(final ISL sl) {
 		super("Admin");
+		this.sl=sl;
 		//((DAL)(dal)).testAddDeleteCoupon();
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.getContentPane().setLayout(new BorderLayout());
@@ -70,11 +71,11 @@ public class MainAdminFrame extends JFrame {
 		JButton btnAdd = new JButton("Add");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AdminAddFrame addFrame = new AdminAddFrame();
+				AdminAddFrame addFrame = new AdminAddFrame(sl);
 				addFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		         
 		        //Create and set up the content pane.
-		        CardLayoutDemo demo = new CardLayoutDemo();
+		        CardLayoutDemo demo = new CardLayoutDemo(sl);
 		        demo.addComponentToPane(addFrame.getContentPane());
 		         
 		        //Display the window.
@@ -129,6 +130,15 @@ public class MainAdminFrame extends JFrame {
 		        frame.setVisible(true);
 			}
 		});
+		
+		JLabel lblApprove = new JLabel("You have coupons to approve!");
+		GridBagConstraints gbc_lblApprove = new GridBagConstraints();
+		gbc_lblApprove.insets = new Insets(0, 0, 5, 5);
+		gbc_lblApprove.gridx = 0;
+		gbc_lblApprove.gridy = 3;
+		contentPane.add(lblApprove, gbc_lblApprove);
+		lblApprove.setVisible(false);
+		lblApprove.setVisible(true);
 		GridBagConstraints gbc_btnEdit = new GridBagConstraints();
 		gbc_btnEdit.anchor = GridBagConstraints.NORTHWEST;
 		gbc_btnEdit.insets = new Insets(0, 0, 5, 5);
@@ -143,7 +153,7 @@ public class MainAdminFrame extends JFrame {
 				addFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		         
 		        //Create and set up the content pane.
-		        AdminDeleteCardLayout demo = new AdminDeleteCardLayout();
+		        AdminDeleteCardLayout demo = new AdminDeleteCardLayout(sl);
 		        demo.addComponentToPane(addFrame.getContentPane());
 		         
 		        //Display the window.
@@ -158,31 +168,14 @@ public class MainAdminFrame extends JFrame {
 		gbc_btnDelete.gridy = 4;
 		contentPane.add(btnDelete, gbc_btnDelete);
 		
-		JLabel lblApprove = new JLabel("You have coupons to approve!");
-		GridBagConstraints gbc_lblApprove = new GridBagConstraints();
-		gbc_lblApprove.insets = new Insets(0, 0, 0, 5);
-		gbc_lblApprove.gridx = 0;
-		gbc_lblApprove.gridy = 5;
-		contentPane.add(lblApprove, gbc_lblApprove);
-		lblApprove.setVisible(false);
-		
-		JButton btnApproveCoupons = new JButton("Approve Coupons");
-		GridBagConstraints gbc_btnApproveCoupons = new GridBagConstraints();
-		gbc_btnApproveCoupons.insets = new Insets(0, 0, 0, 5);
-		gbc_btnApproveCoupons.gridx = 1;
-		gbc_btnApproveCoupons.gridy = 5;
-		contentPane.add(btnApproveCoupons, gbc_btnApproveCoupons);
-		btnApproveCoupons.setEnabled(false);
-		
 		//TODO: check if there are coupons to approve
 		int toApprove=sl.getNumOfUnapprovedCoupons();
 		if(toApprove>0){
-			lblApprove.setText("You Have "+toApprove+" Coupons to Approve!");
+			lblApprove.setText("You Have "+toApprove+" Coupons to Approve! ->");
 			
 		}
 		else{
-			lblApprove.setText("You Have No Coupons to Approve!");
+			lblApprove.setText("You Have No Coupons to Approve! ->");
 		}
-		lblApprove.setVisible(true);
 	}
 }

@@ -15,9 +15,11 @@ import bl_backend.Purchase;
 public class SL implements ISL {
 
 	IBL bl;
+	private String username;
 
 	public SL() {
 		bl = new BL();
+		username="";
 	}
 
 	@Override

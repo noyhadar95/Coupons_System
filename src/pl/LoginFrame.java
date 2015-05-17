@@ -105,7 +105,7 @@ public class LoginFrame extends JFrame {
 							setVisible(false);
 							break;
 						case "Admin":
-							JFrame adminFrame = new MainAdminFrame();
+							JFrame adminFrame = new MainAdminFrame(sl);
 							adminFrame.setLocation(getLocation()); 
 							adminFrame.setVisible(true);
 							// close current frame
