@@ -681,14 +681,14 @@ public class DAL implements IDAL {
 	}
 
 	@Override
-	public DefaultTableModel getCouponsByFilter(String text, int filter) {
-		String query = String.format("SELECT * FROM couponsdb.coupons WHERE $s=%s", filter, text);
+	public DefaultTableModel getCouponsByFilter(String filter, String text) {
+		String query = String.format("SELECT * FROM couponsdb.coupons WHERE %s='%s'", filter, text);
 		return getResultSetFromQuery(query);
 	}
 
 	@Override
-	public DefaultTableModel getBusinessByFilter(String text, int filter) {
-		String query = String.format("SELECT * FROM couponsdb.businesses WHERE $s=%s", filter, text);
+	public DefaultTableModel getBusinessByFilter(String filter, String text) {
+		String query = String.format("SELECT * FROM couponsdb.businesses WHERE %s='%s'", filter, text);
 		return getResultSetFromQuery(query);
 	}
 
@@ -701,4 +701,5 @@ public class DAL implements IDAL {
 									customerName);
 		return getResultSetFromQuery(query);
 	}
+
 }

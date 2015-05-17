@@ -98,10 +98,15 @@ public class CustomerMain extends JFrame {
 		JButton btn_search = new JButton("Search");
 		btn_search.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//Component component = (Component) e.getSource();
-				//JFrame frame = (JFrame) SwingUtilities.getRoot(component);
-				//frame.getContentPane().setBackground(Color.RED);
-				txt_search.setText("RED");
+				DefaultTableModel model;
+				switch (cmbx_By.getSelectedIndex()) {
+				case 0:
+					
+					break;
+
+				default:
+					break;
+				}
 				
 				if(cmbx_Type.getSelectedIndex() == 0){
 					
