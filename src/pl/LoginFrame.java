@@ -12,14 +12,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import dal.IDAL;
-
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 
-import bl.BL;
-import bl.IBL;
-import bl_backend.Customer;
 import bl_backend.EmailSender;
 
 import java.awt.SystemColor;
@@ -101,8 +96,28 @@ public class LoginFrame extends JFrame {
 					boolean success = sl.tryLogin(tryUsername, tryPassword, authType);
 					
 					if(success){
-						JOptionPane.showMessageDialog((Component) e.getSource(),
-								"success");
+						switch (authType) {
+						case "Customer":
+							JFrame customerFrame = new CustomerMain();
+							customerFrame.setLocation(getLocation()); 
+							customerFrame.setVisible(true);
+							// close current frame
+							setVisible(false);
+							break;
+						case "Admin":
+							JFrame adminFrame = new MainAdminFrame();
+							adminFrame.setLocation(getLocation()); 
+							adminFrame.setVisible(true);
+							// close current frame
+							setVisible(false);
+							break;
+						case "Bussines Owner":
+							JOptionPane.showMessageDialog((Component) e.getSource(),
+									"move to business owner frame");
+							break;
+						default:
+							break;
+						}
 					}
 					else{
 						JOptionPane.showMessageDialog((Component) e.getSource(),
@@ -155,7 +170,8 @@ public class LoginFrame extends JFrame {
 							"enter all fields in order to sign up");
 				}
 				else if(textFieldEmail.getText() == null || textFieldEmail.getText().equals("") ||
-						textFieldPhone.getText() == null || textFieldPhone.getText().equals("")){
+						!textFieldEmail.isVisible() || textFieldPhone.getText() == null ||
+						textFieldPhone.getText().equals("") || !textFieldPhone.isVisible()){
 					setSignUpPanelVisibility(true);
 					JOptionPane.showMessageDialog((Component) e.getSource(),
 							"enter all fields in order to sign up");

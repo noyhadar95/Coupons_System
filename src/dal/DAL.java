@@ -20,8 +20,9 @@ public class DAL implements IDAL {
 	 String db_name="";
 
 	// Database credentials
-	static final String USER = "Shai";
-	static final String PASS = "root";
+
+	static final String USER = "root";
+	static final String PASS = "root123";
 
 	public DAL() {
 		//initialDatabase();
@@ -444,7 +445,7 @@ public class DAL implements IDAL {
 			return null;
 		HashMap user = (HashMap) userList.get(0);
 		Admin result = new Admin((String) user.get("Username"),
-				(String) user.get("pass"), (String) user.get("Email"),
+				(String) user.get("Password"), (String) user.get("Email"),
 				(String) user.get("Phone"));
 		return result;
 	}
