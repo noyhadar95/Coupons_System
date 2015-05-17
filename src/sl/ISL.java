@@ -2,6 +2,7 @@ package sl;
 
 import javax.swing.table.DefaultTableModel;
 
+import bl_backend.Business;
 import bl_backend.Coupon;
 
 public interface ISL {
@@ -87,5 +88,16 @@ public interface ISL {
 	String getPasswordByUsername(String username, String authType);
 
 	String getEmailByUsername(String username, String authType);
+
+	/**
+	 * returns a DefaultTableModel object that contains the details of all the
+	 * businesses in the db.
+	 * 
+	 * @return a DefaultTableModel object.
+	 */
+	
+	DefaultTableModel getBusinessesDetails();
+
+	void updateBusinessByOwner(Business business);
 
 }

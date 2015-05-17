@@ -46,9 +46,9 @@ public class BusinessOwnerMain extends JFrame {
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[]{0, 0, 0, 0, 0};
-		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
+		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gbl_contentPane.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 		
 		JLabel lblHello = new JLabel("Hello,");
@@ -111,7 +111,7 @@ public class BusinessOwnerMain extends JFrame {
 		
 		JLabel lblObserveCoupons = new JLabel("Observe coupons");
 		GridBagConstraints gbc_lblObserveCoupons = new GridBagConstraints();
-		gbc_lblObserveCoupons.insets = new Insets(0, 0, 0, 5);
+		gbc_lblObserveCoupons.insets = new Insets(0, 0, 5, 5);
 		gbc_lblObserveCoupons.gridx = 1;
 		gbc_lblObserveCoupons.gridy = 4;
 		contentPane.add(lblObserveCoupons, gbc_lblObserveCoupons);
@@ -131,9 +131,38 @@ public class BusinessOwnerMain extends JFrame {
 			}
 		});
 		GridBagConstraints gbc_btnObserveCoupon = new GridBagConstraints();
+		gbc_btnObserveCoupon.insets = new Insets(0, 0, 5, 0);
 		gbc_btnObserveCoupon.gridx = 3;
 		gbc_btnObserveCoupon.gridy = 4;
 		contentPane.add(btnObserveCoupon, gbc_btnObserveCoupon);
+		
+		JButton btnEditBusinesses = new JButton("Edit Businesses");
+		btnEditBusinesses.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				JFrame frame = new JFrame();
+				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		         
+				JPanel panel=new BusinessOwnerEditBusiness();
+				frame.getContentPane().add(panel);
+		         
+		        //Display the window.
+		        frame.pack();
+		        frame.setVisible(true);
+			}
+			
+		});
+		
+		JLabel lblEditYoursBusinesses = new JLabel("Edit your's businesses");
+		GridBagConstraints gbc_lblEditYoursBusinesses = new GridBagConstraints();
+		gbc_lblEditYoursBusinesses.insets = new Insets(0, 0, 5, 5);
+		gbc_lblEditYoursBusinesses.gridx = 1;
+		gbc_lblEditYoursBusinesses.gridy = 5;
+		contentPane.add(lblEditYoursBusinesses, gbc_lblEditYoursBusinesses);
+		GridBagConstraints gbc_btnEditBusinesses = new GridBagConstraints();
+		gbc_btnEditBusinesses.insets = new Insets(0, 0, 5, 0);
+		gbc_btnEditBusinesses.gridx = 3;
+		gbc_btnEditBusinesses.gridy = 5;
+		contentPane.add(btnEditBusinesses, gbc_btnEditBusinesses);
 	}
 
 }

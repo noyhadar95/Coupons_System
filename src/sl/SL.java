@@ -4,6 +4,7 @@ import javax.swing.table.DefaultTableModel;
 
 import bl.BL;
 import bl.IBL;
+import bl_backend.Business;
 import bl_backend.Coupon;
 
 public class SL implements ISL {
@@ -33,6 +34,11 @@ public class SL implements ISL {
 	public boolean updateCouponByAdmin(Coupon coupon) {
 		return bl.updateCoupon(coupon);
 	}
+	public boolean updateBusinessByOwner(Business business){
+		return bl.updateBusiness(business);
+		
+	}
+	
 
 	@Override
 	public DefaultTableModel getCouponsDetails() {
@@ -59,4 +65,10 @@ public class SL implements ISL {
 	public String getEmailByUsername(String username, String authType) {
 		return bl.getEmailByUsername(username, authType);
 	}
+	
+	@Override
+	public DefaultTableModel getBusinessesDetails() {
+		return bl.getBusinessesDetails();
+	}
+	
 }

@@ -59,10 +59,21 @@ public class BL implements IBL {
 		dal.updateCoupon(coupon);
 		return true;
 	}
+	
+	public boolean updateBusiness(Business business){
+		dal.updateBusiness(business);
+		return true;
+		
+	}
 
 	@Override
 	public DefaultTableModel getCouponsDetails() {
 		return dal.selectAllCoupons();
+	}
+	
+	@Override
+	public DefaultTableModel getBusinessesDetails() {
+		return dal.selectAllBusinesses();
 	}
 
 	@Override

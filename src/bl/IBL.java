@@ -2,6 +2,7 @@ package bl;
 
 import javax.swing.table.DefaultTableModel;
 
+import bl_backend.Business;
 import bl_backend.Coupon;
 
 public interface IBL {
@@ -23,5 +24,9 @@ public interface IBL {
 	String getPasswordByUsername(String username, String authType);
 
 	String getEmailByUsername(String username, String authType);
+
+	DefaultTableModel getBusinessesDetails();
+
+	boolean updateBusiness(Business business);
 
 }

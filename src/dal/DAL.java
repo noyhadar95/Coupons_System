@@ -591,6 +591,17 @@ public class DAL implements IDAL {
 		executePassiveCommand(sql);
 
 	}
+	
+	public void updateBusiness(Business business){
+		String sql = String
+				.format("UPDATE couponsdb.businesses SET Name='%s',Address=%s ,City=%s ,Category=%s ,Description=%s WHERE Name='%s' ",
+						business.getName(), business.getAddress(),business.getCity(),business.getCategory(),business.getDescription(),business.getName());
+		executePassiveCommand(sql);
+		
+	
+	}
+	
+	
 
 	@Override
 	public void insertPurchase(Purchase purchase) {
@@ -664,6 +675,11 @@ public class DAL implements IDAL {
 	@Override
 	public DefaultTableModel selectAllCoupons() {
 		return getResultset("coupons");
+	}
+	
+	@Override
+	public DefaultTableModel selectAllBusinesses() {
+		return getResultset("businesses");
 	}
 
 	@Override

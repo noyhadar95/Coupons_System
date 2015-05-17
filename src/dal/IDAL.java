@@ -70,4 +70,8 @@ public interface IDAL {
 	
 	int getNumOfUnapprovedCoupons();
 
+	DefaultTableModel selectAllBusinesses();
+
+	void updateBusiness(Business business);
+
 }
