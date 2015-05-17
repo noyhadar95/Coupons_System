@@ -120,16 +120,10 @@ public interface ISL {
 	DefaultTableModel getResultset(String table);
 	
 	DefaultTableModel getApprovedCoupons();
-	
-<<<<<<< HEAD
-	DefaultTableModel getCouponsByFilter(String text, String filter);
-	
-	DefaultTableModel getBusinessByFilter(String text, String filter);
-=======
+
 	DefaultTableModel getCouponsByFilter(String filter, String text);
 	
 	DefaultTableModel getBusinessByFilter(String filter, String text);
->>>>>>> searchcoupons
 	
 	void purchaseCoupon(String couponName, String customerName);
 	
