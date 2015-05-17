@@ -9,9 +9,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 
@@ -30,13 +30,13 @@ import sl.SL;
 public class LoginFrame extends JFrame {
 
 	static final String COMPANY_NAME = "Coupons For You";
-	static final String COMPANY_EMAIL = "noyhadar95@gmail.com";
+	static final String COMPANY_EMAIL = "couponsforyouapp";
 	private final int WINDOW_WIDTH = 700, WINDOW_HEIGHT = 550;
 	private final String[] authTypes = {"Customer", "Admin", "Bussines Owner"};
 	private JPanel contentPane;
 	private ISL sl;
 	private JTextField textFieldUsername;
-	private JTextField textFieldPassword;
+	private JPasswordField textFieldPassword;
 	private JComboBox authTypeCB;
 	private JTextField textFieldEmail;
 	private JTextField textFieldPhone;
@@ -98,14 +98,14 @@ public class LoginFrame extends JFrame {
 					if(success){
 						switch (authType) {
 						case "Customer":
-							JFrame customerFrame = new CustomerMain();
+							JFrame customerFrame = new CustomerMain(sl);
 							customerFrame.setLocation(getLocation()); 
 							customerFrame.setVisible(true);
 							// close current frame
 							setVisible(false);
 							break;
 						case "Admin":
-							JFrame adminFrame = new MainAdminFrame();
+							JFrame adminFrame = new MainAdminFrame(sl);
 							adminFrame.setLocation(getLocation()); 
 							adminFrame.setVisible(true);
 							// close current frame
@@ -135,21 +135,25 @@ public class LoginFrame extends JFrame {
 		lblUsername.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		
 		textFieldUsername = new JTextField();
+		textFieldUsername.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		textFieldUsername.setColumns(10);
 		
 		JLabel lblPassword = new JLabel("Password:");
 		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		
-		textFieldPassword = new JTextField();
+		textFieldPassword = new JPasswordField();
+		textFieldPassword.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		textFieldPassword.setColumns(10);
 		
 		authTypeCB = new JComboBox(authTypes);
 		
 		textFieldEmail = new JTextField();
+		textFieldEmail.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		textFieldEmail.setColumns(10);
 		textFieldEmail.setVisible(false);
 		
 		textFieldPhone = new JTextField();
+		textFieldPhone.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		textFieldPhone.setColumns(10);
 		textFieldPhone.setVisible(false);
 		
@@ -193,8 +197,8 @@ public class LoginFrame extends JFrame {
 			private void trySignUp(ActionEvent e) {
 				String username = textFieldUsername.getText();
 				String password = textFieldPassword.getText();
-				String email = textFieldUsername.getText();
-				String phone = textFieldPassword.getText();
+				String email = textFieldEmail.getText();
+				String phone = textFieldPhone.getText();
 				
 				boolean success = sl.signUp(username, password, email, phone);
 				if(success){
