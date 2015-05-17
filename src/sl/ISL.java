@@ -121,9 +121,9 @@ public interface ISL {
 	
 	DefaultTableModel getApprovedCoupons();
 	
-	DefaultTableModel getCouponsByFilter(String text, int filter);
+	DefaultTableModel getCouponsByFilter(String text, String filter);
 	
-	DefaultTableModel getBusinessByFilter(String text, int filter);
+	DefaultTableModel getBusinessByFilter(String text, String filter);
 	
 	void purchaseCoupon(String couponName, String customerName);
 	
