@@ -4,10 +4,14 @@ import javax.swing.table.DefaultTableModel;
 
 import bl.BL;
 import bl.IBL;
+<<<<<<< HEAD
 import bl_backend.Admin;
 import bl_backend.Business;
 import bl_backend.BusinessOwner;
 import bl_backend.Category;
+=======
+import bl_backend.Business;
+>>>>>>> BusineseesOwnerMain
 import bl_backend.Coupon;
 import bl_backend.Customer;
 import bl_backend.Purchase;
@@ -44,6 +48,11 @@ public class SL implements ISL {
 	public boolean updateCouponByAdmin(Coupon coupon) {
 		return bl.updateCoupon(coupon);
 	}
+	public boolean updateBusinessByOwner(Business business){
+		return bl.updateBusiness(business);
+		
+	}
+	
 
 	@Override
 	public DefaultTableModel getCouponsDetails() {
@@ -70,6 +79,7 @@ public class SL implements ISL {
 	public String getEmailByUsername(String username, String authType) {
 		return bl.getEmailByUsername(username, authType);
 	}
+<<<<<<< HEAD
 
 	public void insertBusinessOwner(BusinessOwner owner) {
 		bl.insertBusinessOwner(owner);
@@ -247,4 +257,12 @@ public class SL implements ISL {
 		return username;
 	}
 
+=======
+	
+	@Override
+	public DefaultTableModel getBusinessesDetails() {
+		return bl.getBusinessesDetails();
+	}
+	
+>>>>>>> BusineseesOwnerMain
 }

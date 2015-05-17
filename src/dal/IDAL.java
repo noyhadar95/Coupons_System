@@ -70,6 +70,7 @@ public interface IDAL {
 
 	int getNumOfUnapprovedCoupons();
 
+<<<<<<< HEAD
 	DefaultTableModel getApprovedCoupons();
 
 	DefaultTableModel getCouponsByFilter(String filter, String text);
@@ -77,5 +78,10 @@ public interface IDAL {
 	DefaultTableModel getBusinessByFilter(String filter, String text);
 
 	DefaultTableModel getCouponsByPreference(String customerName);
+=======
+	DefaultTableModel selectAllBusinesses();
+
+	void updateBusiness(Business business);
+>>>>>>> BusineseesOwnerMain
 
 }
