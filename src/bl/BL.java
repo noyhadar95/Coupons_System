@@ -197,4 +197,118 @@ public class BL implements IBL {
 		return dal.getCouponsByPreference(customerName);
 	}
 
+	@Override
+	public void insertCustomer(Customer customer) {
+		dal.insertCustomer(customer);
+		
+	}
+
+	@Override
+	public Customer selectCustomer(String username) {
+		return dal.selectCustomer(username);
+	}
+
+	@Override
+	public void deleteCustomer(String username) {
+		dal.deleteCustomer(username);
+		
+	}
+
+	@Override
+	public void insertAdmin(Admin admin) {
+		dal.insertAdmin(admin);
+		
+	}
+
+	@Override
+	public Admin selectAdmin(String username) {
+		return dal.selectAdmin(username);
+	}
+
+	@Override
+	public void deleteAdmin(String username) {
+		dal.deleteAdmin(username);
+		
+	}
+
+	@Override
+	public void inserBusinessOwner(BusinessOwner owner) {
+		dal.inserBusinessOwner(owner);
+		
+	}
+
+	@Override
+	public BusinessOwner selectBusinessOwner(String username) {
+		return dal.selectBusinessOwner(username);
+	}
+
+	@Override
+	public void deleteBusinessOwner(String username) {
+		dal.deleteBusinessOwner(username);
+		
+	}
+
+	@Override
+	public void updateBusinessOwner(BusinessOwner owner) {
+		dal.updateBusinessOwner(owner);
+		
+	}
+
+	@Override
+	public Business selectBusiness(String name) {
+		return dal.selectBusiness(name);
+	}
+
+	@Override
+	public void deleteBusiness(String name) {
+		dal.deleteBusiness(name);
+		
+	}
+
+	@Override
+	public void insertCategory(Category category) {
+		dal.insertCategory(category);
+		
+	}
+
+	@Override
+	public Coupon selectCoupon(String name) {
+		return dal.selectCoupon(name);
+	}
+
+	@Override
+	public void deleteCoupon(String name) {
+		dal.deleteCoupon(name);
+		
+	}
+
+	@Override
+	public void deleteCategory(int id) {
+		dal.deleteCategory(id);
+		
+	}
+
+	@Override
+	public void insertPurchase(Purchase purchase) {
+		dal.insertPurchase(purchase);
+		
+	}
+
+	@Override
+	public Purchase selectPurchase(String serialKey) {
+		return dal.selectPurchase(serialKey);
+	}
+
+	@Override
+	public void deletePurchase(String serialKey) {
+		dal.deletePurchase(serialKey);
+		
+	}
+
+	@Override
+	public void updatePurchase(Purchase purchase) {
+		dal.updatePurchase(purchase);
+		
+	}
+
 }

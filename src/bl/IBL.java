@@ -2,9 +2,13 @@ package bl;
 
 import javax.swing.table.DefaultTableModel;
 
+import bl_backend.Admin;
 import bl_backend.Business;
 import bl_backend.BusinessOwner;
+import bl_backend.Category;
 import bl_backend.Coupon;
+import bl_backend.Customer;
+import bl_backend.Purchase;
 
 public interface IBL {
 
@@ -45,5 +49,45 @@ public interface IBL {
 	void purchaseCoupon(String couponName, String customerName);
 
 	DefaultTableModel getCouponsByPreference(String customerName);
+
+	void insertCustomer(Customer customer);
+
+	Customer selectCustomer(String username);
+
+	void deleteCustomer(String username);
+
+	void insertAdmin(Admin admin);
+
+	Admin selectAdmin(String username);
+
+	void deleteAdmin(String username);
+
+	void inserBusinessOwner(BusinessOwner owner);
+
+	BusinessOwner selectBusinessOwner(String username);
+
+	void deleteBusinessOwner(String username);
+
+	void updateBusinessOwner(BusinessOwner owner);
+
+	Business selectBusiness(String name);
+
+	void deleteBusiness(String name);
+
+	void insertCategory(Category category);
+
+	Coupon selectCoupon(String name);
+
+	void deleteCoupon(String name);
+
+	void deleteCategory(int id);
+
+	void insertPurchase(Purchase purchase);
+
+	Purchase selectPurchase(String serialKey);
+
+	void deletePurchase(String serialKey);
+
+	void updatePurchase(Purchase purchase);
 
 }

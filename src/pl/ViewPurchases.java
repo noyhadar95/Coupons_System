@@ -8,10 +8,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.table.DefaultTableModel;
+import sl.*;
 
-import sl.TempAdminSL;
-import dal.DAL;
-import dal.IDAL;
 
 public class ViewPurchases extends JPanel {
 	private JTable table;
@@ -19,7 +17,7 @@ public class ViewPurchases extends JPanel {
 	 * Create the panel.
 	 */
 	public ViewPurchases() {
-	TempAdminSL sl=new TempAdminSL();
+	ISL sl=new SL();
 		
 		//((DAL)(dal)).testAddDeleteCoupon();
 		String name="cust1";

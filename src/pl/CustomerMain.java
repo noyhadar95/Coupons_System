@@ -34,8 +34,6 @@ import javax.swing.JTable;
 
 import sl.ISL;
 import sl.SL;
-import sl.TempL;
-import sl.TempSL;
 
 public class CustomerMain extends JFrame {
 

@@ -15,7 +15,7 @@ import java.awt.Insets;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
-import sl.TempAdminSL;
+import sl.*;
 import bl_backend.BusinessOwner;
 import dal.DAL;
 import dal.IDAL;
@@ -29,7 +29,7 @@ public class AddBusinessOwnerPanel extends JPanel {
 	private JTextField email;
 	private JTextField phone;
 	private JButton btnAdd;
-	private TempAdminSL sl=new TempAdminSL();
+	private ISL sl=new SL();
 
 	/**
 	 * Create the panel.
@@ -117,7 +117,7 @@ public class AddBusinessOwnerPanel extends JPanel {
 				String pass1=pass.getText();
 				String email1=email.getText();
 				String phone1=phone.getText();
-				sl.inserBusinessOwner(new BusinessOwner(name1, pass1, email1, phone1)); 
+				sl.insertBusinessOwner(new BusinessOwner(name1, pass1, email1, phone1)); 
 			}
 		});
 		GridBagConstraints gbc_btnAdd = new GridBagConstraints();

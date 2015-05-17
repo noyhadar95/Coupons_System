@@ -14,7 +14,7 @@ import java.awt.Insets;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
-import sl.TempAdminSL;
+import sl.*;
 import bl_backend.Coupon;
 import bl_backend.Customer;
 import dal.DAL;
@@ -33,7 +33,7 @@ public class AddCouponPanel extends JPanel {
 	private JTextField txtBusiness;
 	private JLabel lblAddCoupon;
 	private JButton btnAdd;
-	private TempAdminSL sl=new TempAdminSL();
+	private ISL sl=new SL();
 
 	/**
 	 * Create the panel.

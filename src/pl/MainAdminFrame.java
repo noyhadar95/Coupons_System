@@ -23,11 +23,12 @@ import java.awt.Insets;
 
 import javax.swing.SwingConstants;
 
-import sl.TempAdminSL;
+import sl.ISL;
+import sl.SL;
 
 public class MainAdminFrame extends JFrame {
 
-	private TempAdminSL sl=new TempAdminSL();
+	private ISL sl=new SL();
 	private JPanel contentPane;
 	private final int WINDOW_WIDTH = 900, WINDOW_HEIGHT = 700;
 
@@ -60,9 +61,9 @@ public class MainAdminFrame extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
-		gbl_contentPane.columnWidths = new int[]{411, 105, 0};
+		gbl_contentPane.columnWidths = new int[]{411, 105, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gbl_contentPane.rowHeights = new int[]{16, 79, 29, 29, 29, 0, 0};
-		gbl_contentPane.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPane.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 		
@@ -85,13 +86,31 @@ public class MainAdminFrame extends JFrame {
 		JLabel lblWelconeAdmin = new JLabel("Welcone, Admin!");
 		GridBagConstraints gbc_lblWelconeAdmin = new GridBagConstraints();
 		gbc_lblWelconeAdmin.anchor = GridBagConstraints.NORTHWEST;
-		gbc_lblWelconeAdmin.insets = new Insets(0, 0, 5, 0);
+		gbc_lblWelconeAdmin.insets = new Insets(0, 0, 5, 5);
 		gbc_lblWelconeAdmin.gridx = 1;
 		gbc_lblWelconeAdmin.gridy = 0;
 		contentPane.add(lblWelconeAdmin, gbc_lblWelconeAdmin);
+		
+		JButton btnLogout = new JButton("logout");
+		btnLogout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFrame frame = new LoginFrame();
+				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		         setVisible(false);
+		        //Display the window.
+		        frame.pack();
+		        frame.setVisible(true);
+				
+			}
+		});
+		GridBagConstraints gbc_btnLogout = new GridBagConstraints();
+		gbc_btnLogout.insets = new Insets(0, 0, 5, 5);
+		gbc_btnLogout.gridx = 10;
+		gbc_btnLogout.gridy = 0;
+		contentPane.add(btnLogout, gbc_btnLogout);
 		GridBagConstraints gbc_btnAdd = new GridBagConstraints();
 		gbc_btnAdd.anchor = GridBagConstraints.NORTHWEST;
-		gbc_btnAdd.insets = new Insets(0, 0, 5, 0);
+		gbc_btnAdd.insets = new Insets(0, 0, 5, 5);
 		gbc_btnAdd.gridx = 1;
 		gbc_btnAdd.gridy = 2;
 		contentPane.add(btnAdd, gbc_btnAdd);
@@ -103,7 +122,7 @@ public class MainAdminFrame extends JFrame {
 				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		         
 				JPanel panel=new AdminEditCoupons();
-				frame.add(panel);
+				frame.getContentPane().add(panel);
 		         
 		        //Display the window.
 		        frame.pack();
@@ -112,7 +131,7 @@ public class MainAdminFrame extends JFrame {
 		});
 		GridBagConstraints gbc_btnEdit = new GridBagConstraints();
 		gbc_btnEdit.anchor = GridBagConstraints.NORTHWEST;
-		gbc_btnEdit.insets = new Insets(0, 0, 5, 0);
+		gbc_btnEdit.insets = new Insets(0, 0, 5, 5);
 		gbc_btnEdit.gridx = 1;
 		gbc_btnEdit.gridy = 3;
 		contentPane.add(btnEdit, gbc_btnEdit);
@@ -133,7 +152,7 @@ public class MainAdminFrame extends JFrame {
 			}
 		});
 		GridBagConstraints gbc_btnDelete = new GridBagConstraints();
-		gbc_btnDelete.insets = new Insets(0, 0, 5, 0);
+		gbc_btnDelete.insets = new Insets(0, 0, 5, 5);
 		gbc_btnDelete.anchor = GridBagConstraints.NORTHWEST;
 		gbc_btnDelete.gridx = 1;
 		gbc_btnDelete.gridy = 4;
@@ -149,6 +168,7 @@ public class MainAdminFrame extends JFrame {
 		
 		JButton btnApproveCoupons = new JButton("Approve Coupons");
 		GridBagConstraints gbc_btnApproveCoupons = new GridBagConstraints();
+		gbc_btnApproveCoupons.insets = new Insets(0, 0, 0, 5);
 		gbc_btnApproveCoupons.gridx = 1;
 		gbc_btnApproveCoupons.gridy = 5;
 		contentPane.add(btnApproveCoupons, gbc_btnApproveCoupons);
