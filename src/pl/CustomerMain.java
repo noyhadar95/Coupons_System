@@ -74,7 +74,7 @@ public class CustomerMain extends JFrame {
 		        checkNotificationByPreference();
 		    }
 		};
-
+		final JComboBox cmbx_By = new JComboBox();
 		// schedule the task to run starting now and then every hour...
 		timer.schedule (hourlyTask, 0l, 1000*60*60);   // 1000*10*60 every 10 minut
 		//timer.schedule (hourlyTask, 0l, 60*60); 
@@ -92,6 +92,20 @@ public class CustomerMain extends JFrame {
 				JComboBox comboBox = (JComboBox) e.getSource();
 
                 Object selected = comboBox.getSelectedItem();
+                if(comboBox.getSelectedIndex()==0){
+                	cmbx_By.removeAllItems();
+                		cmbx_By.insertItemAt("By Business", 0);
+                		cmbx_By.insertItemAt("By Category", 1);
+                		cmbx_By.setVisible(true);
+                }
+                
+                else{
+                	cmbx_By.removeAllItems();
+                		cmbx_By.insertItemAt("By Category", 0);
+                		cmbx_By.insertItemAt("By City", 1);
+                }
+                	
+                
 				
 			}
 		});
@@ -100,7 +114,7 @@ public class CustomerMain extends JFrame {
 		txt_search = new JTextField();
 		txt_search.setColumns(10);
 		
-		final JComboBox cmbx_By = new JComboBox();
+		
 		cmbx_By.setModel(new DefaultComboBoxModel(new String[] {"By Business", "By Category"}));
 		
 		JButton btn_search = new JButton("Search");
@@ -116,31 +130,11 @@ public class CustomerMain extends JFrame {
 					 model = isl.getCouponsByFilter("Category", txt_search.getText()); 
 				
 				default:
-					model = (DefaultTableModel)table.getModel();
+					model = isl.getApprovedCoupons();
 					break;
 				}
-				}
-				else{
-					switch (cmbx_By.getSelectedIndex()) {
-					case 0:
-						 model = isl.getCouponsByFilter("Business", txt_search.getText()); 
-						break;
-					case 1:
-						 model = isl.getCouponsByFilter("Category", txt_search.getText()); 
-					
-					default:
-						model = (DefaultTableModel)table.getModel();
-						break;
-					}
-				}
-				table.setModel(model);
 				
-				DefaultTableModel coupons=isl.getApprovedCoupons();
-				
-				
-				
-				
-				for(int i=0;i<table.getRowCount(); i++){
+for(int i=0;i<table.getRowCount(); i++){
 		        	
 		        	table.setValueAt("Purchase", i, 7);
 
@@ -162,6 +156,28 @@ public class CustomerMain extends JFrame {
 			        };
 			         
 			        ButtonColumn buttonColumn = new ButtonColumn(table, purchase, 7);
+				}
+				else{
+					switch (cmbx_By.getSelectedIndex()) {
+					case 0:
+						 model = isl.getBusinessByFilter("Category", txt_search.getText()); 
+						break;
+					case 1:
+						 model = isl.getBusinessByFilter("City", txt_search.getText()); 
+						 break;
+					default:
+						model = isl.getBusinessByFilter("Name", "");
+						break;
+					}
+				}
+				table.setModel(model);
+				
+				
+				
+				
+				
+				
+				
 			}
 		});
 		
