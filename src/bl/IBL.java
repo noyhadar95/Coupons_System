@@ -46,6 +46,7 @@ public interface IBL {
 
 	DefaultTableModel getBusinessByFilter(String text, String filter);
 
+
 	void purchaseCoupon(String couponName, String customerName);
 
 	DefaultTableModel getCouponsByPreference(String customerName);

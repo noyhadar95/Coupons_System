@@ -72,9 +72,9 @@ public interface IDAL {
 
 	DefaultTableModel getApprovedCoupons();
 
-	DefaultTableModel getCouponsByFilter(String text, String filter);
+	DefaultTableModel getCouponsByFilter(String filter, String text);
 
-	DefaultTableModel getBusinessByFilter(String text, String filter);
+	DefaultTableModel getBusinessByFilter(String filter, String text);
 
 	DefaultTableModel getCouponsByPreference(String customerName);
 
