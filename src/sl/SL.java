@@ -88,13 +88,13 @@ public class SL implements ISL {
 	}
 
 	@Override
-	public DefaultTableModel getCouponsByFilter(String text, int filter) {
-		return bl.getCouponsByFilter(text, filter);
+	public DefaultTableModel getCouponsByFilter(String filter, String text) {
+		return bl.getCouponsByFilter(filter, text);
 	}
 
 	@Override
-	public DefaultTableModel getBusinessByFilter(String text, int filter) {
-		return bl.getBusinessByFilter(text, filter);
+	public DefaultTableModel getBusinessByFilter(String filter, String text) {
+		return bl.getBusinessByFilter(filter, text);
 	}
 
 	@Override

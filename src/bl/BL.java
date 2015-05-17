@@ -169,13 +169,13 @@ public class BL implements IBL {
 	}
 
 	@Override
-	public DefaultTableModel getCouponsByFilter(String text, int filter) {
-		return dal.getCouponsByFilter(text, filter);
+	public DefaultTableModel getCouponsByFilter(String filter, String text) {
+		return dal.getCouponsByFilter(filter, text);
 	}
 
 	@Override
-	public DefaultTableModel getBusinessByFilter(String text, int filter) {
-		return dal.getBusinessByFilter(text, filter);
+	public DefaultTableModel getBusinessByFilter(String filter, String text) {
+		return dal.getBusinessByFilter(filter, text);
 	}
 
 	@Override
