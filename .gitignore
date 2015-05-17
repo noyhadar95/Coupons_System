@@ -43,3 +43,11 @@ Temporary Items
 .apdisk
 
 bin/dal/DAL.class
+
+bin/pl/CustomerMain.class
+
+*.class
+
+*.class
+
+*.class

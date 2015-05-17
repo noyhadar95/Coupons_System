@@ -2,13 +2,21 @@ package pl;
 
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*;
+
+import sl.ISL;
  
 public class AdminDeleteCardLayout implements ItemListener {
     JPanel cards; //a panel that uses CardLayout
     final static String COUPON = "Coupon";
     final static String BUSINESS = "Business";
-     
+    private static ISL sl; 
+    
+    public AdminDeleteCardLayout(ISL sl) {
+		this.sl=sl;
+	}
+    
     public void addComponentToPane(Container pane) {
         //Put the JComboBox in a JPanel to get a nicer look.
         JPanel comboBoxPane = new JPanel(); //use FlowLayout
@@ -47,7 +55,7 @@ public class AdminDeleteCardLayout implements ItemListener {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
          
         //Create and set up the content pane.
-        CardLayoutDemo demo = new CardLayoutDemo();
+        CardLayoutDemo demo = new CardLayoutDemo(sl);
         demo.addComponentToPane(frame.getContentPane());
          
         //Display the window.

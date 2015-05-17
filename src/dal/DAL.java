@@ -21,8 +21,8 @@ public class DAL implements IDAL {
 
 	// Database credentials
 
-	static final String USER = "Shai";
-	static final String PASS = "root";
+	static final String USER = "root";
+	static final String PASS = "";
 
 	public DAL() {
 		//initialDatabase();
@@ -682,7 +682,7 @@ public class DAL implements IDAL {
 
 	@Override
 	public DefaultTableModel getCouponsByFilter(String filter, String text) {
-		String query = String.format("SELECT * FROM couponsdb.coupons WHERE %s='%s'", filter, text);
+		String query = String.format("SELECT * FROM couponsdb.coupons WHERE %s='%s' AND Approved=1", filter, text);
 		return getResultSetFromQuery(query);
 	}
 
@@ -701,4 +701,5 @@ public class DAL implements IDAL {
 									customerName);
 		return getResultSetFromQuery(query);
 	}
+
 }

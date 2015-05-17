@@ -1,6 +1,7 @@
 package pl;
 
 import javax.swing.GroupLayout;
+import sl.*;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -9,9 +10,6 @@ import javax.swing.JTable;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.table.DefaultTableModel;
 
-import sl.TempAdminSL;
-import dal.DAL;
-import dal.IDAL;
 
 public class ViewBusinessesPanel extends JPanel {
 
@@ -21,7 +19,7 @@ public class ViewBusinessesPanel extends JPanel {
 	 */
 	public ViewBusinessesPanel() {
 
-			TempAdminSL sl=new TempAdminSL();
+			ISL sl=new SL();
 			
 			//((DAL)(dal)).testAddDeleteCoupon();
 			DefaultTableModel businesses=sl.getResultset("businesses");

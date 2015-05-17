@@ -2,9 +2,13 @@ package sl;
 
 import javax.swing.table.DefaultTableModel;
 
+import bl_backend.Admin;
 import bl_backend.Business;
 import bl_backend.BusinessOwner;
+import bl_backend.Category;
 import bl_backend.Coupon;
+import bl_backend.Customer;
+import bl_backend.Purchase;
 
 public interface ISL {
 
@@ -117,12 +121,60 @@ public interface ISL {
 	
 	DefaultTableModel getApprovedCoupons();
 	
-	DefaultTableModel getCouponsByFilter(String text, int filter);
+<<<<<<< HEAD
+	DefaultTableModel getCouponsByFilter(String text, String filter);
 	
-	DefaultTableModel getBusinessByFilter(String text, int filter);
+	DefaultTableModel getBusinessByFilter(String text, String filter);
+=======
+	DefaultTableModel getCouponsByFilter(String filter, String text);
+	
+	DefaultTableModel getBusinessByFilter(String filter, String text);
+>>>>>>> searchcoupons
 	
 	void purchaseCoupon(String couponName, String customerName);
 	
 	DefaultTableModel getCouponsByPreference(String customerName);
+
+	void insertCustomer(Customer customer);
+
+	void deleteCustomer(String username);
+
+	void inserBusinessOwner(BusinessOwner owner);
+
+	void insertCategory(Category category);
+
+	void insertPurchase(Purchase purchase);
+
+	void deletePurchase(String serialKey);
+
+	void deleteCoupon(String name);
+
+	void deleteCategory(int id);
+
+	void deleteBusiness(String name);
+
+	void deleteBusinessOwner(String username);
+
+	Customer selectCustomer(String username);
+
+	void insertAdmin(Admin admin);
+
+	Admin selectAdmin(String username);
+
+	void deleteAdmin(String username);
+
+	BusinessOwner selectBusinessOwner(String username);
+
+	void updateBusinessOwner(BusinessOwner owner);
+
+	Business selectBusiness(String name);
+
+	Coupon selectCoupon(String name);
+
+	void updateCoupon(Coupon coupon);
+
+	Purchase selectPurchase(String serialKey);
+
+	void updatePurchase(Purchase purchase);
 
 }

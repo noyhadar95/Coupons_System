@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.AbstractAction;
@@ -73,7 +74,7 @@ public class CustomerMain extends JFrame {
 		        checkNotificationByPreference();
 		    }
 		};
-
+		final JComboBox cmbx_By = new JComboBox();
 		// schedule the task to run starting now and then every hour...
 		timer.schedule (hourlyTask, 0l, 1000*60*60);   // 1000*10*60 every 10 minut
 		//timer.schedule (hourlyTask, 0l, 60*60); 
@@ -86,37 +87,104 @@ public class CustomerMain extends JFrame {
 		JLabel lblSearch = new JLabel("Search");
 		
 		final JComboBox cmbx_Type = new JComboBox();
-		cmbx_Type.setEnabled(false);
+		cmbx_Type.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JComboBox comboBox = (JComboBox) e.getSource();
+
+                Object selected = comboBox.getSelectedItem();
+                if(comboBox.getSelectedIndex()==0){
+                	cmbx_By.removeAllItems();
+                		cmbx_By.insertItemAt("By Business", 0);
+                		cmbx_By.insertItemAt("By Category", 1);
+                		cmbx_By.setVisible(true);
+                }
+                
+                else{
+                	cmbx_By.removeAllItems();
+                		cmbx_By.insertItemAt("By Category", 0);
+                		cmbx_By.insertItemAt("By City", 1);
+                }
+                	
+                
+				
+			}
+		});
 		cmbx_Type.setModel(new DefaultComboBoxModel(new String[] {"Coupon", "Business"}));
 		
 		txt_search = new JTextField();
 		txt_search.setColumns(10);
 		
-		final JComboBox cmbx_By = new JComboBox();
-		cmbx_By.setModel(new DefaultComboBoxModel(new String[] {"By Business", "By Category", "By City", "By Sensor", "By Map"}));
+		
+		cmbx_By.setModel(new DefaultComboBoxModel(new String[] {"By Business", "By Category"}));
 		
 		JButton btn_search = new JButton("Search");
 		btn_search.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel model;
+				if(cmbx_Type.getSelectedIndex() == 0){
 				switch (cmbx_By.getSelectedIndex()) {
 				case 0:
-					
+					 model = isl.getCouponsByFilter("Business", txt_search.getText()); 
 					break;
-
+				case 1:
+					 model = isl.getCouponsByFilter("Category", txt_search.getText()); 
+				
 				default:
+					model = isl.getApprovedCoupons();
 					break;
 				}
 				
-				if(cmbx_Type.getSelectedIndex() == 0){
-					
+for(int i=0;i<table.getRowCount(); i++){
+		        	
+		        	table.setValueAt("Purchase", i, 7);
+
+		        }
+				
+				
+				 Action purchase = new AbstractAction()
+			        {
+			            public void actionPerformed(ActionEvent e)
+			            {
+			                JTable table = (JTable)e.getSource();
+			                int modelRow = Integer.valueOf( e.getActionCommand() );
+
+			               isl.purchaseCoupon((String)table.getValueAt(modelRow, 0), "cust1");
+			    
+			               JOptionPane.showMessageDialog((JFrame)cmbx_By.getTopLevelAncestor(), "cust1 bought " + (String)table.getValueAt(modelRow, 0));
+
+			            }
+			        };
+			         
+			        ButtonColumn buttonColumn = new ButtonColumn(table, purchase, 7);
 				}
+				else{
+					switch (cmbx_By.getSelectedIndex()) {
+					case 0:
+						 model = isl.getBusinessByFilter("Category", txt_search.getText()); 
+						break;
+					case 1:
+						 model = isl.getBusinessByFilter("City", txt_search.getText()); 
+						 break;
+					default:
+						model = isl.getBusinessByFilter("Name", "");
+						break;
+					}
+				}
+				table.setModel(model);
+				
+				
+				
+				
+				
+				
+				
 			}
 		});
 		
+	
 		DefaultTableModel coupons=isl.getApprovedCoupons();
-		
 		table = new JTable(coupons);
+		table.getColumnModel().getColumn(1).setHeaderValue("Name");
 		
 		for(int i=0;i<table.getRowCount(); i++){
         	
@@ -197,6 +265,9 @@ public class CustomerMain extends JFrame {
 					.addContainerGap())
 		);
 		contentPane.setLayout(groupLayout);
+		
+	
+		
 	}
 	
 	

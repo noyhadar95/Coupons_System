@@ -4,16 +4,22 @@ import javax.swing.table.DefaultTableModel;
 
 import bl.BL;
 import bl.IBL;
+import bl_backend.Admin;
 import bl_backend.Business;
 import bl_backend.BusinessOwner;
+import bl_backend.Category;
 import bl_backend.Coupon;
+import bl_backend.Customer;
+import bl_backend.Purchase;
 
 public class SL implements ISL {
 
 	IBL bl;
+	private String username;
 
 	public SL() {
 		bl = new BL();
+		username="";
 	}
 
 	@Override
@@ -88,13 +94,23 @@ public class SL implements ISL {
 	}
 
 	@Override
-	public DefaultTableModel getCouponsByFilter(String text, int filter) {
+<<<<<<< HEAD
+	public DefaultTableModel getCouponsByFilter(String text, String filter) {
 		return bl.getCouponsByFilter(text, filter);
 	}
 
 	@Override
-	public DefaultTableModel getBusinessByFilter(String text, int filter) {
+	public DefaultTableModel getBusinessByFilter(String text, String filter) {
 		return bl.getBusinessByFilter(text, filter);
+=======
+	public DefaultTableModel getCouponsByFilter(String filter, String text) {
+		return bl.getCouponsByFilter(filter, text);
+	}
+
+	@Override
+	public DefaultTableModel getBusinessByFilter(String filter, String text) {
+		return bl.getBusinessByFilter(filter, text);
+>>>>>>> searchcoupons
 	}
 
 	@Override
@@ -106,6 +122,125 @@ public class SL implements ISL {
 	@Override
 	public DefaultTableModel getCouponsByPreference(String customerName) {
 		return bl.getCouponsByPreference(customerName);
+	}
+
+	@Override
+	public void insertCustomer(Customer customer) {
+		bl.insertCustomer(customer);
+		
+	}
+
+	@Override
+	public void deleteCustomer(String username) {
+		bl.deleteCustomer(username);
+		
+	}
+
+	@Override
+	public void inserBusinessOwner(BusinessOwner owner) {
+		bl.inserBusinessOwner(owner);
+		
+	}
+
+	@Override
+	public void insertCategory(Category category) {
+		bl.insertCategory(category);
+		
+	}
+
+	@Override
+	public void insertPurchase(Purchase purchase) {
+		bl.insertPurchase(purchase);
+		
+	}
+
+	@Override
+	public void deletePurchase(String serialKey) {
+		bl.deletePurchase(serialKey);
+		
+	}
+
+	@Override
+	public void deleteCoupon(String name) {
+		bl.deleteCoupon(name);
+	}
+
+	@Override
+	public void deleteCategory(int id) {
+		bl.deleteCategory(id);
+		
+	}
+
+	@Override
+	public void deleteBusiness(String name) {
+		bl.deleteBusiness(name);
+		
+	}
+
+	@Override
+	public void deleteBusinessOwner(String username) {
+		bl.deleteBusinessOwner(username);
+		
+	}
+
+	@Override
+	public Customer selectCustomer(String username) {
+		return bl.selectCustomer(username);
+	}
+
+	@Override
+	public void insertAdmin(Admin admin) {
+		bl.insertAdmin(admin);
+		
+	}
+
+	@Override
+	public Admin selectAdmin(String username) {
+		return bl.selectAdmin(username);
+	}
+
+	@Override
+	public void deleteAdmin(String username) {
+		bl.deleteAdmin(username);
+		
+	}
+
+	@Override
+	public BusinessOwner selectBusinessOwner(String username) {
+		return bl.selectBusinessOwner(username);
+	}
+
+	@Override
+	public void updateBusinessOwner(BusinessOwner owner) {
+		bl.updateBusinessOwner(owner);
+		
+	}
+
+	@Override
+	public Business selectBusiness(String name) {
+		return bl.selectBusiness(name);
+	}
+
+	@Override
+	public Coupon selectCoupon(String name) {
+		return bl.selectCoupon(name);
+	}
+
+	@Override
+	public void updateCoupon(Coupon coupon) {
+		bl.updateCoupon(coupon);
+		
+	}
+
+	@Override
+	public Purchase selectPurchase(String serialKey) {
+		return bl.selectPurchase(serialKey);
+	}
+
+	@Override
+	public void updatePurchase(Purchase purchase) {
+		bl.updatePurchase(purchase);
+		
 	}
 
 }

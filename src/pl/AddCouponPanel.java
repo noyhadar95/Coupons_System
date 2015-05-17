@@ -14,7 +14,7 @@ import java.awt.Insets;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
-import sl.TempAdminSL;
+import sl.*;
 import bl_backend.Coupon;
 import bl_backend.Customer;
 import dal.DAL;
@@ -33,12 +33,13 @@ public class AddCouponPanel extends JPanel {
 	private JTextField txtBusiness;
 	private JLabel lblAddCoupon;
 	private JButton btnAdd;
-	private TempAdminSL sl=new TempAdminSL();
+	private ISL sl;
 
 	/**
 	 * Create the panel.
 	 */
-	public AddCouponPanel() {
+	public AddCouponPanel(final ISL sl) {
+		this.sl=sl;
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};

@@ -9,7 +9,7 @@ import javax.swing.JTable;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.table.DefaultTableModel;
 
-import sl.TempAdminSL;
+import sl.*;
 import dal.DAL;
 import dal.IDAL;
 
@@ -19,7 +19,7 @@ public class ViewCoupons extends JPanel {
 	 * Create the panel.
 	 */
 	public ViewCoupons() {
-	TempAdminSL sl=new TempAdminSL();
+	ISL sl=new SL();
 		
 		//((DAL)(dal)).testAddDeleteCoupon();
 		String query="coupons";

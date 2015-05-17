@@ -2,14 +2,21 @@ package pl;
 
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*;
+
+import sl.ISL;
  
 public class CardLayoutDemo implements ItemListener {
     JPanel cards; //a panel that uses CardLayout
     final static String COUPON = "Coupon";
     final static String BUSINESSOWNER = "Business Owner";
     final static String BUSINESS = "Business";
+    private static ISL sl;
      
+    public CardLayoutDemo(ISL sl){
+    	this.sl=sl;
+    }
     public void addComponentToPane(Container pane) {
         //Put the JComboBox in a JPanel to get a nicer look.
         JPanel comboBoxPane = new JPanel(); //use FlowLayout
@@ -24,7 +31,7 @@ public class CardLayoutDemo implements ItemListener {
          
         JPanel card2 = new AddBusinessOwnerPanel();
          
-        JPanel card3=new AddCouponPanel();
+        JPanel card3=new AddCouponPanel(sl);
         //Create the panel that contains the "cards".
         cards = new JPanel(new CardLayout());
         cards.add(card3, COUPON);
@@ -51,7 +58,7 @@ public class CardLayoutDemo implements ItemListener {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
          
         //Create and set up the content pane.
-        CardLayoutDemo demo = new CardLayoutDemo();
+        CardLayoutDemo demo = new CardLayoutDemo(sl);
         demo.addComponentToPane(frame.getContentPane());
          
         //Display the window.
