@@ -1,5 +1,5 @@
 package bl;
 
-public class SensorController {
+public class SensorController implements ISensorController{
 
 }
