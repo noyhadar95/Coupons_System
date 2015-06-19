@@ -21,7 +21,7 @@ public class ViewPurchases extends JPanel {
 		this.sl=sl;
 		String name=sl.getUsername();
 		String query="purchases WHERE CustomerName='"+name+"'";
-		DefaultTableModel coupons=sl.getResultset(query);
+		DefaultTableModel coupons=sl.getResultset(query);//TODO change this to customer name
 		 table = new JTable(coupons);
 		 JScrollPane spTable = new JScrollPane(table);
 		 //JOptionPane.showMessageDialog(null, spTable);
