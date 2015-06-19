@@ -21,7 +21,7 @@ public class SL implements ISL {
 
 	public SL() {
 		bl = new BL();
-		username="";
+		username="";//
 	}
 
 	@Override
