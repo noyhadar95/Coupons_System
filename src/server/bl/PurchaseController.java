@@ -1,12 +1,12 @@
-package bl;
+package server.bl;
 
 
 import javax.swing.table.DefaultTableModel;
 
-import bl_backend.Coupon;
-import bl_backend.Purchase;
-import dal.DAL;
-import dal.IDAL;
+import server.bl_backend.Coupon;
+import server.bl_backend.Purchase;
+import server.dal.DAL;
+import server.dal.IDAL;
 
 public class PurchaseController implements IPurchaseController {
 	private IDAL dal;

@@ -1,11 +1,11 @@
-package dal;
+package server.dal;
 
 import java.sql.ResultSet;
 import java.util.List;
 
 import javax.swing.table.DefaultTableModel;
 
-import bl_backend.*;
+import server.bl_backend.*;
 
 public interface IDAL {
 

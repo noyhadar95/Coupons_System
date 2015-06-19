@@ -1,4 +1,4 @@
-package bl_backend;
+package server.bl_backend;
 
 public interface Sensor {
 

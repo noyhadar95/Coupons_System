@@ -1,8 +1,8 @@
-package bl;
+package server.bl;
 
-import dal.DAL;
-import dal.IDAL;
-import bl_backend.Category;
+import server.dal.DAL;
+import server.dal.IDAL;
+import server.bl_backend.Category;
 
 public class CategoryController implements ICategoryController {
 

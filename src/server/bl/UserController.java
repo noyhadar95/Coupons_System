@@ -1,9 +1,9 @@
-package bl;
+package server.bl;
 
-import dal.DAL;
-import dal.IDAL;
-import bl_backend.Customer;
-import bl_backend.User;
+import server.dal.DAL;
+import server.dal.IDAL;
+import server.bl_backend.Customer;
+import server.bl_backend.User;
 
 public class UserController implements IUserController {
 

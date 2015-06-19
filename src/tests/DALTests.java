@@ -6,9 +6,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import dal.DAL;
-import dal.IDAL;
-import bl_backend.*;
+import server.dal.DAL;
+import server.dal.IDAL;
+import server.bl_backend.*;
 
 public class DALTests {
 

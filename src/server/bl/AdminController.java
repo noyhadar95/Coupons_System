@@ -1,8 +1,8 @@
-package bl;
+package server.bl;
 
-import dal.DAL;
-import dal.IDAL;
-import bl_backend.Admin;
+import server.dal.DAL;
+import server.dal.IDAL;
+import server.bl_backend.Admin;
 
 public class AdminController implements IAdminController {
 	

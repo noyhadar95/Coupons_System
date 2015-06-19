@@ -1,4 +1,4 @@
-package dal;
+package server.dal;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -8,7 +8,7 @@ import java.util.Vector;
 
 import javax.swing.table.DefaultTableModel;
 
-import bl_backend.*;
+import server.bl_backend.*;
 
 public class DAL implements IDAL {
 

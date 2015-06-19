@@ -1,8 +1,8 @@
-package bl;
+package server.bl;
 
 import javax.swing.table.DefaultTableModel;
 
-import bl_backend.Coupon;
+import server.bl_backend.Coupon;
 
 public interface ICouponController {
 

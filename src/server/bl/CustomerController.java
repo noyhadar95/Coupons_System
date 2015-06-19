@@ -1,10 +1,10 @@
-package bl;
+package server.bl;
 
 import javax.swing.table.DefaultTableModel;
 
-import dal.DAL;
-import dal.IDAL;
-import bl_backend.Customer;
+import server.dal.DAL;
+import server.dal.IDAL;
+import server.bl_backend.Customer;
 
 public class CustomerController implements ICustomerController {
 	private IDAL dal;

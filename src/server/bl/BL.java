@@ -1,13 +1,13 @@
-package bl;
+package server.bl;
 
 import java.util.List;
 import java.util.UUID;
 
 import javax.swing.table.DefaultTableModel;
 
-import bl_backend.*;
-import dal.DAL;
-import dal.IDAL;
+import server.bl_backend.*;
+import server.dal.DAL;
+import server.dal.IDAL;
 
 public class BL implements IBL {
 

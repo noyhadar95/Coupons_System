@@ -1,6 +1,6 @@
-package bl;
+package server.bl;
 
-import bl_backend.Admin;
+import server.bl_backend.Admin;
 
 public interface IAdminController {
 

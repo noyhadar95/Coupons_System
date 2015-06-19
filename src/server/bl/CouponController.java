@@ -1,10 +1,10 @@
-package bl;
+package server.bl;
 
 import javax.swing.table.DefaultTableModel;
 
-import bl_backend.Coupon;
-import dal.DAL;
-import dal.IDAL;
+import server.bl_backend.Coupon;
+import server.dal.DAL;
+import server.dal.IDAL;
 
 public class CouponController implements ICouponController {
 	private IDAL dal;

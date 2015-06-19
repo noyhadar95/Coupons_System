@@ -1,4 +1,4 @@
-package bl;
+package server.bl;
 
 public interface IUserController {
 

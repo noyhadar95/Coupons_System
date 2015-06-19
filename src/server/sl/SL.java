@@ -1,18 +1,18 @@
-package sl;
+package server.sl;
 
 import java.util.List;
 
 import javax.swing.table.DefaultTableModel;
 
-import bl.BL;
-import bl.IBL;
-import bl_backend.Admin;
-import bl_backend.Business;
-import bl_backend.BusinessOwner;
-import bl_backend.Category;
-import bl_backend.Coupon;
-import bl_backend.Customer;
-import bl_backend.Purchase;
+import server.bl.BL;
+import server.bl.IBL;
+import server.bl_backend.Admin;
+import server.bl_backend.Business;
+import server.bl_backend.BusinessOwner;
+import server.bl_backend.Category;
+import server.bl_backend.Coupon;
+import server.bl_backend.Customer;
+import server.bl_backend.Purchase;
 
 public class SL implements ISL {
 

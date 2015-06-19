@@ -1,9 +1,9 @@
-package bl;
+package server.bl;
 
 import javax.swing.table.DefaultTableModel;
 
-import bl_backend.Business;
-import bl_backend.BusinessOwner;
+import server.bl_backend.Business;
+import server.bl_backend.BusinessOwner;
 
 public interface IBusinessOwnerController {
 	DefaultTableModel getBusinessesDetails();
