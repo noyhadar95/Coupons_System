@@ -203,19 +203,46 @@ public class LoginFrame extends JFrame {
 				String email = textFieldEmail.getText();
 				String phone = textFieldPhone.getText();
 				
-				boolean success = sl.signUp(username, password, email, phone);
-				if(success){
-					setSignUpPanelVisibility(false);
+				boolean isStrongPass = checkStrongPass(password);
+				
+				if(!isStrongPass){
 					JOptionPane.showMessageDialog((Component) e.getSource(),
-							"you are now signed up to 'coupons for you'\ntry to login to your new account");
-					textFieldUsername.setText("");;
-					textFieldPassword.setText("");
+							"your password is not strong enough.\nA strong password contains digits "+
+								"and lettes and it's length is at least 5.");
 				}
 				else{
-					JOptionPane.showMessageDialog((Component) e.getSource(),
-							"incorrect information, please try again");
+					// the password is strong
+					boolean success = sl.signUp(username, password, email, phone);
+					if(success){
+						setSignUpPanelVisibility(false);
+						JOptionPane.showMessageDialog((Component) e.getSource(),
+								"you are now signed up to 'coupons for you'\ntry to login to your new account");
+						textFieldUsername.setText("");;
+						textFieldPassword.setText("");
+					}
+					else{
+						JOptionPane.showMessageDialog((Component) e.getSource(),
+								"incorrect information, please try again");
+					}
 				}
 				
+			}
+			
+			boolean checkStrongPass(String password){
+				if(password.length()<5)
+					return false;
+				
+				boolean foundDigit=false,foundLetter=false;
+				for(int i=0; i<password.length(); i++){
+					if(password.charAt(i)>'0' && password.charAt(i)<'9'){
+						foundDigit=true;
+					}
+					if((password.charAt(i)>'a' && password.charAt(i)<'z') ||
+							(password.charAt(i)>'A' && password.charAt(i)<'Z')){
+						foundLetter=true;
+					}
+				}
+				return (foundDigit && foundLetter);
 			}
 
 			
