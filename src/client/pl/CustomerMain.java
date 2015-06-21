@@ -201,7 +201,7 @@ for(int i=0;i<table.getRowCount(); i++){
 	                JTable table = (JTable)e.getSource();
 	                int modelRow = Integer.valueOf( e.getActionCommand() );
 
-	               sl.purchaseCoupon((String)table.getValueAt(modelRow, 0), uc.getUsername());
+	               cc.purchaseCoupon((String)table.getValueAt(modelRow, 0), uc.getUsername());
 	    
 	               JOptionPane.showMessageDialog((JFrame)cmbx_By.getTopLevelAncestor(), uc.getUsername()+" bought " + (String)table.getValueAt(modelRow, 0));
 
