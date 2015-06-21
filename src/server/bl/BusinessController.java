@@ -53,4 +53,9 @@ public class BusinessController implements IBusinessController {
 	public List getTableArrayList(String string) {
 		return dal.getTableArrayList(string);
 	}
+	
+	@Override
+	public DefaultTableModel getResultset(String table) {
+		return dal.getResultset(table);
+	}
 }

@@ -1,4 +1,4 @@
-package pl;
+package client.pl;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -8,22 +8,24 @@ import javax.swing.JTable;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.table.DefaultTableModel;
 
-import sl.ISL;
-import dal.DAL;
-import dal.IDAL;
+import client.bl.IBusinessController;
+import client.bl.IUserController;
+
 
 public class ViewBusinessesOfOwnerPanel extends JPanel {
 
-	private ISL sl;
+	private IUserController userCont;
+	private IBusinessController businessCont;
 	private JTable table;
 	/**
 	 * Create the panel.
 	 */
-	public ViewBusinessesOfOwnerPanel(ISL sl) {
-		this.sl=sl;
-		String owner =sl.getUsername();
+	public ViewBusinessesOfOwnerPanel() {
 		
-		DefaultTableModel businesses=sl.getResultset("businesses WHERE owner='"+owner+"'");
+		String owner =userCont.getUsername();
+		
+		// TODO: check controller (is it the right one?)
+		DefaultTableModel businesses=businessCont.getResultset("businesses WHERE owner='"+owner+"'");
 		 table = new JTable(businesses);
 		 JScrollPane spTable = new JScrollPane(table);
 		 //JOptionPane.showMessageDialog(null, spTable);

@@ -15,4 +15,5 @@ public interface IBusinessController {
 	public Business selectBusiness(String name);
 	public void deleteBusiness(String name);
 	public List getTableArrayList(String string);
+	DefaultTableModel getResultset(String table);
 }

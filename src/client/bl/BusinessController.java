@@ -52,4 +52,9 @@ public class BusinessController implements IBusinessController {
 	public List getTableArrayList(String string) {
 		return sl.getTableArrayList(string);
 	}
+
+	@Override
+	public DefaultTableModel getResultset(String table) {
+		return sl.getResultset(table);
+	}
 }
