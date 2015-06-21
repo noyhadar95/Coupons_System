@@ -1,4 +1,4 @@
-package pl;
+package client.pl;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -15,9 +15,8 @@ import java.awt.GridBagConstraints;
 
 import javax.swing.JComboBox;
 
-import bl_backend.Coupon;
-import dal.DAL;
-import dal.IDAL;
+import auxiliary.bl_backend.*;
+import client.bl.*;
 
 import java.awt.Insets;
 import java.util.ArrayList;
@@ -28,7 +27,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class DeleteCouponPanel extends JPanel {
-	private IDAL dal=new DAL();
+	private ICouponController couponCont=new CouponController();
 	/**
 	 * Create the panel.
 	 */
@@ -89,7 +88,7 @@ public class DeleteCouponPanel extends JPanel {
 				String toDelete=comboBox.getSelectedItem().toString();
 				label.setText(toDelete);
 				int index=comboBox.getSelectedIndex();
-				dal.deleteCoupon(toDelete);
+				couponCont.deleteCoupon(toDelete);
 				comboBox.removeItemAt(index);
 				//JOptionPane.showMessageDialog(null, "deleted!");
 				
@@ -102,7 +101,7 @@ public class DeleteCouponPanel extends JPanel {
 		add(btnDelete, gbc_btnDelete);
 		
 		
-		List data=dal.getTableArrayList("coupons");
+		List data=couponCont.getTableArrayList("coupons");
 		for (int i = 0; i < data.size(); i++) {
 			HashMap coupon = (HashMap) data.get(i);
 			label.setText(label.getText()+" "+(String) coupon.get("Name"));

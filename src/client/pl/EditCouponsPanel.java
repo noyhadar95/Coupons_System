@@ -1,4 +1,4 @@
-package pl;
+package client.pl;
 
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;

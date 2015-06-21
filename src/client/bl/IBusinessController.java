@@ -1,5 +1,7 @@
 package client.bl;
 
+import java.util.List;
+
 import javax.swing.table.DefaultTableModel;
 
 import server.sl.*;
@@ -21,4 +23,5 @@ public interface IBusinessController {
 	public Business selectBusiness(String name);
 	public void deleteBusiness(String name);
 	public boolean updateBusinessByOwner(Business business);
+	public List getTableArrayList(String string);
 }
