@@ -12,10 +12,8 @@ import java.awt.Insets;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
-import sl.*;
-import bl_backend.Business;
-import dal.DAL;
-import dal.IDAL;
+import auxiliary.bl_backend.Business;
+import client.bl.*;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -27,7 +25,7 @@ public class AddBusinessPanel extends JPanel {
 	private JTextField txtCat;
 	private JTextField txtDesc;
 	private JTextField txtOwner;
-	private ISL sl=new SL();
+	private IBusinessController businessCont=new BusinessController();
 
 	/**
 	 * Create the panel.
@@ -159,7 +157,7 @@ public class AddBusinessPanel extends JPanel {
 				String cat=txtCat.getText();
 				String desc=txtDesc.getText();
 				String owner=txtOwner.getText();
-				sl.insertBusiness(new Business(name, address, city, cat, desc, owner));
+				businessCont.insertBusiness(new Business(name, address, city, cat, desc, owner));
 			}
 		});
 		GridBagConstraints gbc_btnAdd = new GridBagConstraints();

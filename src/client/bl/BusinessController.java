@@ -1,5 +1,7 @@
 package client.bl;
 
+import java.util.List;
+
 import javax.swing.table.DefaultTableModel;
 
 import server.sl.*;
@@ -45,5 +47,9 @@ public class BusinessController implements IBusinessController {
 	public void deleteBusiness(String name) {
 		sl.deleteBusiness(name);
 		
+	}
+	@Override
+	public List getTableArrayList(String string) {
+		return sl.getTableArrayList(string);
 	}
 }

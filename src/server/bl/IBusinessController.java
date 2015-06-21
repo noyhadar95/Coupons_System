@@ -1,5 +1,7 @@
 package server.bl;
 
+import java.util.List;
+
 import javax.swing.table.DefaultTableModel;
 
 import auxiliary.bl_backend.Business;
@@ -12,4 +14,5 @@ public interface IBusinessController {
 	public DefaultTableModel getBusinessByFilter(String filter, String text);
 	public Business selectBusiness(String name);
 	public void deleteBusiness(String name);
+	public List getTableArrayList(String string);
 }
