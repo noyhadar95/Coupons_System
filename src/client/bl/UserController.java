@@ -5,12 +5,12 @@ import auxiliary.bl_backend.*;
 
 public class UserController implements IUserController {
 
-	private IDAL dal;
+	private ISL sl;
 
 	public UserController() {
-		dal = new DAL();
+		sl = new SL();
 	}
-	
+
 	@Override
 	public boolean tryLogin(String username, String password, String authType) {
 		boolean successFlag = false;
@@ -28,7 +28,7 @@ public class UserController implements IUserController {
 	public boolean signUp(String username, String password, String email,
 			String phone) {
 		Customer cus = new Customer(username, password, email, phone);
-		dal.insertCustomer(cus);
+		sl.insertCustomer(cus);
 		return true;
 	}
 
@@ -52,13 +52,13 @@ public class UserController implements IUserController {
 
 		switch (authType) {
 		case "Admin":
-			user = dal.selectAdmin(username);
+			user = sl.selectAdmin(username);
 			break;
 		case "Customer":
-			user = dal.selectCustomer(username);
+			user = sl.selectCustomer(username);
 			break;
 		case "Bussines Owner":
-			user = dal.selectBusinessOwner(username);
+			user = sl.selectBusinessOwner(username);
 			break;
 		default:
 			break;
@@ -77,6 +77,18 @@ public class UserController implements IUserController {
 		}
 
 		return email;
+	}
+
+	@Override
+	public void setUsername(String username) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public String getUsername() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
