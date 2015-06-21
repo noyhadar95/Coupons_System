@@ -1,4 +1,4 @@
-package pl;
+package client.pl;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -8,20 +8,27 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.table.DefaultTableModel;
-import sl.*;
+
+import client.bl.ICouponController;
+import client.bl.IUserController;
+import server.bl.ICustomerController;
+import server.sl.ISL;
 
 
 public class ViewPurchases extends JPanel {
 	private JTable table;
-	private ISL sl;
+
+	private IUserController userController;
+	private ICouponController coupController;
 	/**
 	 * Create the panel.
 	 */
-	public ViewPurchases(ISL sl) {
-		this.sl=sl;
-		String name=sl.getUsername();
+	// TODO: get  SL
+	public ViewPurchases() {
+		
+		String name=userController.getUsername();
 		String query="purchases WHERE CustomerName='"+name+"'";
-		DefaultTableModel coupons=sl.getResultset(query);//TODO change this to customer name
+		DefaultTableModel coupons=coupController.getResultset(query);//TODO change this to customer name
 		 table = new JTable(coupons);
 		 JScrollPane spTable = new JScrollPane(table);
 		 //JOptionPane.showMessageDialog(null, spTable);

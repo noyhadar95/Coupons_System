@@ -1,4 +1,4 @@
-package pl;
+package client.pl;
 
 import javax.swing.GroupLayout;
 import javax.swing.JPanel;
@@ -8,21 +8,25 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.table.DefaultTableModel;
 
-import sl.ISL;
-import sl.SL;
+import client.bl.ICouponController;
+import client.bl.IUserController;
+
 
 public class ViewCouponsOfOwner extends JPanel {
-	private ISL sl;
+
+	private IUserController userController;
+	private ICouponController coupController;
 	private JTable table;
 	/**
 	 * Create the panel.
 	 */
-	public ViewCouponsOfOwner(ISL sl) {
-		this.sl=sl;
+	
+	//TODO: ViewCouponsOfOwner Get sl before change
+	public ViewCouponsOfOwner() {
 		
 		//((DAL)(dal)).testAddDeleteCoupon();
-		String query="coupons Join (select Name,Owner From couponsdb.businesses) b  on b.Name=coupons.business where b.Owner='"+sl.getUsername()+"'";
-		DefaultTableModel coupons=sl.getResultset(query);
+		String query="coupons Join (select Name,Owner From couponsdb.businesses) b  on b.Name=coupons.business where b.Owner='"+userController.getUsername()+"'";
+		DefaultTableModel coupons=coupController.getResultset(query);
 		 table = new JTable(coupons);
 		 JScrollPane spTable = new JScrollPane(table);
 		 //JOptionPane.showMessageDialog(null, spTable);

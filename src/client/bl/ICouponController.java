@@ -1,5 +1,7 @@
 package client.bl;
 
+import java.util.List;
+
 import javax.swing.table.DefaultTableModel;
 
 import server.sl.*;
@@ -96,4 +98,8 @@ public interface ICouponController {
 	 * @param name
 	 */
 	void deleteCoupon(String name);
+	
+	public DefaultTableModel getResultset(String table);
+	
+	public List getTableArrayList(String string);
 }

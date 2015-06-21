@@ -1,5 +1,7 @@
 package server.bl;
 
+import java.util.List;
+
 import javax.swing.table.DefaultTableModel;
 
 import auxiliary.bl_backend.Coupon;
@@ -64,4 +66,12 @@ public class CouponController implements ICouponController {
 		
 	}
 	
+	@Override
+	public DefaultTableModel getResultset(String custumerName) {
+		return dal.getResultset("purchases WHERE CustomerName='"+custumerName+"'");
+	}
+	@Override
+	public List getTableArrayList(String string) {
+		return dal.getTableArrayList(string);
+	}
 }
