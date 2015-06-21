@@ -1,4 +1,4 @@
-package pl;
+package client.pl;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
@@ -16,7 +16,8 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 
-import sl.ISL;
+import auxiliary.bl_backend.*;
+import client.bl.*;
 
 public class AdminAddFrame extends JFrame implements ItemListener{
 
@@ -24,7 +25,6 @@ public class AdminAddFrame extends JFrame implements ItemListener{
 	JPanel cards; //a panel that uses CardLayout
     final static String BUTTONPANEL = "sdfsdfsdfsd";
     final static String TEXTPANEL = "Card with JTextField";
-    private static ISL sl;
      
     public void addComponentToPane(Container pane) {
         //Put the JComboBox in a JPanel to get a nicer look.
@@ -69,7 +69,7 @@ public class AdminAddFrame extends JFrame implements ItemListener{
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
          
         //Create and set up the content pane.
-        CardLayoutDemo demo = new CardLayoutDemo(sl);
+        CardLayoutDemo demo = new CardLayoutDemo();//TODO used to receive sl in the constructor
         demo.addComponentToPane(frame.getContentPane());
          
         //Display the window.
@@ -116,11 +116,11 @@ public class AdminAddFrame extends JFrame implements ItemListener{
             public void run() {
                 //createAndShowGUI();
             	try {
-					AdminAddFrame frame = new AdminAddFrame(sl);
+					AdminAddFrame frame = new AdminAddFrame();//TODO used to receive sl in the constructor
 					frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			         
 			        //Create and set up the content pane.
-			        CardLayoutDemo demo = new CardLayoutDemo(sl);
+			        CardLayoutDemo demo = new CardLayoutDemo();//TODO used to receive sl in the constructor
 			        demo.addComponentToPane(frame.getContentPane());
 			         
 			        //Display the window.
@@ -136,9 +136,8 @@ public class AdminAddFrame extends JFrame implements ItemListener{
 	/**
 	 * Create the frame.
 	 */
-	public AdminAddFrame(ISL sl) {
+	public AdminAddFrame() {//TODO used to receive sl in the constructor
 		super("Admin Add");
-		this.sl=sl;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();

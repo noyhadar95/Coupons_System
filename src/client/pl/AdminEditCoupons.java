@@ -1,4 +1,4 @@
-package pl;
+package client.pl;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -6,8 +6,6 @@ import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
-
-import dal.*;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -20,7 +18,8 @@ import javax.swing.event.CellEditorListener;
 import javax.swing.event.ChangeEvent;
 import javax.swing.table.DefaultTableModel;
 
-import bl_backend.Coupon;
+import auxiliary.bl_backend.*;
+import client.bl.*;
 
 import com.mysql.jdbc.ResultSetMetaData;
 
@@ -29,22 +28,18 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
-import sl.ISL;
-import sl.SL;
-
 
 
 public class AdminEditCoupons extends JPanel {
 	private JTable table;
-	private ISL isl;
+	private ICouponController couponCont=new CouponController();
 	/**
 	 * Create the panel.
 	 */
 	public AdminEditCoupons() {//ActionListener actionListener
-		isl = new SL();
 		final int APPROVE_COLUMN = 7;
 		
-		DefaultTableModel coupons=isl.getCouponsDetails();
+		DefaultTableModel coupons=couponCont.getCouponsDetails();
 		
 int colcount = coupons.getColumnCount();
 		
@@ -108,7 +103,7 @@ int colcount = coupons.getColumnCount();
 	                        // id is the primary key of my DB
 	                        String name = table.getValueAt(row, 0).toString();
 	                        
-	                        isl.updateCouponByAdmin(getCouponFromRow(row, table));
+	                        couponCont.updateCouponByAdmin(getCouponFromRow(row, table));
 	                    }
 	                });
 	        
@@ -121,7 +116,7 @@ int colcount = coupons.getColumnCount();
 	                int modelRow = Integer.valueOf( e.getActionCommand() );
 	                Coupon coup = getCouponFromRow(modelRow, table);
 	                coup.setApproved(1);
-	                isl.updateCouponByAdmin(coup);
+	                couponCont.updateCouponByAdmin(coup);
 	                //((DefaultTableModel)table.getModel()).removeRow(modelRow);
 	                
 	            }

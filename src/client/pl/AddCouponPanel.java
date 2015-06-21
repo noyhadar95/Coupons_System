@@ -1,4 +1,4 @@
-package pl;
+package client.pl;
 
 import javax.swing.JPanel;
 import javax.swing.GroupLayout;
@@ -14,11 +14,8 @@ import java.awt.Insets;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
-import sl.*;
-import bl_backend.Coupon;
-import bl_backend.Customer;
-import dal.DAL;
-import dal.IDAL;
+import auxiliary.bl_backend.*;
+import client.bl.*;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -33,13 +30,12 @@ public class AddCouponPanel extends JPanel {
 	private JTextField txtBusiness;
 	private JLabel lblAddCoupon;
 	private JButton btnAdd;
-	private ISL sl;
+	private ICouponController couponCont=new CouponController();
 
 	/**
 	 * Create the panel.
 	 */
-	public AddCouponPanel(final ISL sl) {
-		this.sl=sl;
+	public AddCouponPanel() {//TODO used to receive sl in the constructor
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -184,7 +180,7 @@ public class AddCouponPanel extends JPanel {
 				int discount=Integer.parseInt(txtDiscount.getText());
 				int rating=Integer.parseInt(txtRating.getText());
 				String business=txtBusiness.getText();
-				sl.insertCoupon(new Coupon(name, desc, cat, initial, discount, rating, business,0));
+				couponCont.insertCoupon(new Coupon(name, desc, cat, initial, discount, rating, business,0));
 				
 			}
 		});
