@@ -1,4 +1,4 @@
-package pl;
+package client.pl;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -17,15 +17,18 @@ import java.awt.Insets;
 
 import javax.swing.JButton;
 
-import sl.ISL;
-import sl.SL;
+import client.bl.BusinessOwnerController;
+
+
+import client.bl.UserController;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class BusinessOwnerMain extends JFrame {
 
-	static ISL sl;
+	static BusinessOwnerController boc;
+	static UserController uc;
 	private JPanel contentPane;
 
 	/**
@@ -35,7 +38,7 @@ public class BusinessOwnerMain extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					BusinessOwnerMain frame = new BusinessOwnerMain(sl);
+					BusinessOwnerMain frame = new BusinessOwnerMain();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -47,8 +50,8 @@ public class BusinessOwnerMain extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public BusinessOwnerMain(final ISL sl) {
-		this.sl=sl;
+	public BusinessOwnerMain() {//TODO: got isl
+		this.boc = new BusinessOwnerController();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -75,7 +78,7 @@ public class BusinessOwnerMain extends JFrame {
 				JFrame f=new LoginFrame();
 				setVisible(false);
 				f.setVisible(true);
-				sl.setUsername("");
+				uc.setUsername("");
 			}
 		});
 		GridBagConstraints gbc_btnLogout = new GridBagConstraints();
@@ -94,7 +97,7 @@ public class BusinessOwnerMain extends JFrame {
 		JButton btnAddCoupon = new JButton("Add Coupon");
 		btnAddCoupon.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				BusinessOwnerAddCoupon addFrame = new BusinessOwnerAddCoupon(sl);
+				BusinessOwnerAddCoupon addFrame = new BusinessOwnerAddCoupon(); //TODO: Gave sl
 				addFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		         
 		        //Display the window.
@@ -122,7 +125,7 @@ public class BusinessOwnerMain extends JFrame {
 				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				frame.getContentPane().setLayout(new BorderLayout());
 				frame.setSize(900, 700);
-				 ViewBusinessesOfOwnerPanel v=new ViewBusinessesOfOwnerPanel(sl);
+				 ViewBusinessesOfOwnerPanel v=new ViewBusinessesOfOwnerPanel();//TODO: Gave sl
 				 frame.getContentPane().add(v, BorderLayout.CENTER);
 				 frame.pack();
 				 frame.setVisible(true);
@@ -148,7 +151,7 @@ public class BusinessOwnerMain extends JFrame {
 				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				frame.getContentPane().setLayout(new BorderLayout());
 				frame.setSize(900, 700);
-				 ViewCouponsOfOwner v=new ViewCouponsOfOwner(sl);
+				 ViewCouponsOfOwner v=new ViewCouponsOfOwner();//TODO: Gave sl
 				 frame.getContentPane().add(v, BorderLayout.CENTER);
 				 frame.pack();
 				 frame.setVisible(true);
@@ -167,7 +170,7 @@ public class BusinessOwnerMain extends JFrame {
 				JFrame frame = new JFrame();
 				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		         
-				JPanel panel=new BusinessOwnerEditBusiness(sl);
+				JPanel panel=new BusinessOwnerEditBusiness();//TODO: Gave sl
 				frame.getContentPane().add(panel);
 		         
 		        //Display the window.

@@ -32,7 +32,7 @@ public class BusinessOwnerEditBusiness extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public BusinessOwnerEditBusiness(ISL sl) {
+	public BusinessOwnerEditBusiness(ISL sl) {//TODO: GOT ISL
 		isl =sl;
 		
 		String owner = sl.getUsername();

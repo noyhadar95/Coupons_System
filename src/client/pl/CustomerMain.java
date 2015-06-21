@@ -1,4 +1,4 @@
-package pl;
+package client.pl;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -33,8 +33,11 @@ import java.util.TimerTask;
 
 import javax.swing.JTable;
 
-import sl.ISL;
-import sl.SL;
+import client.bl.BusinessController;
+import client.bl.CouponController;
+import client.bl.CustomerController;
+import client.bl.UserController;
+
 
 public class CustomerMain extends JFrame {
 
@@ -42,7 +45,9 @@ public class CustomerMain extends JFrame {
 	private JTextField txt_search;
 	private JTable table;
 	private DefaultTableModel lastModel;
-	private static ISL sl;
+	private static CouponController cc;
+	private static UserController uc;
+	private static BusinessController bc;
 
 	/**
 	 * Launch the application.
@@ -52,7 +57,7 @@ public class CustomerMain extends JFrame {
 			public void run() {
 				try {
 					
-					CustomerMain frame = new CustomerMain(sl);
+					CustomerMain frame = new CustomerMain();//TODO: Gave sl
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -64,9 +69,11 @@ public class CustomerMain extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CustomerMain(final ISL sl) { 
-		this.sl =sl;
-		lastModel = sl.getCouponsByPreference(sl.getUsername());
+	public CustomerMain() { //TODO: Got isl 
+		this.cc =new CouponController();
+		this.uc = new UserController();
+		this.bc = new BusinessController();
+		lastModel = cc.getCouponsByPreference(uc.getUsername());
 		
 		Timer timer = new Timer ();
 		TimerTask hourlyTask = new TimerTask () {
@@ -125,13 +132,13 @@ public class CustomerMain extends JFrame {
 				if(cmbx_Type.getSelectedIndex() == 0){
 				switch (cmbx_By.getSelectedIndex()) {
 				case 0:
-					 model = sl.getCouponsByFilter("Business", txt_search.getText()); 
+					 model = cc.getCouponsByFilter("Business", txt_search.getText()); 
 					break;
 				case 1:
-					 model = sl.getCouponsByFilter("Category", txt_search.getText()); 
+					 model = cc.getCouponsByFilter("Category", txt_search.getText()); 
 				
 				default:
-					model = sl.getApprovedCoupons();
+					model = cc.getApprovedCoupons();
 					break;
 				}
 				
@@ -149,9 +156,9 @@ for(int i=0;i<table.getRowCount(); i++){
 			                JTable table = (JTable)e.getSource();
 			                int modelRow = Integer.valueOf( e.getActionCommand() );
 
-			               sl.purchaseCoupon((String)table.getValueAt(modelRow, 0), sl.getUsername());
+			               cc.purchaseCoupon((String)table.getValueAt(modelRow, 0), uc.getUsername());
 			    
-			               JOptionPane.showMessageDialog((JFrame)cmbx_By.getTopLevelAncestor(), sl.getUsername()+" bought " + (String)table.getValueAt(modelRow, 0));
+			               JOptionPane.showMessageDialog((JFrame)cmbx_By.getTopLevelAncestor(), uc.getUsername()+" bought " + (String)table.getValueAt(modelRow, 0));
 
 			            }
 			        };
@@ -161,29 +168,22 @@ for(int i=0;i<table.getRowCount(); i++){
 				else{
 					switch (cmbx_By.getSelectedIndex()) {
 					case 0:
-						 model = sl.getBusinessByFilter("Category", txt_search.getText()); 
+						 model = bc.getBusinessByFilter("Category", txt_search.getText()); 
 						break;
 					case 1:
-						 model = sl.getBusinessByFilter("City", txt_search.getText()); 
+						 model = bc.getBusinessByFilter("City", txt_search.getText()); 
 						 break;
 					default:
-						model = sl.getBusinessByFilter("Name", "");
+						model = bc.getBusinessByFilter("Name", "");
 						break;
 					}
 				}
-				table.setModel(model);
-				
-				
-				
-				
-				
-				
-				
+				table.setModel(model);	
 			}
 		});
 		
 	
-		DefaultTableModel coupons=sl.getApprovedCoupons();
+		DefaultTableModel coupons = cc.getApprovedCoupons();
 		table = new JTable(coupons);
 		table.getColumnModel().getColumn(1).setHeaderValue("Name");
 		
@@ -201,9 +201,9 @@ for(int i=0;i<table.getRowCount(); i++){
 	                JTable table = (JTable)e.getSource();
 	                int modelRow = Integer.valueOf( e.getActionCommand() );
 
-	               sl.purchaseCoupon((String)table.getValueAt(modelRow, 0), sl.getUsername());
+	               sl.purchaseCoupon((String)table.getValueAt(modelRow, 0), uc.getUsername());
 	    
-	               JOptionPane.showMessageDialog((JFrame)cmbx_By.getTopLevelAncestor(), sl.getUsername()+" bought " + (String)table.getValueAt(modelRow, 0));
+	               JOptionPane.showMessageDialog((JFrame)cmbx_By.getTopLevelAncestor(), uc.getUsername()+" bought " + (String)table.getValueAt(modelRow, 0));
 
 	            }
 	        };
@@ -222,7 +222,7 @@ for(int i=0;i<table.getRowCount(); i++){
 		JButton btnObserveMyCoupons = new JButton("Observe My Coupons");
 		btnObserveMyCoupons.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				JFrame newFrame = new CustomersCoupons(sl);
+				JFrame newFrame = new CustomersCoupons(); //TODO: Gave sl
 				
 			}
 		});
@@ -290,7 +290,7 @@ for(int i=0;i<table.getRowCount(); i++){
 	
 	
 	void checkNotificationByPreference(){
-		DefaultTableModel newModel = sl.getCouponsByPreference(sl.getUsername());
+		DefaultTableModel newModel = cc.getCouponsByPreference(uc.getUsername());
 		ArrayList<String> list = new ArrayList<>();
 		for(int i=0; i < newModel.getRowCount(); i++){
 			if(inTable((String)newModel.getValueAt(i, 0), lastModel)==false) 

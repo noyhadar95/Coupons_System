@@ -1,4 +1,4 @@
-package pl;
+package client.pl;
 
 import java.awt.EventQueue;
 
@@ -18,9 +18,7 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
-import bl_backend.Coupon;
-import dal.DAL;
-import dal.IDAL;
+import auxiliary.bl_backend.Coupon;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -28,18 +26,19 @@ import java.util.HashMap;
 
 import javax.swing.JComboBox;
 
-import sl.ISL;
+import client.bl.CouponController;
+import server.bl.BusinessOwnerController;
 
 public class BusinessOwnerAddCoupon extends JFrame {
 
-	private static ISL sl;
+	private static BusinessOwnerController boc;
+	private static CouponController cc;
 	private JPanel contentPane;
 	private JTextField txtDesc;
 	private JTextField txtName;
 	private JTextField txtCategory;
 	private JTextField txtInitialPrice;
 	private JTextField txtDiscount;
-	private IDAL dal=new DAL();
 	private JComboBox comboBox;
 	/**
 	 * Launch the application.
@@ -48,7 +47,7 @@ public class BusinessOwnerAddCoupon extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					BusinessOwnerAddCoupon frame = new BusinessOwnerAddCoupon(sl);
+					BusinessOwnerAddCoupon frame = new BusinessOwnerAddCoupon(); //TODO: used to be an isl
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -60,8 +59,8 @@ public class BusinessOwnerAddCoupon extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public BusinessOwnerAddCoupon(ISL sl) {
-		this.sl=sl;
+	public BusinessOwnerAddCoupon() { //TODO: used to be an isl
+		boc = new BusinessOwnerController();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -186,7 +185,8 @@ public class BusinessOwnerAddCoupon extends JFrame {
 				int discount=Integer.parseInt(txtDiscount.getText());
 				int rating=0;
 				String business=comboBox.getSelectedItem().toString();
-				dal.insertCoupon(new Coupon(name, desc, cat, initial, discount, rating, business,0));
+				
+				cc.insertCoupon(new Coupon(name, desc, cat, initial, discount, rating, business,0));
 			}
 		});
 		
@@ -203,6 +203,7 @@ public class BusinessOwnerAddCoupon extends JFrame {
 		gbc_btnAddCoupon.gridy = 8;
 		contentPane.add(btnAddCoupon, gbc_btnAddCoupon);
 		
+		//TODO: CHANGE THIS TO CONTROLLER
 		String owner=sl.getUsername();
 		
 		List data=dal.getTableArrayList("businesses WHERE owner='"+owner+"'");

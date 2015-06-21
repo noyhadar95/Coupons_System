@@ -1,4 +1,4 @@
-package pl;
+package client.pl;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -22,15 +22,17 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-import sl.ISL;
-import sl.SL;
+import client.bl.CouponController;
+import client.bl.PurchaseController;
+
 
 
 public class CustomersCoupons extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
-	private static ISL isl;
+	private static CouponController cc;
+	private static PurchaseController pc;
 	/**
 	 * Launch the application.
 	 */
@@ -38,7 +40,7 @@ public class CustomersCoupons extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CustomersCoupons frame = new CustomersCoupons(isl);
+					CustomersCoupons frame = new CustomersCoupons(); //TODO: Gave isl
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -50,15 +52,16 @@ public class CustomersCoupons extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CustomersCoupons(ISL sl) {
+	public CustomersCoupons() { //TODO: Got isl
+		this.cc = new CouponController();
+		this.pc = new PurchaseController();
 		
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         final int USE_COLUMN = 3;
         
-        isl = sl;
         
 		String name="cust1";
-		DefaultTableModel coupons=isl.getCouponsNamesRatings(name);
+		DefaultTableModel coupons=cc.getCouponsNamesRatings(name);
 
 		
 		
@@ -110,7 +113,7 @@ for(int i=0;i<model.getRowCount(); i++){
                 JTable table = (JTable)e.getSource();
                 int modelRow = Integer.valueOf( e.getActionCommand() );
 
-                if(isl.useCoupon(table.getValueAt(modelRow, 0).toString()))
+                if(pc.useCoupon(table.getValueAt(modelRow, 0).toString()))
                 	table.setValueAt("Used", modelRow, USE_COLUMN);
             }
         };
@@ -134,7 +137,7 @@ for(int i=0;i<model.getRowCount(); i++){
                         String result = table.getValueAt(row, col).toString();
                         // id is the primary key of my DB
                         String serialKey = table.getValueAt(row, 0).toString();
-                        isl.updatePurchaseRating(serialKey, Integer.parseInt(result));
+                        pc.updatePurchaseRating(serialKey, Integer.parseInt(result));
                        
                     }
                 });
