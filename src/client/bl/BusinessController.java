@@ -46,4 +46,10 @@ public class BusinessController implements IBusinessController {
 		sl.deleteBusiness(name);
 		
 	}
+	
+	@Override
+	public DefaultTableModel getResultset(String table) {
+		return sl.getResultset(table);
+	}
+	
 }

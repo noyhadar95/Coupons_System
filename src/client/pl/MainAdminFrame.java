@@ -1,4 +1,4 @@
-package pl;
+package client.pl;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -12,9 +12,6 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
-import dal.DAL;
-import dal.IDAL;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.GridBagLayout;
@@ -23,12 +20,14 @@ import java.awt.Insets;
 
 import javax.swing.SwingConstants;
 
-import sl.ISL;
-import sl.SL;
+import client.bl.IAdminController;
+import client.bl.ICouponController;
+import client.bl.IUserController;
 
 public class MainAdminFrame extends JFrame {
 
-	private ISL sl;
+	private IUserController userCont;
+	private ICouponController couponCont;
 	private JPanel contentPane;
 	private final int WINDOW_WIDTH = 900, WINDOW_HEIGHT = 700;
 
@@ -51,9 +50,9 @@ public class MainAdminFrame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public MainAdminFrame(final ISL sl) {
+	public MainAdminFrame() {
 		super("Admin");
-		this.sl=sl;
+		
 		//((DAL)(dal)).testAddDeleteCoupon();
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.getContentPane().setLayout(new BorderLayout());
@@ -71,11 +70,13 @@ public class MainAdminFrame extends JFrame {
 		JButton btnAdd = new JButton("Add");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AdminAddFrame addFrame = new AdminAddFrame(sl);
+				// TODO: deleted sl from constructor
+				AdminAddFrame addFrame = new AdminAddFrame();
 				addFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		         
 		        //Create and set up the content pane.
-		        CardLayoutDemo demo = new CardLayoutDemo(sl);
+				// TODO: deleted sl from constructor
+		        CardLayoutDemo demo = new CardLayoutDemo();
 		        demo.addComponentToPane(addFrame.getContentPane());
 		         
 		        //Display the window.
@@ -84,7 +85,7 @@ public class MainAdminFrame extends JFrame {
 			}
 		});
 		
-		JLabel lblWelconeAdmin = new JLabel("Welcone, "+sl.getUsername()+"!");
+		JLabel lblWelconeAdmin = new JLabel("Welcone, "+userCont.getUsername()+"!");
 		GridBagConstraints gbc_lblWelconeAdmin = new GridBagConstraints();
 		gbc_lblWelconeAdmin.anchor = GridBagConstraints.NORTHWEST;
 		gbc_lblWelconeAdmin.insets = new Insets(0, 0, 5, 5);
@@ -153,7 +154,8 @@ public class MainAdminFrame extends JFrame {
 				addFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		         
 		        //Create and set up the content pane.
-		        AdminDeleteCardLayout demo = new AdminDeleteCardLayout(sl);
+				// TODO: deleted sl from constructor
+		        AdminDeleteCardLayout demo = new AdminDeleteCardLayout();
 		        demo.addComponentToPane(addFrame.getContentPane());
 		         
 		        //Display the window.
@@ -169,7 +171,7 @@ public class MainAdminFrame extends JFrame {
 		contentPane.add(btnDelete, gbc_btnDelete);
 		
 		//TODO: check if there are coupons to approve
-		int toApprove=sl.getNumOfUnapprovedCoupons();
+		int toApprove=couponCont.getNumOfUnapprovedCoupons();
 		if(toApprove>0){
 			lblApprove.setText("You Have "+toApprove+" Coupons to Approve! ->");
 			

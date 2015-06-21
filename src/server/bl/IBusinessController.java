@@ -12,4 +12,5 @@ public interface IBusinessController {
 	public DefaultTableModel getBusinessByFilter(String filter, String text);
 	public Business selectBusiness(String name);
 	public void deleteBusiness(String name);
+	DefaultTableModel getResultset(String table);
 }

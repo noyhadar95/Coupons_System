@@ -1,4 +1,4 @@
-package pl;
+package client.pl;
 
 import java.awt.Component;
 import java.awt.EventQueue;
@@ -15,7 +15,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 
-import bl_backend.EmailSender;
+import auxiliary.bl_backend.EmailSender;
 
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
@@ -24,8 +24,9 @@ import java.awt.event.ActionListener;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JComboBox;
 
-import sl.ISL;
-import sl.SL;
+import client.bl.IUserController;
+import client.bl.UserController;
+
 
 public class LoginFrame extends JFrame {
 
@@ -34,7 +35,7 @@ public class LoginFrame extends JFrame {
 	private final int WINDOW_WIDTH = 700, WINDOW_HEIGHT = 550;
 	private final String[] authTypes = {"Customer", "Admin", "Bussines Owner"};
 	private JPanel contentPane;
-	private ISL sl;
+	private IUserController userCont;
 	private JTextField textFieldUsername;
 	private JPasswordField textFieldPassword;
 	private JComboBox authTypeCB;
@@ -76,7 +77,7 @@ public class LoginFrame extends JFrame {
 		
 		setContentPane(contentPane);
 		
-		sl = new SL();
+		userCont = new UserController();
 		
 		btnLogin = new JButton("login");
 		btnLogin.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -93,26 +94,29 @@ public class LoginFrame extends JFrame {
 					String tryUsername = textFieldUsername.getText();
 					String tryPassword = textFieldPassword.getText();
 					String authType = (String) authTypeCB.getSelectedItem();
-					boolean success = sl.tryLogin(tryUsername, tryPassword, authType);
+					boolean success = userCont.tryLogin(tryUsername, tryPassword, authType);
 					
 					if(success){
 						switch (authType) {
 						case "Customer":
-							JFrame customerFrame = new CustomerMain(sl);
+							// TODO: deleted sl from constructor
+							JFrame customerFrame = new CustomerMain();
 							customerFrame.setLocation(getLocation()); 
 							customerFrame.setVisible(true);
 							// close current frame
 							setVisible(false);
 							break;
 						case "Admin":
-							JFrame adminFrame = new MainAdminFrame(sl);
+							// TODO: deleted sl from constructor
+							JFrame adminFrame = new MainAdminFrame();
 							adminFrame.setLocation(getLocation()); 
 							adminFrame.setVisible(true);
 							// close current frame
 							setVisible(false);
 							break;
 						case "Bussines Owner":
-							JFrame ownerFrame = new BusinessOwnerMain(sl);
+							// TODO: deleted sl from constructor
+							JFrame ownerFrame = new BusinessOwnerMain();
 							ownerFrame.setLocation(getLocation()); 
 							ownerFrame.setVisible(true);
 							// close current frame
@@ -212,7 +216,7 @@ public class LoginFrame extends JFrame {
 				}
 				else{
 					// the password is strong
-					boolean success = sl.signUp(username, password, email, phone);
+					boolean success = userCont.signUp(username, password, email, phone);
 					if(success){
 						setSignUpPanelVisibility(false);
 						JOptionPane.showMessageDialog((Component) e.getSource(),
@@ -259,14 +263,14 @@ public class LoginFrame extends JFrame {
 				else{
 					String username = textFieldUsername.getText();
 					String authType = (String) authTypeCB.getSelectedItem();
-					String password = sl.getPasswordByUsername(username, authType);
+					String password = userCont.getPasswordByUsername(username, authType);
 					if(password == null){
 						JOptionPane.showMessageDialog((Component) e.getSource(),
 								"username does not exist");
 					}
 					else{
 						EmailSender emailSender = new EmailSender();
-						String userEmail = sl.getEmailByUsername(username, authType);
+						String userEmail = userCont.getEmailByUsername(username, authType);
 						boolean success = emailSender.sendEmail(userEmail, COMPANY_EMAIL,
 								COMPANY_NAME + ": retrived password", "your password is: "+ password);
 						if(success){

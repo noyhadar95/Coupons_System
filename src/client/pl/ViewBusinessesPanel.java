@@ -1,7 +1,6 @@
-package pl;
+package client.pl;
 
 import javax.swing.GroupLayout;
-import sl.*;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -10,20 +9,21 @@ import javax.swing.JTable;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.table.DefaultTableModel;
 
+import client.bl.IBusinessController;
+
 
 public class ViewBusinessesPanel extends JPanel {
-	private ISL sl;
+	
+	private IBusinessController businessCont;
 
 	private JTable table;
 	/**
 	 * Create the panel.
 	 */
-	public ViewBusinessesPanel(ISL sl) {
+	public ViewBusinessesPanel() {
 
-			this.sl=sl;
-			
 			//((DAL)(dal)).testAddDeleteCoupon();
-			DefaultTableModel businesses=sl.getResultset("businesses");
+			DefaultTableModel businesses=businessCont.getResultset("businesses");
 			 table = new JTable(businesses);
 			 JScrollPane spTable = new JScrollPane(table);
 			 //JOptionPane.showMessageDialog(null, spTable);

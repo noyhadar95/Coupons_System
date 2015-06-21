@@ -47,4 +47,10 @@ public class BusinessController implements IBusinessController {
 		dal.deleteBusiness(name);
 		
 	}
+	
+	@Override
+	public DefaultTableModel getResultset(String table) {
+		return dal.getResultset(table);
+	}
+	
 }

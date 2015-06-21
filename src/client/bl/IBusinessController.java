@@ -2,7 +2,6 @@ package client.bl;
 
 import javax.swing.table.DefaultTableModel;
 
-import server.sl.*;
 import auxiliary.bl_backend.*;
 
 
@@ -21,4 +20,5 @@ public interface IBusinessController {
 	public Business selectBusiness(String name);
 	public void deleteBusiness(String name);
 	public boolean updateBusinessByOwner(Business business);
+	DefaultTableModel getResultset(String table);
 }
