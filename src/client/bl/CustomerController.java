@@ -6,40 +6,39 @@ import server.sl.*;
 import auxiliary.bl_backend.*;
 
 public class CustomerController implements ICustomerController {
-	private IDAL dal;
+	private ISL sl;
 	
 	public CustomerController() {
-		dal=new DAL();
+		sl=new SL();
 	}
-	
+
 	@Override
 	public boolean signUp(String username, String password, String email,
 			String phone) {
-		Customer cus = new Customer(username, password, email, phone);
-		dal.insertCustomer(cus);
-		return true;
+		return sl.signUp(username, password, email, phone);
 	}
-	
+
 	@Override
 	public DefaultTableModel getResultset(String table) {
-		return dal.getResultset(table);
+		return sl.getResultset(table);
 	}
-	
+
 	@Override
 	public void insertCustomer(Customer customer) {
-		dal.insertCustomer(customer);
+		sl.insertCustomer(customer);
 		
 	}
 
 	@Override
 	public Customer selectCustomer(String username) {
-		return dal.selectCustomer(username);
+		return sl.selectCustomer(username);
 	}
 
 	@Override
 	public void deleteCustomer(String username) {
-		dal.deleteCustomer(username);
+		sl.deleteCustomer(username);
 		
 	}
+	
 
 }
