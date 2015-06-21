@@ -30,4 +30,6 @@ public interface ICouponController {
 	public DefaultTableModel getResultset(String custumerName);
 	
 	public List getTableArrayList(String string) ;
+	
+	public void purchaseCoupon(String couponName, String customerName);
 }

@@ -1,6 +1,7 @@
 package client.bl;
 
 import java.util.List;
+import java.util.UUID;
 
 import javax.swing.table.DefaultTableModel;
 
@@ -75,4 +76,17 @@ public class CouponController implements ICouponController {
 		return sl.getTableArrayList(string);
 	}
 	
+	@Override
+	public void purchaseCoupon(String couponName, String customerName) {
+		String serial_key = genSerialKey();
+		Purchase purchase = new Purchase(serial_key, 0, customerName,
+				couponName, 0);
+		sl.insertPurchase(purchase);
+	}
+	
+	// returns a new special serial key.
+		private String genSerialKey() {
+			return UUID.randomUUID().toString().toUpperCase();
+
+		}
 }

@@ -102,4 +102,6 @@ public interface ICouponController {
 	public DefaultTableModel getResultset(String table);
 	
 	public List getTableArrayList(String string);
+	
+	public void purchaseCoupon(String couponName, String customerName);
 }
