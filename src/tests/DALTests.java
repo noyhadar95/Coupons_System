@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import server.dal.DAL;
 import server.dal.IDAL;
-import server.bl_backend.*;
+import auxiliary.bl_backend.*;
 
 public class DALTests {
 

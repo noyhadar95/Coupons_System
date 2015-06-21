@@ -1,31 +1,29 @@
-package server.bl;
+package client.bl;
 
-import server.dal.DAL;
-import server.dal.IDAL;
-import auxiliary.bl_backend.Admin;
-
+import server.sl.*;
+import auxiliary.bl_backend.*;
 public class AdminController implements IAdminController {
 	
-	private IDAL dal;
+	private ISL sl;
 
 	public AdminController() {
-		dal = new DAL();
+		sl = new  SL();
 	}
 	
 	@Override
 	public void insertAdmin(Admin admin) {
-		dal.insertAdmin(admin);
+		sl.insertAdmin(admin);
 		
 	}
 
 	@Override
 	public Admin selectAdmin(String username) {
-		return dal.selectAdmin(username);
+		return sl.selectAdmin(username);
 	}
 
 	@Override
 	public void deleteAdmin(String username) {
-		dal.deleteAdmin(username);
+		sl.deleteAdmin(username);
 		
 	}
 

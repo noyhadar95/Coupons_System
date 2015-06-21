@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.swing.table.DefaultTableModel;
 
-import server.bl_backend.*;
+import auxiliary.bl_backend.*;
 
 public interface IDAL {
 

@@ -1,29 +1,28 @@
-package server.bl;
+package client.bl;
 
 import javax.swing.table.DefaultTableModel;
 
-import server.dal.DAL;
-import server.dal.IDAL;
-import auxiliary.bl_backend.Business;
+import server.sl.*;
+import auxiliary.bl_backend.*;
 
 public class BusinessController implements IBusinessController {
 
-	private IDAL dal;
+	private ISL sl;
 
 	public BusinessController() {
-		dal = new DAL();
+		sl = new SL();
 	}
 	
 	@Override
 	public boolean updateBusiness(Business business){
-		dal.updateBusiness(business);
+		sl.updateBusiness(business);
 		return true;
 		
 	}
 	
 	@Override
 	public DefaultTableModel getBusinessesDetails() {
-		return dal.selectAllBusinesses();
+		return sl.selectAllBusinesses();
 	}
 	
 	@Override

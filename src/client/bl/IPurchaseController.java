@@ -1,9 +1,8 @@
-package server.bl;
+package client.bl;
 
 import javax.swing.table.DefaultTableModel;
-
-import auxiliary.bl_backend.Purchase;
-
+import server.sl.*;
+import auxiliary.bl_backend.*;
 public interface IPurchaseController {
 
 	boolean updatePurchaseRating(String serialKey, int rating);

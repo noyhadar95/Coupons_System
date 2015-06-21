@@ -5,7 +5,7 @@ import java.util.UUID;
 
 import javax.swing.table.DefaultTableModel;
 
-import server.bl_backend.*;
+import auxiliary.bl_backend.*;
 import server.dal.DAL;
 import server.dal.IDAL;
 

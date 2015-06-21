@@ -1,8 +1,9 @@
-package server.bl;
+package client.bl;
 
 import javax.swing.table.DefaultTableModel;
+import server.sl.*;
+import auxiliary.bl_backend.*;
 
-import auxiliary.bl_backend.Business;
 
 public interface IBusinessController {
 

@@ -1,4 +1,4 @@
-package server.bl_backend;
+package auxiliary.bl_backend;
 
 public class Purchase {
 

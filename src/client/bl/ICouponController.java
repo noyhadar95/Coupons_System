@@ -1,9 +1,8 @@
-package server.bl;
+package client.bl;
 
 import javax.swing.table.DefaultTableModel;
-
-import auxiliary.bl_backend.Coupon;
-
+import server.sl.*;
+import auxiliary.bl_backend.*;
 public interface ICouponController {
 
 	DefaultTableModel getCouponsNamesRatings(String customerName);

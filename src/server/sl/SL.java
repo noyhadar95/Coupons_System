@@ -6,13 +6,13 @@ import javax.swing.table.DefaultTableModel;
 
 import server.bl.BL;
 import server.bl.IBL;
-import server.bl_backend.Admin;
-import server.bl_backend.Business;
-import server.bl_backend.BusinessOwner;
-import server.bl_backend.Category;
-import server.bl_backend.Coupon;
-import server.bl_backend.Customer;
-import server.bl_backend.Purchase;
+import auxiliary.bl_backend.Admin;
+import auxiliary.bl_backend.Business;
+import auxiliary.bl_backend.BusinessOwner;
+import auxiliary.bl_backend.Category;
+import auxiliary.bl_backend.Coupon;
+import auxiliary.bl_backend.Customer;
+import auxiliary.bl_backend.Purchase;
 
 public class SL implements ISL {
 

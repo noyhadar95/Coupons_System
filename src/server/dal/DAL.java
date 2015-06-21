@@ -8,7 +8,7 @@ import java.util.Vector;
 
 import javax.swing.table.DefaultTableModel;
 
-import server.bl_backend.*;
+import auxiliary.bl_backend.*;
 
 public class DAL implements IDAL {
 

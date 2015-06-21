@@ -1,4 +1,4 @@
-package server.bl_backend;
+package auxiliary.bl_backend;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;

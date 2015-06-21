@@ -1,6 +1,7 @@
-package server.bl;
+package client.bl;
 
-import auxiliary.bl_backend.Category;
+import server.sl.*;
+import auxiliary.bl_backend.*;
 
 public interface ICategoryController {
 	public void insertCategory(Category category);

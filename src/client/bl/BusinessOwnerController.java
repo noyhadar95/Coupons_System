@@ -1,11 +1,9 @@
-package server.bl;
+package client.bl;
 
 import javax.swing.table.DefaultTableModel;
 
-import server.dal.DAL;
-import server.dal.IDAL;
-import auxiliary.bl_backend.Business;
-import auxiliary.bl_backend.BusinessOwner;
+import server.sl.*;
+import auxiliary.bl_backend.*;
 
 public class BusinessOwnerController implements IBusinessOwnerController {
 	
