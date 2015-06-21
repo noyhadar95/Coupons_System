@@ -1,64 +1,66 @@
 package client.bl;
 
 import javax.swing.table.DefaultTableModel;
+
 import server.sl.*;
 import auxiliary.bl_backend.*;
 public class CouponController implements ICouponController {
-	private IDAL dal;
+	private ISL sl;
 
 	public CouponController() {
-		dal = new DAL();
-	}
-	
-	public DefaultTableModel getCouponsNamesRatings(String customerName) {
-		return dal.selectCouponsNamesRatingsByCustomer(customerName);
+		sl = new SL();
 	}
 	
 	@Override
+	public DefaultTableModel getCouponsNamesRatings(String customerName) {
+		return sl.getCouponsNamesRatings(customerName);
+	}
+	@Override
 	public boolean updateCoupon(Coupon coupon) {
-		dal.updateCoupon(coupon);
+		sl.updateCoupon(coupon);
 		return true;
 	}
 	
 	@Override
 	public DefaultTableModel getCouponsDetails() {
-		return dal.selectAllCoupons();
+		return sl.getCouponsDetails();
 	}
 	
-	@Override
 	public void insertCoupon(Coupon coupon) {
-		dal.insertCoupon(coupon);
-
+		sl.insertCoupon(coupon);
 	}
 	
-	@Override
 	public int getNumOfUnapprovedCoupons() {
-		return dal.getNumOfUnapprovedCoupons();
+		return sl.getNumOfUnapprovedCoupons();
 	}
 	@Override
 	public DefaultTableModel getApprovedCoupons() {
-		return dal.getApprovedCoupons();
+		return sl.getApprovedCoupons();
 	}
-	
 	@Override
 	public DefaultTableModel getCouponsByFilter(String filter, String text) {
-		return dal.getCouponsByFilter(filter, text);
+		return sl.getCouponsByFilter(filter, text);
 	}
 	
 	@Override
 	public DefaultTableModel getCouponsByPreference(String customerName) {
-		return dal.getCouponsByPreference(customerName);
+		return sl.getCouponsByPreference(customerName);
 	}
-	
-	@Override
-	public Coupon selectCoupon(String name) {
-		return dal.selectCoupon(name);
-	}
-	
+
 	@Override
 	public void deleteCoupon(String name) {
-		dal.deleteCoupon(name);
-		
+		sl.deleteCoupon(name);
+	}
+	
+	@Override
+	public void updateCouponByAdmin(Coupon coupon) {
+		sl.updateCoupon(coupon);
+	}
+
+	@Override
+	
+	public Coupon selectCoupon(String name) {
+		return sl.selectCoupon(name);
 	}
 	
 }
