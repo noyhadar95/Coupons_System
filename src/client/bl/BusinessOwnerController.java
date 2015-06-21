@@ -7,47 +7,42 @@ import auxiliary.bl_backend.*;
 
 public class BusinessOwnerController implements IBusinessOwnerController {
 	
-	private IDAL dal;
+	private ISL sl;
 
 	 public BusinessOwnerController() {
-		dal = new DAL();
-	}
-	
-	public boolean updateBusiness(Business business){
-		dal.updateBusiness(business);
-		return true;
-		
-	}
-	@Override
-	public DefaultTableModel getBusinessesDetails() {
-		return dal.selectAllBusinesses();
+		sl = new SL();
 	}
 	
 	@Override
 	public void insertBusinessOwner(BusinessOwner owner) {
-		dal.inserBusinessOwner(owner);
+		sl.inserBusinessOwner(owner);
 
 	}
-	public DefaultTableModel getBusinessByFilter(String filter, String text) {
-		return dal.getBusinessByFilter(filter, text);
+	@Override
+	public void inserBusinessOwner(BusinessOwner owner){
+		sl.inserBusinessOwner(owner);
 	}
+	
 
 	
 	@Override
 	public BusinessOwner selectBusinessOwner(String username) {
-		return dal.selectBusinessOwner(username);
+		return sl.selectBusinessOwner(username);
 	}
 	
 	@Override
 	public void deleteBusinessOwner(String username) {
-		dal.deleteBusinessOwner(username);
+		sl.deleteBusinessOwner(username);
 		
 	}
 
 	@Override
 	public void updateBusinessOwner(BusinessOwner owner) {
-		dal.updateBusinessOwner(owner);
+		sl.updateBusinessOwner(owner);
 		
 	}
+
+
+	
 	
 }
