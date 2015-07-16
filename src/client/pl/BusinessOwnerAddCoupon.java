@@ -26,13 +26,16 @@ import java.util.HashMap;
 
 import javax.swing.JComboBox;
 
+import client.bl.BusinessController;
 import client.bl.CouponController;
+import client.bl.UserController;
 import server.bl.BusinessOwnerController;
 
 public class BusinessOwnerAddCoupon extends JFrame {
 
-	private static BusinessOwnerController boc;
+	private static BusinessController bc;
 	private static CouponController cc;
+	private static UserController uc;
 	private JPanel contentPane;
 	private JTextField txtDesc;
 	private JTextField txtName;
@@ -60,7 +63,9 @@ public class BusinessOwnerAddCoupon extends JFrame {
 	 * Create the frame.
 	 */
 	public BusinessOwnerAddCoupon() { //TODO: used to be an isl
-		boc = new BusinessOwnerController();
+		bc = new BusinessController();
+		cc = new CouponController();
+		uc = new UserController();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -204,9 +209,9 @@ public class BusinessOwnerAddCoupon extends JFrame {
 		contentPane.add(btnAddCoupon, gbc_btnAddCoupon);
 		
 		//TODO: CHANGE THIS TO CONTROLLER
-		String owner=sl.getUsername();
+		String owner=uc.getUsername();
 		
-		List data=dal.getTableArrayList("businesses WHERE owner='"+owner+"'");
+		List data=bc.getTableArrayList("businesses WHERE owner='"+owner+"'");
 		for (int i = 0; i < data.size(); i++) {
 			HashMap business = (HashMap) data.get(i);
 			comboBox.addItem((String) business.get("Name"));

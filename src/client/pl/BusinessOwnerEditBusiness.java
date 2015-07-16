@@ -1,4 +1,4 @@
-package pl;
+package client.pl;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -17,26 +17,24 @@ import javax.swing.event.CellEditorListener;
 import javax.swing.event.ChangeEvent;
 import javax.swing.table.DefaultTableModel;
 
-import dal.DAL;
-import dal.IDAL;
-import bl_backend.Business;
-import bl_backend.Coupon;
-import sl.ISL;
-import sl.SL;
-
+import client.bl.*;
+import auxiliary.bl_backend.*;
 public class BusinessOwnerEditBusiness extends JPanel {
 
-	private  IDAL dal= new DAL();
+	
 	private JTable table;
-	private ISL isl;
+	private UserController uc;
+	private BusinessController bc;
+	
 	/**
 	 * Create the panel.
 	 */
-	public BusinessOwnerEditBusiness(ISL sl) {//TODO: GOT ISL
-		isl =sl;
-		
-		String owner = sl.getUsername();
-		DefaultTableModel business=dal.getResultset("businesses WHERE owner='"+owner+"'");
+	public BusinessOwnerEditBusiness() {//TODO: GOT ISL
+		//isl =sl;
+		uc = new UserController();
+		bc = new BusinessController();
+		String owner = uc.getUsername();
+		DefaultTableModel business=bc.getResultset("businesses WHERE owner='"+owner+"'");
 		
 int colcount = business.getColumnCount();
 		
@@ -83,7 +81,7 @@ int colcount = business.getColumnCount();
 	                        // id is the primary key of my DB
 	                        String name = table.getValueAt(row, 0).toString();
 	                        
-	                        isl.updateBusinessByOwner(getBusinessFromRow(row, table));
+	                        bc.updateBusinessByOwner(getBusinessFromRow(row, table));
 	                    }
 	                });
 	        
