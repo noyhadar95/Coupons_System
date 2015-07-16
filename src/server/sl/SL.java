@@ -17,18 +17,15 @@ import auxiliary.bl_backend.Purchase;
 public class SL implements ISL {
 
 	IBL bl;
-	private String username;
 
 	public SL() {
 		bl = new BL();
-		username="";
 	}
 
 	@Override
 	public boolean tryLogin(String username, String password, String authType) {
 		boolean result= bl.tryLogin(username, password, authType);
-		if(result)
-			this.username=username;
+		
 		return result;
 	}
 
@@ -242,18 +239,6 @@ public class SL implements ISL {
 		bl.updatePurchase(purchase);
 		
 	}
-
-	@Override
-	public void setUsername(String username) {
-		this.username=username;
-		
-	}
-
-	@Override
-	public String getUsername() {
-		return username;
-	}
-
 
 	@Override
 	public DefaultTableModel getBusinessesDetails() {
