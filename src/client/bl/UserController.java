@@ -1,6 +1,6 @@
 package client.bl;
 
-import dal.DAL;
+import client.dal.DAL;
 import server.sl.*;
 import auxiliary.bl_backend.*;
 
