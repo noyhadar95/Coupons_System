@@ -21,6 +21,10 @@ public class UserController implements IUserController {
 			successFlag = true;
 		}
 
+		if(successFlag){
+			setUsername(username);
+		}
+		
 		return successFlag;
 	}
 
@@ -81,14 +85,13 @@ public class UserController implements IUserController {
 
 	@Override
 	public void setUsername(String username) {
-		// TODO Auto-generated method stub
+		DAL.getInstance.setUsername(username);
 
 	}
 
 	@Override
 	public String getUsername() {
-		// TODO Auto-generated method stub
-		return null;
+		return DAL.getInstance.getUsername();
 	}
 
 }
