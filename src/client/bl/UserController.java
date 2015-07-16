@@ -1,5 +1,6 @@
 package client.bl;
 
+import dal.DAL;
 import server.sl.*;
 import auxiliary.bl_backend.*;
 
@@ -85,13 +86,13 @@ public class UserController implements IUserController {
 
 	@Override
 	public void setUsername(String username) {
-		DAL.getInstance.setUsername(username);
+		DAL.getInstance().setUsername(username);
 
 	}
 
 	@Override
 	public String getUsername() {
-		return DAL.getInstance.getUsername();
+		return DAL.getInstance().getUsername();
 	}
 
 }

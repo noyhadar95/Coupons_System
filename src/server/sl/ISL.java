@@ -173,9 +173,6 @@ public interface ISL {
 
 	void updatePurchase(Purchase purchase);
 	
-	void setUsername(String username);
-	
-	String getUsername();
 	/**
 	 * returns a DefaultTableModel object that contains the details of all the
 	 * businesses in the db.
