@@ -1,6 +1,7 @@
 package server.sl;
 
 import java.util.List;
+import java.util.Vector;
 
 import javax.swing.table.DefaultTableModel;
 
@@ -186,6 +187,11 @@ public interface ISL {
 	void updateBusinessByOwner(Business business);
 
 	List getTableArrayList(String string);
+<<<<<<< HEAD
 
 	Location getLocationByIp(String ip);
+=======
+	
+	Vector<Vector<Object>> getPruchases(String username);
+>>>>>>> adding-local-purchases
 }

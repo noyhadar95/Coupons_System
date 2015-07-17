@@ -67,5 +67,7 @@ public interface IUserController {
 	 * @return a username.
 	 */
 	String getUsername();
+	
+	void initializePurchases(String username);
 
 }

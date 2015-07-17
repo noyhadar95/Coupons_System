@@ -26,6 +26,7 @@ import javax.swing.JComboBox;
 
 import client.bl.IUserController;
 import client.bl.UserController;
+import client.dal.DAL;
 
 
 public class LoginFrame extends JFrame {
@@ -97,6 +98,8 @@ public class LoginFrame extends JFrame {
 					boolean success = userCont.tryLogin(tryUsername, tryPassword, authType);
 					
 					if(success){
+						userCont.initializePurchases(DAL.getInstance().getUsername());//TODO: purchase controller!
+						
 						switch (authType) {
 						case "Customer":
 							// TODO: deleted sl from constructor

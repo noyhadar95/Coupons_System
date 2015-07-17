@@ -1,5 +1,7 @@
 package client.bl;
 
+import java.util.Vector;
+
 import javax.swing.table.DefaultTableModel;
 
 import server.sl.*;
@@ -30,4 +32,7 @@ public interface IPurchaseController {
 	Purchase selectPurchase(String serialKey);
 	void deletePurchase(String serialKey);
 	void updatePurchase(Purchase purchase);
+	void initializeLocalPurchases(String username);
+	DefaultTableModel getPurchases();
+	DefaultTableModel getPurchasesNoHeader();
 }

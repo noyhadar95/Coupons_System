@@ -1,8 +1,11 @@
 package client.bl;
 
 
+import java.util.Vector;
+
 import javax.swing.table.DefaultTableModel;
 
+import client.dal.DAL;
 import server.sl.*;
 import auxiliary.bl_backend.*;
 
@@ -52,6 +55,28 @@ public class PurchaseController implements IPurchaseController {
 		
 	}
 	
+	@Override
+	public void initializeLocalPurchases(String username){
+		Vector<Vector<Object>> purchasesVec=DAL.getInstance().getPurchases(); //TODO weird!
+		
+	}
+	
+	@Override
+	public DefaultTableModel getPurchases(){
+		System.out.println("local data!");
+		Vector<Vector<Object>> data =DAL.getInstance().getPurchases();
+		Vector<String> columnNames = new Vector<String>();
+		columnNames.add("SerialKey");
+		columnNames.add("Rating");
+		columnNames.add( "CustomerName");
+		columnNames.add("Used");
+		return new DefaultTableModel(data, columnNames);
+	}
+	
+	@Override
+	public DefaultTableModel getPurchasesNoHeader(){
+		return null;
+	}
 	
 	
 }

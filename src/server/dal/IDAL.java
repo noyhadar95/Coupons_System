@@ -2,6 +2,7 @@ package server.dal;
 
 import java.sql.ResultSet;
 import java.util.List;
+import java.util.Vector;
 
 import javax.swing.table.DefaultTableModel;
 
@@ -81,8 +82,13 @@ public interface IDAL {
 	DefaultTableModel selectAllBusinesses();
 
 	void updateBusiness(Business business);
+<<<<<<< HEAD
 
 	DefaultTableModel getLocationByIP(String IP);
 
+=======
+	
+	Vector<Vector<Object>> getPruchases(String username);
+>>>>>>> adding-local-purchases
 
 }

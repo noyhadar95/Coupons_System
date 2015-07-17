@@ -1,6 +1,7 @@
 package server.sl;
 
 import java.util.List;
+import java.util.Vector;
 
 import javax.swing.table.DefaultTableModel;
 
@@ -254,6 +255,11 @@ public class SL implements ISL {
 	@Override
 	public Location getLocationByIp(String ip){
 		return null; //TODO implement
+	}
+
+	@Override
+	public Vector<Vector<Object>> getPruchases(String username) {
+		return bl.getPruchases(username);
 	}
 
 }
