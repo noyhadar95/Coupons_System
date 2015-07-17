@@ -10,6 +10,7 @@ import auxiliary.bl_backend.BusinessOwner;
 import auxiliary.bl_backend.Category;
 import auxiliary.bl_backend.Coupon;
 import auxiliary.bl_backend.Customer;
+import auxiliary.bl_backend.Location;
 import auxiliary.bl_backend.Purchase;
 
 public interface ISL {
@@ -186,4 +187,5 @@ public interface ISL {
 
 	List getTableArrayList(String string);
 
+	Location getLocationByIp(String ip);
 }
