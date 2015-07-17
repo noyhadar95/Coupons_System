@@ -187,11 +187,6 @@ public interface ISL {
 	void updateBusinessByOwner(Business business);
 
 	List getTableArrayList(String string);
-<<<<<<< HEAD
-
 	Location getLocationByIp(String ip);
-=======
-	
 	Vector<Vector<Object>> getPruchases(String username);
->>>>>>> adding-local-purchases
 }

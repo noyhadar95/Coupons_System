@@ -82,13 +82,7 @@ public interface IDAL {
 	DefaultTableModel selectAllBusinesses();
 
 	void updateBusiness(Business business);
-<<<<<<< HEAD
-
 	DefaultTableModel getLocationByIP(String IP);
-
-=======
-	
 	Vector<Vector<Object>> getPruchases(String username);
->>>>>>> adding-local-purchases
 
 }

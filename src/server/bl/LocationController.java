@@ -5,7 +5,7 @@ import javax.swing.table.DefaultTableModel;
 import server.dal.DAL;
 import server.dal.IDAL;
 import auxiliary.bl_backend.Location;
-import dal.*;
+import server.dal.*;
 public class LocationController implements ILocationController {
 	private IDAL dal;
 	
