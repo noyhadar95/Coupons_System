@@ -372,7 +372,6 @@ public class DAL implements IDAL {
 	private DefaultTableModel executeResultSet(String query) {
 		Statement stmt = null;
 		ResultSet result = null;
-		List list = null;
 		ResultSetMetaData metaData=null;
 		try {
 			connect();
@@ -396,6 +395,55 @@ public class DAL implements IDAL {
 		    }
 
 		    return new DefaultTableModel(data, columnNames);
+		} catch (Exception e) {
+			// Handle errors for Class.forName
+			e.printStackTrace();
+		} finally {
+			// finally block used to close resources
+			try {
+				if (stmt != null)
+					stmt.close();
+			} catch (SQLException se2) {
+			}// nothing we can do
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}// end finally try
+		}// end try
+		return null;
+		
+	}
+	
+	
+	public Vector<Vector<Object>> getPruchases(String username) {
+		Statement stmt = null;
+		ResultSet result = null;
+		ResultSetMetaData metaData=null;
+		try {
+			connect();
+			stmt = conn.createStatement();
+			String query="SELECT SerialKey,CouponName,Rating,Used FROM couponsdb.purchases WHERE CustomerName='"+username+"'";
+			result = stmt.executeQuery(query);
+		    metaData = result.getMetaData();
+		    Vector<String> columnNames = new Vector<String>();
+		    int columnCount = metaData.getColumnCount();
+		    for (int column = 1; column <= columnCount; column++) {
+		        columnNames.add(metaData.getColumnName(column));
+		    }
+
+		    // data of the table
+		    Vector<Vector<Object>> data = new Vector<Vector<Object>>();
+		    while (result.next()) {
+		        Vector<Object> vector = new Vector<Object>();
+		        for (int columnIndex = 1; columnIndex <= columnCount; columnIndex++) {
+		            vector.add(result.getObject(columnIndex));
+		        }
+		        data.add(vector);
+		    }
+
+		    return data;
 		} catch (Exception e) {
 			// Handle errors for Class.forName
 			e.printStackTrace();

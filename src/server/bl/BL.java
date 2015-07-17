@@ -2,6 +2,7 @@ package server.bl;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.Vector;
 
 import javax.swing.table.DefaultTableModel;
 
@@ -326,6 +327,11 @@ public class BL implements IBL {
 	@Override
 	public List getTableArrayList(String string) {
 		return dal.getTableArrayList(string);
+	}
+
+	@Override
+	public Vector<Vector<Object>> getPruchases(String username) {
+		return dal.getPruchases(username);
 	}
 
 }

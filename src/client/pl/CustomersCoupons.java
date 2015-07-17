@@ -22,7 +22,9 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import server.bl.UserController;
 import client.bl.CouponController;
+import client.bl.IUserController;
 import client.bl.PurchaseController;
 
 
@@ -33,6 +35,7 @@ public class CustomersCoupons extends JFrame {
 	private JTable table;
 	private static CouponController cc;
 	private static PurchaseController pc;
+	private static IUserController uc;
 	/**
 	 * Launch the application.
 	 */
@@ -55,13 +58,15 @@ public class CustomersCoupons extends JFrame {
 	public CustomersCoupons() { //TODO: Got isl
 		this.cc = new CouponController();
 		this.pc = new PurchaseController();
+		this.uc=new client.bl.UserController();
 		
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         final int USE_COLUMN = 3;
         
         
-		String name="cust1";
-		DefaultTableModel coupons=cc.getCouponsNamesRatings(name);
+		String name=uc.getUsername();
+		//DefaultTableModel coupons=cc.getCouponsNamesRatings(name);
+		DefaultTableModel coupons=pc.getPurchases();
 
 		
 		
@@ -96,11 +101,15 @@ public class CustomersCoupons extends JFrame {
         
         
 for(int i=0;i<model.getRowCount(); i++){
-        	
+        	try{
         	if((int)model.getValueAt(i, USE_COLUMN) == 0)
         			model.setValueAt("Use", i, USE_COLUMN);
         	else
         		model.setValueAt("Used", i, USE_COLUMN);
+        	}
+        	catch(Exception e){
+        		//probably because of local
+        	}
 
         }
         
@@ -146,6 +155,8 @@ for(int i=0;i<model.getRowCount(); i++){
         setLocationByPlatform(true);
         pack();
         setVisible(true);
+        
 
+        
 }
 }

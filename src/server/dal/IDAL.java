@@ -2,6 +2,7 @@ package server.dal;
 
 import java.sql.ResultSet;
 import java.util.List;
+import java.util.Vector;
 
 import javax.swing.table.DefaultTableModel;
 
@@ -81,6 +82,7 @@ public interface IDAL {
 	DefaultTableModel selectAllBusinesses();
 
 	void updateBusiness(Business business);
-
+	
+	Vector<Vector<Object>> getPruchases(String username);
 
 }

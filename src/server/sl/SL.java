@@ -1,6 +1,7 @@
 package server.sl;
 
 import java.util.List;
+import java.util.Vector;
 
 import javax.swing.table.DefaultTableModel;
 
@@ -248,6 +249,11 @@ public class SL implements ISL {
 	@Override
 	public List getTableArrayList(String string) {
 		return bl.getTableArrayList(string);
+	}
+
+	@Override
+	public Vector<Vector<Object>> getPruchases(String username) {
+		return bl.getPruchases(username);
 	}
 
 }

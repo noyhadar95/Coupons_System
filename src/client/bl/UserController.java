@@ -1,5 +1,7 @@
 package client.bl;
 
+import java.util.Vector;
+
 import client.dal.DAL;
 import server.sl.*;
 import auxiliary.bl_backend.*;
@@ -93,6 +95,12 @@ public class UserController implements IUserController {
 	@Override
 	public String getUsername() {
 		return DAL.getInstance().getUsername();
+	}
+	
+	@Override
+	public void initializePurchases(String username){
+		Vector<Vector<Object>> purchases=sl.getPruchases(username);
+		DAL.getInstance().initializePurchases(purchases);
 	}
 
 }

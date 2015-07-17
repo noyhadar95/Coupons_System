@@ -1,6 +1,8 @@
 package server.bl;
 
 
+import java.util.Vector;
+
 import javax.swing.table.DefaultTableModel;
 
 import auxiliary.bl_backend.Coupon;
@@ -77,5 +79,6 @@ public class PurchaseController implements IPurchaseController {
 		dal.updatePurchase(purchase);
 		
 	}
+	
 	
 }

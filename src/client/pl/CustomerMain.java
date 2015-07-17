@@ -37,6 +37,7 @@ import client.bl.BusinessController;
 import client.bl.CouponController;
 import client.bl.CustomerController;
 import client.bl.UserController;
+import client.dal.DAL;
 
 
 public class CustomerMain extends JFrame {
@@ -157,7 +158,7 @@ for(int i=0;i<table.getRowCount(); i++){
 			                int modelRow = Integer.valueOf( e.getActionCommand() );
 
 			               cc.purchaseCoupon((String)table.getValueAt(modelRow, 0), uc.getUsername());
-			    
+			               
 			               JOptionPane.showMessageDialog((JFrame)cmbx_By.getTopLevelAncestor(), uc.getUsername()+" bought " + (String)table.getValueAt(modelRow, 0));
 
 			            }
@@ -202,6 +203,7 @@ for(int i=0;i<table.getRowCount(); i++){
 	                int modelRow = Integer.valueOf( e.getActionCommand() );
 
 	               cc.purchaseCoupon((String)table.getValueAt(modelRow, 0), uc.getUsername());
+	               uc.initializePurchases(DAL.getInstance().getUsername());
 	    
 	               JOptionPane.showMessageDialog((JFrame)cmbx_By.getTopLevelAncestor(), uc.getUsername()+" bought " + (String)table.getValueAt(modelRow, 0));
 
