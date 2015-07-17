@@ -21,8 +21,8 @@ public class DAL implements IDAL {
 
 	// Database credentials
 
-	static final String USER = "root";
-	static final String PASS = "";
+	static final String USER = "Shai";
+	static final String PASS = "root";
 
 	public DAL() {
 		//initialDatabase();
@@ -717,5 +717,16 @@ public class DAL implements IDAL {
 									customerName);
 		return getResultSetFromQuery(query);
 	}
+	
+	@Override
+	public DefaultTableModel getLocationByIP(String IP) {
+		/*String query = String.format("SELECT couponsdb.`geolitecity-location`.country,  couponsdb.`geolitecity-location`.city, couponsdb.`geolitecity-location`.latitude, couponsdb.`geolitecity-location`.longitude " +
+									"FROM couponsdb.`geolitecity-blocks` join couponsdb.`geolitecity-location` "+
+									"WHERE couponsdb.`geolitecity-location`.locId = couponsdb.`geolitecity-blocks`.locId AND INET_ATON('%s') BETWEEN startIpNum AND endIpNum LIMIT 1",
+									IP); */
+		String query = String.format("SELECT * FROM couponsdb.locations WHERE INET_ATON('%s') BETWEEN couponsdb.locations.ip_from AND couponsdb.locations.ip_to LIMIT 1", IP);
+		return getResultSetFromQuery(query);
+	}
+	
 
 }

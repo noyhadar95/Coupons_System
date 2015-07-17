@@ -12,6 +12,7 @@ import auxiliary.bl_backend.BusinessOwner;
 import auxiliary.bl_backend.Category;
 import auxiliary.bl_backend.Coupon;
 import auxiliary.bl_backend.Customer;
+import auxiliary.bl_backend.Location;
 import auxiliary.bl_backend.Purchase;
 
 public class SL implements ISL {
@@ -248,6 +249,11 @@ public class SL implements ISL {
 	@Override
 	public List getTableArrayList(String string) {
 		return bl.getTableArrayList(string);
+	}
+	
+	@Override
+	public Location getLocationByIp(String ip){
+		return null; //TODO implement
 	}
 
 }

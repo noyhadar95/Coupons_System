@@ -82,5 +82,7 @@ public interface IDAL {
 
 	void updateBusiness(Business business);
 
+	DefaultTableModel getLocationByIP(String IP);
+
 
 }
