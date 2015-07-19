@@ -14,7 +14,7 @@ public class Main {
 		DAL dal = new DAL();
 		GPS gps = new GPS();
 		gps.start();
-		DefaultTableModel model = dal.getLocationByIP("82.102.141.253");
+		DefaultTableModel model = dal.getCouponsByLocation(10, 10, 5);
 		dal.testAddDeleteCoupon1();// adding some sample records to the db
 
 	}

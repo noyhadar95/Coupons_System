@@ -85,4 +85,9 @@ public interface IDAL {
 	DefaultTableModel getLocationByIP(String IP);
 	Vector<Vector<Object>> getPruchases(String username);
 
+	DefaultTableModel getCouponsByLocation(double latitude, double longitude,
+			double radius);
+
+	DefaultTableModel getocationofCity(String city);
+
 }

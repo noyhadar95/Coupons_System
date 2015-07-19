@@ -749,6 +749,20 @@ public class DAL implements IDAL {
 		String query = String.format("SELECT * FROM couponsdb.coupons WHERE %s='%s' AND Approved=1", filter, text);
 		return getResultSetFromQuery(query);
 	}
+	
+	@Override
+	public DefaultTableModel getCouponsByLocation(double latitude, double longitude, double radius){
+		double latup = latitude + radius;
+		double latdown = latitude - radius;
+		double longup = longitude + radius;
+		double longdown = longitude - radius;
+		String query = String.format("SELECT couponsdb.coupons.Name, couponsdb.coupons.Description, couponsdb.coupons.Category, couponsdb.coupons.InitialPrice,"
+				+ "couponsdb.coupons.DiscountPrice, couponsdb.coupons.Rating, couponsdb.coupons.Business, couponsdb.coupons.Approved, couponsdb.businesses.Latitude, couponsdb.businesses.Longitude"
+				+ " FROM couponsdb.coupons, couponsdb.businesses WHERE couponsdb.coupons.Business = couponsdb.businesses.Name AND couponsdb.coupons.Approved=1 AND"
+				+ " couponsdb.businesses.Latitude BETWEEN %f AND %f AND"
+				+ " couponsdb.businesses.Longitude BETWEEN %f AND %f", latdown, latup,longdown,longup );
+		return getResultSetFromQuery(query);
+	}
 
 	@Override
 	public DefaultTableModel getBusinessByFilter(String filter, String text) {
@@ -773,6 +787,12 @@ public class DAL implements IDAL {
 									"WHERE couponsdb.`geolitecity-location`.locId = couponsdb.`geolitecity-blocks`.locId AND INET_ATON('%s') BETWEEN startIpNum AND endIpNum LIMIT 1",
 									IP); */
 		String query = String.format("SELECT * FROM couponsdb.locations WHERE INET_ATON('%s') BETWEEN couponsdb.locations.ip_from AND couponsdb.locations.ip_to LIMIT 1", IP);
+		return getResultSetFromQuery(query);
+	}
+	
+	@Override
+	public DefaultTableModel getocationofCity(String city){
+		String query = String.format("SELECT couponsdb.locations.longitude, couponsdb.locations.latitude FROM couponsdb.locations WHERE city_name = '%s' Limit 1",city);
 		return getResultSetFromQuery(query);
 	}
 	

@@ -76,6 +76,7 @@ public class CouponController implements ICouponController {
 	public List getTableArrayList(String string) {
 		return dal.getTableArrayList(string);
 	}
+	
 	@Override
 	public void purchaseCoupon(String couponName, String customerName) {
 		String serial_key = genSerialKey();
@@ -87,5 +88,12 @@ public class CouponController implements ICouponController {
 		private String genSerialKey() {
 			return UUID.randomUUID().toString().toUpperCase();
 
+		}
+
+		@Override
+		public DefaultTableModel getCouponsByLocation(double longitude,
+				double latitude, double radius) {
+		return dal.getCouponsByLocation(latitude, longitude, radius);
+		
 		}
 }

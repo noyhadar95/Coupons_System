@@ -21,6 +21,8 @@ public interface ICouponController {
 	
 	DefaultTableModel getCouponsByFilter(String text, String filter);
 	
+	DefaultTableModel getCouponsByLocation(double longitude, double latitude, double radius);
+	
 	DefaultTableModel getCouponsByPreference(String customerName);
 	
 	Coupon selectCoupon(String name);

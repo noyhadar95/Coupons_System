@@ -29,8 +29,13 @@ public class BusinessController implements IBusinessController {
 	}
 	
 	@Override
-	public void insertBusiness(Business business) {
+	public void insertBusiness(Business business) { //TODO: CHeck this works
+		DefaultTableModel model = dal.getocationofCity(business.getCity());
+		if(model.getRowCount() > 0)
+			business.setCoordinates((double)model.getValueAt(0, 0),(double)model.getValueAt(0, 1));
 		dal.insertBusiness(business);
+		
+	
 
 	}
 	

@@ -8,7 +8,8 @@ public class Business {
 	private String category;
 	private String description;
 	private String owner; //maybe change to owner object?
-	
+	private double longitude;
+	private double latitude;
 	public Business(String name,String address,String city,String category,String description,String owner) {
 		this.name = name;
 		this.address = address;
@@ -16,6 +17,8 @@ public class Business {
 		this.category = category;
 		this.description = description;
 		this.owner = owner;
+		this.longitude = 0;
+		this.latitude = 0;
 	}
 	
 	public String getName() {
@@ -54,4 +57,10 @@ public class Business {
 	public void setOwner(String owner) {
 		this.owner = owner;
 	}
+	
+	public void setCoordinates(double longitude, double latitude){
+		this.longitude = longitude;
+		this.latitude = latitude;
+	}
+	
 }
