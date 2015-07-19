@@ -9,6 +9,7 @@ import javax.swing.JTable;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.table.DefaultTableModel;
 
+import client.bl.CouponController;
 import client.bl.ICouponController;
 
 public class ViewCoupons extends JPanel {
@@ -20,7 +21,7 @@ public class ViewCoupons extends JPanel {
 	 * Create the panel.
 	 */
 	public ViewCoupons() {
-		
+		couponCont = new CouponController();
 		//((DAL)(dal)).testAddDeleteCoupon();
 		String query="coupons";
 		DefaultTableModel coupons=couponCont.getResultset(query);

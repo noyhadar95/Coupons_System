@@ -20,9 +20,11 @@ import java.awt.Insets;
 
 import javax.swing.SwingConstants;
 
+import client.bl.CouponController;
 import client.bl.IAdminController;
 import client.bl.ICouponController;
 import client.bl.IUserController;
+import client.bl.UserController;
 
 public class MainAdminFrame extends JFrame {
 
@@ -53,6 +55,8 @@ public class MainAdminFrame extends JFrame {
 	public MainAdminFrame() {
 		super("Admin");
 		
+		userCont = new UserController();
+		couponCont = new CouponController();
 		//((DAL)(dal)).testAddDeleteCoupon();
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.getContentPane().setLayout(new BorderLayout());

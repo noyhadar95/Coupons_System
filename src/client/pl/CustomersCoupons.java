@@ -56,9 +56,9 @@ public class CustomersCoupons extends JFrame {
 	 * Create the frame.
 	 */
 	public CustomersCoupons() { //TODO: Got isl
-		this.cc = new CouponController();
-		this.pc = new PurchaseController();
-		this.uc=new client.bl.UserController();
+		cc = new CouponController();
+		pc = new PurchaseController();
+		uc=new client.bl.UserController();
 		
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         final int USE_COLUMN = 3;

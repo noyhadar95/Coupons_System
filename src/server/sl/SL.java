@@ -5,8 +5,7 @@ import java.util.Vector;
 
 import javax.swing.table.DefaultTableModel;
 
-import server.bl.BL;
-import server.bl.IBL;
+import server.bl.*;
 import auxiliary.bl_backend.Admin;
 import auxiliary.bl_backend.Business;
 import auxiliary.bl_backend.BusinessOwner;
@@ -18,248 +17,267 @@ import auxiliary.bl_backend.Purchase;
 
 public class SL implements ISL {
 
-	IBL bl;
+	IUserController userCont;
+	IPurchaseController purchaseCont;
+	ICouponController couponCont;
+	ICustomerController customerCont;
+	ICategoryController categoryCont;
+	IBusinessController businessCont;
+	IBusinessOwnerController businessOwnerCont;
+	IAdminController adminCont;
+	ILocationController locationCont;
 
 	public SL() {
-		bl = new BL();
+
+		userCont = new UserController();
+		purchaseCont = new PurchaseController();
+		couponCont = new CouponController();
+		customerCont = new CustomerController();
+		categoryCont = new CategoryController();
+		businessCont = new BusinessController();
+		businessOwnerCont = new BusinessOwnerController();
+		adminCont = new AdminController();
+		locationCont = new LocationController();
 	}
 
 	@Override
 	public boolean tryLogin(String username, String password, String authType) {
-		boolean result= bl.tryLogin(username, password, authType);
-		
+		boolean result = userCont.tryLogin(username, password, authType);
+
 		return result;
 	}
 
 	@Override
 	public DefaultTableModel getCouponsNamesRatings(String customerName) {
-		return bl.getCouponsNamesRatings(customerName);
+		return couponCont.getCouponsNamesRatings(customerName);
 	}
 
 	@Override
 	public boolean updatePurchaseRating(String serialKey, int rating) {
-		return bl.updatePurchaseRating(serialKey, rating);
+		return purchaseCont.updatePurchaseRating(serialKey, rating);
 	}
 
 	@Override
 	public boolean updateCouponByAdmin(Coupon coupon) {
-		return bl.updateCoupon(coupon);
+		return couponCont.updateCoupon(coupon);
 	}
-	public void updateBusinessByOwner(Business business){
-		 bl.updateBusiness(business);
-		
+
+	public void updateBusinessByOwner(Business business) {
+		businessCont.updateBusiness(business);
+
 	}
-	
 
 	@Override
 	public DefaultTableModel getCouponsDetails() {
-		return bl.getCouponsDetails();
+		return couponCont.getCouponsDetails();
 	}
 
 	@Override
 	public boolean useCoupon(String serialKey) {
-		return bl.useCoupon(serialKey);
+		return purchaseCont.useCoupon(serialKey);
 	}
 
 	@Override
 	public boolean signUp(String username, String password, String email,
 			String phone) {
-		return bl.signUp(username, password, email, phone);
+		return userCont.signUp(username, password, email, phone);
 	}
 
 	@Override
 	public String getPasswordByUsername(String username, String authType) {
-		return bl.getPasswordByUsername(username, authType);
+		return userCont.getPasswordByUsername(username, authType);
 	}
 
 	@Override
 	public String getEmailByUsername(String username, String authType) {
-		return bl.getEmailByUsername(username, authType);
+		return userCont.getEmailByUsername(username, authType);
 	}
 
 	public void insertBusinessOwner(BusinessOwner owner) {
-		bl.insertBusinessOwner(owner);
+		businessOwnerCont.insertBusinessOwner(owner);
 	}
 
 	public void insertBusiness(Business business) {
-		bl.insertBusiness(business);
+		businessCont.insertBusiness(business);
 	}
 
 	public void insertCoupon(Coupon coupon) {
-		bl.insertCoupon(coupon);
+		couponCont.insertCoupon(coupon);
 	}
 
 	public int getNumOfUnapprovedCoupons() {
-		return bl.getNumOfUnapprovedCoupons();
+		return couponCont.getNumOfUnapprovedCoupons();
 	}
 
 	public DefaultTableModel getResultset(String table) {
-		return bl.getResultset(table);
+		// can use either couponCont, businessCont or purchaseCont
+		return couponCont.getResultset(table);
 	}
 
 	@Override
 	public DefaultTableModel getApprovedCoupons() {
-		return bl.getApprovedCoupons();
+		return couponCont.getApprovedCoupons();
 	}
 
 	@Override
 	public DefaultTableModel getCouponsByFilter(String filter, String text) {
-		return bl.getCouponsByFilter(filter, text);
+		return couponCont.getCouponsByFilter(filter, text);
 	}
 
 	@Override
 	public DefaultTableModel getBusinessByFilter(String filter, String text) {
-		return bl.getBusinessByFilter(filter, text);
+		return businessCont.getBusinessByFilter(filter, text);
 	}
 
 	@Override
 	public void purchaseCoupon(String couponName, String customerName) {
-		bl.purchaseCoupon(couponName, customerName);
+		couponCont.purchaseCoupon(couponName, customerName);
 
 	}
 
 	@Override
 	public DefaultTableModel getCouponsByPreference(String customerName) {
-		return bl.getCouponsByPreference(customerName);
+		return couponCont.getCouponsByPreference(customerName);
 	}
 
 	@Override
 	public void insertCustomer(Customer customer) {
-		bl.insertCustomer(customer);
-		
+		customerCont.insertCustomer(customer);
+
 	}
 
 	@Override
 	public void deleteCustomer(String username) {
-		bl.deleteCustomer(username);
-		
+		customerCont.deleteCustomer(username);
+
 	}
 
 	@Override
 	public void inserBusinessOwner(BusinessOwner owner) {
-		bl.inserBusinessOwner(owner);
-		
+		businessOwnerCont.insertBusinessOwner(owner);
+
 	}
 
 	@Override
 	public void insertCategory(Category category) {
-		bl.insertCategory(category);
-		
+		categoryCont.insertCategory(category);
+
 	}
 
 	@Override
 	public void insertPurchase(Purchase purchase) {
-		bl.insertPurchase(purchase);
-		
+		purchaseCont.insertPurchase(purchase);
+
 	}
 
 	@Override
 	public void deletePurchase(String serialKey) {
-		bl.deletePurchase(serialKey);
-		
+		purchaseCont.deletePurchase(serialKey);
+
 	}
 
 	@Override
 	public void deleteCoupon(String name) {
-		bl.deleteCoupon(name);
+		couponCont.deleteCoupon(name);
 	}
 
 	@Override
 	public void deleteCategory(int id) {
-		bl.deleteCategory(id);
-		
+		categoryCont.deleteCategory(id);
+
 	}
 
 	@Override
 	public void deleteBusiness(String name) {
-		bl.deleteBusiness(name);
-		
+		businessCont.deleteBusiness(name);
+
 	}
 
 	@Override
 	public void deleteBusinessOwner(String username) {
-		bl.deleteBusinessOwner(username);
-		
+		businessOwnerCont.deleteBusinessOwner(username);
+
 	}
 
 	@Override
 	public Customer selectCustomer(String username) {
-		return bl.selectCustomer(username);
+		return customerCont.selectCustomer(username);
 	}
 
 	@Override
 	public void insertAdmin(Admin admin) {
-		bl.insertAdmin(admin);
-		
+		adminCont.insertAdmin(admin);
+
 	}
 
 	@Override
 	public Admin selectAdmin(String username) {
-		return bl.selectAdmin(username);
+		return adminCont.selectAdmin(username);
 	}
 
 	@Override
 	public void deleteAdmin(String username) {
-		bl.deleteAdmin(username);
-		
+		adminCont.deleteAdmin(username);
+
 	}
 
 	@Override
 	public BusinessOwner selectBusinessOwner(String username) {
-		return bl.selectBusinessOwner(username);
+		return businessOwnerCont.selectBusinessOwner(username);
 	}
 
 	@Override
 	public void updateBusinessOwner(BusinessOwner owner) {
-		bl.updateBusinessOwner(owner);
-		
+		businessOwnerCont.updateBusinessOwner(owner);
+
 	}
 
 	@Override
 	public Business selectBusiness(String name) {
-		return bl.selectBusiness(name);
+		return businessCont.selectBusiness(name);
 	}
 
 	@Override
 	public Coupon selectCoupon(String name) {
-		return bl.selectCoupon(name);
+		return couponCont.selectCoupon(name);
 	}
 
 	@Override
 	public void updateCoupon(Coupon coupon) {
-		bl.updateCoupon(coupon);
-		
+		couponCont.updateCoupon(coupon);
+
 	}
 
 	@Override
 	public Purchase selectPurchase(String serialKey) {
-		return bl.selectPurchase(serialKey);
+		return purchaseCont.selectPurchase(serialKey);
 	}
 
 	@Override
 	public void updatePurchase(Purchase purchase) {
-		bl.updatePurchase(purchase);
-		
+		purchaseCont.updatePurchase(purchase);
+
 	}
 
 	@Override
 	public DefaultTableModel getBusinessesDetails() {
-		return bl.getBusinessesDetails();
+		return businessCont.getBusinessesDetails();
 	}
 
 	@Override
 	public List getTableArrayList(String string) {
-		return bl.getTableArrayList(string);
+		// can use either couponCont or businessCont
+		return couponCont.getTableArrayList(string);
 	}
-	
+
 	@Override
-	public Location getLocationByIp(String ip){
-		return null; //TODO implement
+	public Location getLocationByIp(String ip) {
+		return locationCont.getLocationByIp(ip);
 	}
 
 	@Override
 	public Vector<Vector<Object>> getPruchases(String username) {
-		return bl.getPruchases(username);
+		return purchaseCont.getPruchases(username);
 	}
 
 }
