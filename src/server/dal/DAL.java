@@ -21,8 +21,8 @@ public class DAL implements IDAL {
 
 	// Database credentials
 
-	static final String USER = "Shai";
-	static final String PASS = "root";
+	static final String USER = "root";
+	static final String PASS = "root123";
 
 	public DAL() {
 		//initialDatabase();
@@ -831,6 +831,12 @@ public class DAL implements IDAL {
 				+ " couponsdb.businesses.Longitude BETWEEN %f AND %f",customerName, latdown, latup,longdown,longup ); 
 				
 return getResultSetFromQuery(query);
+	}
+	
+	@Override
+	public DefaultTableModel getAllCategories(){
+		String query  ="SELECT * FROM couponsdb.category";
+		return getResultSetFromQuery(query);
 	}
 	
 

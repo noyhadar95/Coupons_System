@@ -200,4 +200,6 @@ public interface ISL {
 
 	DefaultTableModel getCouponsByPreferencesAndLocations(String customerName,
 			double longitude, double latitude, double radius);
+
+	DefaultTableModel getAllCategories();
 }

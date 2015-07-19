@@ -15,6 +15,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 
+import auxiliary.bl_backend.Category;
 import auxiliary.bl_backend.EmailSender;
 
 import java.awt.SystemColor;
@@ -27,6 +28,11 @@ import javax.swing.JComboBox;
 import client.bl.IUserController;
 import client.bl.UserController;
 import client.dal.DAL;
+
+import javax.swing.JList;
+import javax.swing.AbstractListModel;
+
+import client.bl.CategoryController;
 
 
 public class LoginFrame extends JFrame {
@@ -47,6 +53,8 @@ public class LoginFrame extends JFrame {
 	private JButton btnForgotPass;
 	private JButton btnBack;
 	private	JButton btnLogin;
+	private JList list;
+	private CategoryController cc;
 
 	/**
 	 * Launch the application.
@@ -69,6 +77,7 @@ public class LoginFrame extends JFrame {
 	 */
 	public LoginFrame() {
 		super(COMPANY_NAME);
+		cc = new CategoryController();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -299,19 +308,36 @@ public class LoginFrame extends JFrame {
 		btnBack.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnBack.setVisible(false);
 		
+		list = new JList();
+		list.setModel(new AbstractListModel() {
+			Category[] values = cc.getAllCategoriesArray();
+			public int getSize() {
+				return values.length;
+			}
+			public Object getElementAt(int index) {
+				return values[index];
+			}
+		});
+		
 		
 		GroupLayout groupLayout = new GroupLayout(contentPane);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(16)
+					.addGap(43)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(202)
 							.addComponent(lblWelcomeToCoupons))
 						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(btnBack, GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
-							.addGap(50)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addComponent(btnBack, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+									.addGap(50))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGap(16)
+									.addComponent(list, GroupLayout.PREFERRED_SIZE, 99, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)))
 							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
 								.addGroup(groupLayout.createSequentialGroup()
 									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
@@ -336,8 +362,8 @@ public class LoginFrame extends JFrame {
 					.addGap(163))
 		);
 		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(39)
 					.addComponent(lblWelcomeToCoupons, GroupLayout.PREFERRED_SIZE, 67, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
@@ -346,26 +372,27 @@ public class LoginFrame extends JFrame {
 							.addGap(8)
 							.addComponent(textFieldUsername, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE))
 						.addComponent(lblUsername, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE))
-					.addGap(28)
+					.addGap(60)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblPassword, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
 						.addComponent(textFieldPassword, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE))
 					.addGap(35)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(textFieldEmail, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblEmail))
+						.addComponent(lblEmail)
+						.addComponent(list, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE))
 					.addGap(27)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(textFieldPhone, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblPhone))
-					.addGap(34)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnForgotPass)
 						.addComponent(authTypeCB, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(28)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(btnBack, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
-						.addGroup(Alignment.TRAILING, groupLayout.createParallelGroup(Alignment.BASELINE)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addComponent(btnBack, GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
+						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 							.addComponent(btnLogin, GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
 							.addComponent(btnSignUp, GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)))
 					.addContainerGap())
@@ -387,7 +414,5 @@ public class LoginFrame extends JFrame {
 		btnForgotPass.setVisible(!vis);
 		btnLogin.setVisible(!vis);
 	}
-				
-				
 }
 

@@ -300,5 +300,10 @@ public class SL implements ISL {
 	public DefaultTableModel getCouponsByPreferencesAndLocations(String customerName, double longitude, double latitude, double radius){
 		return couponCont.getCouponsByPreferencesAndLocations(customerName, longitude, latitude, radius);
 	}
+	
+	@Override
+	public DefaultTableModel getAllCategories(){
+		return categoryCont.getAllCategories();
+	}
 
 }
