@@ -279,5 +279,21 @@ public class SL implements ISL {
 	public Vector<Vector<Object>> getPruchases(String username) {
 		return purchaseCont.getPruchases(username);
 	}
+	
+	@Override
+	public DefaultTableModel getCouponsByCity(String city){
+		return couponCont.getCouponsByCity(city);
+		
+	}
+	
+	@Override
+	public DefaultTableModel getCouponsByLocation(double longitude,double latitude,double radius){
+		return couponCont.getCouponsByLocation(longitude, latitude, radius);
+	}
+	
+	@Override
+	public DefaultTableModel getBusinessByLocation(double longitude, double latitude, double radius){
+		return businessCont.getBusinessByLocation(longitude, latitude, radius);
+	}
 
 }

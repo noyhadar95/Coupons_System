@@ -189,4 +189,12 @@ public interface ISL {
 	List getTableArrayList(String string);
 	Location getLocationByIp(String ip);
 	Vector<Vector<Object>> getPruchases(String username);
+
+	DefaultTableModel getCouponsByCity(String city);
+
+	DefaultTableModel getCouponsByLocation(double longitude, double latitude,
+			double radius);
+
+	DefaultTableModel getBusinessByLocation(double longitude, double latitude,
+			double radius);
 }

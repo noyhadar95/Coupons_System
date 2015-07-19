@@ -63,4 +63,9 @@ public class BusinessController implements IBusinessController {
 	public DefaultTableModel getResultset(String table) {
 		return dal.getResultset(table);
 	}
+	
+	@Override
+	public DefaultTableModel getBusinessByLocation(double longitude, double latitude, double radius){
+		return dal.getBusinessByLocation(longitude, latitude, radius);
+	}
 }

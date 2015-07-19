@@ -96,4 +96,9 @@ public class CouponController implements ICouponController {
 		return dal.getCouponsByLocation(latitude, longitude, radius);
 		
 		}
+		
+		@Override
+		public DefaultTableModel getCouponsByCity(String city){
+			return dal.getCouponsByCity(city);
+		}
 }

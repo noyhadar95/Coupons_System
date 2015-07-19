@@ -84,6 +84,16 @@ public class CouponController implements ICouponController {
 		sl.insertPurchase(purchase);
 	}
 	
+	@Override 
+	public DefaultTableModel getCouponsByCity(String city){
+		return sl.getCouponsByCity(city);
+	}
+	
+	@Override
+	public DefaultTableModel getCouponsByLocation(double longitude,double latitude,double radius){
+		return sl.getCouponsByLocation(longitude, latitude, radius);
+	}
+	
 	// returns a new special serial key.
 		private String genSerialKey() {
 			return UUID.randomUUID().toString().toUpperCase();

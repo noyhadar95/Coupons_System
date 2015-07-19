@@ -16,4 +16,6 @@ public interface IBusinessController {
 	public void deleteBusiness(String name);
 	public List getTableArrayList(String string);
 	DefaultTableModel getResultset(String table);
+	DefaultTableModel getBusinessByLocation(double longitude, double latitude,
+			double radius);
 }

@@ -4,7 +4,7 @@ public class Location {
 	
 	public Location(int ip_from, int ip_to, String country_code,
 			String country_name, String region_name, String city_name,
-			int latitude, int longitude, String zip_code) {
+			double latitude, double longitude, String zip_code) {
 		this.ip_from = ip_from;
 		this.ip_to = ip_to;
 		this.country_code = country_code;
@@ -15,14 +15,24 @@ public class Location {
 		this.longitude = longitude;
 		this.zip_code = zip_code;
 	}
+	
+	public Location (String country_code, String country_name,String region,String  city,double latitude, double longitude, String zipCode){
+		this.country_code = country_code;
+		this.country_name = country_name;
+		this.region_name = region;
+		this.city_name = city;
+		this.latitude = latitude;
+		this.longitude = longitude;
+		this.zip_code = zipCode;
+	}
 	private int ip_from;
 	private int ip_to;
 	private String country_code;
 	private String country_name;
 	private String region_name;
 	private String city_name;
-	private int latitude;
-	private int longitude;
+	private double latitude;
+	private double longitude;
 	private String zip_code;
 	
 	
@@ -62,13 +72,13 @@ public class Location {
 	public void setCity_name(String city_name) {
 		this.city_name = city_name;
 	}
-	public int getLatitude() {
+	public double getLatitude() {
 		return latitude;
 	}
 	public void setLatitude(int latitude) {
 		this.latitude = latitude;
 	}
-	public int getLongitude() {
+	public double getLongitude() {
 		return longitude;
 	}
 	public void setLongitude(int longitude) {

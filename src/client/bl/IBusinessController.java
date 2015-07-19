@@ -24,4 +24,6 @@ public interface IBusinessController {
 	public boolean updateBusinessByOwner(Business business);
 	public List getTableArrayList(String string);
 	DefaultTableModel getResultset(String table);
+	DefaultTableModel getBusinessByLocation(double longitude, double latitude,
+			double radius);
 }

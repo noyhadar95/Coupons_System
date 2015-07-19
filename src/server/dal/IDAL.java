@@ -90,4 +90,9 @@ public interface IDAL {
 
 	DefaultTableModel getocationofCity(String city);
 
+	DefaultTableModel getCouponsByCity(String city);
+
+	DefaultTableModel getBusinessByLocation(double longitude, double latitude,
+			double radius);
+
 }

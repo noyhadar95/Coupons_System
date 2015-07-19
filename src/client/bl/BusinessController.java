@@ -57,4 +57,9 @@ public class BusinessController implements IBusinessController {
 	public DefaultTableModel getResultset(String table) {
 		return sl.getResultset(table);
 	}
+	
+	@Override
+	public DefaultTableModel getBusinessByLocation(double longitude, double latitude, double radius){
+		return sl.getBusinessByLocation(longitude, latitude, radius);
+	}
 }

@@ -33,9 +33,16 @@ import java.util.TimerTask;
 
 import javax.swing.JTable;
 
+import auxiliary.bl_backend.GPS;
+import auxiliary.bl_backend.Location;
+import auxiliary.bl_backend.Sensor;
 import client.bl.BusinessController;
 import client.bl.CouponController;
 import client.bl.CustomerController;
+import client.bl.ILocationController;
+import client.bl.ISensorController;
+import client.bl.LocationController;
+import client.bl.SensorController;
 import client.bl.UserController;
 import client.dal.DAL;
 
@@ -49,6 +56,7 @@ public class CustomerMain extends JFrame {
 	private static CouponController cc;
 	private static UserController uc;
 	private static BusinessController bc;
+	private static ILocationController lc;
 
 	/**
 	 * Launch the application.
@@ -74,6 +82,7 @@ public class CustomerMain extends JFrame {
 		cc =new CouponController();
 		uc = new UserController();
 		bc = new BusinessController();
+		lc = new LocationController();
 		lastModel = cc.getCouponsByPreference(uc.getUsername());
 		
 		Timer timer = new Timer ();
@@ -105,8 +114,9 @@ public class CustomerMain extends JFrame {
                 	cmbx_By.removeAllItems();
                 		cmbx_By.insertItemAt("By Business", 0);
                 		cmbx_By.insertItemAt("By Category", 1);
-                		cmbx_By.insertItemAt("By Location", 2);
+                		cmbx_By.insertItemAt("By City", 2);
                 		cmbx_By.insertItemAt("By Current Location", 3);
+                		cmbx_By.insertItemAt("Show all", 4);
                 		cmbx_By.setVisible(true);
                 }
                 
@@ -128,12 +138,12 @@ public class CustomerMain extends JFrame {
 		txt_search.setColumns(10);
 		
 		
-		cmbx_By.setModel(new DefaultComboBoxModel(new String[] {"By Business", "By Category", "By Location", "By Current Location"}));
+		cmbx_By.setModel(new DefaultComboBoxModel(new String[] {"By Business", "By Category", "By City", "By Current Location", "Show all"}));
 		
 		JButton btn_search = new JButton("Search");
 		btn_search.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				DefaultTableModel model;
+				DefaultTableModel model = null;
 				if(cmbx_Type.getSelectedIndex() == 0){
 				switch (cmbx_By.getSelectedIndex()) {
 				case 0:
@@ -141,9 +151,20 @@ public class CustomerMain extends JFrame {
 					break;
 				case 1:
 					 model = cc.getCouponsByFilter("Category", txt_search.getText()); 
-			//	case 2: 
-				//	moe
-				
+					 break;
+				case 2: 
+					model = cc.getCouponsByCity(txt_search.getText());
+					break;
+				case 3:
+					Location loc = lc.getLocationByIp();
+					try{
+					model = cc.getCouponsByLocation(loc.getLongitude(),loc.getLatitude(),Integer.parseInt(txt_search.getText()));
+					}
+					catch (Exception e2) {
+						System.err.println("Bad inputs");
+						model = cc.getApprovedCoupons();
+					}
+					break;
 				default:
 					model = cc.getApprovedCoupons();
 					break;
@@ -180,6 +201,16 @@ for(int i=0;i<model.getRowCount(); i++){
 					case 1:
 						 model = bc.getBusinessByFilter("City", txt_search.getText()); 
 						 break;
+					case 2:
+						Location loc = lc.getLocationByIp();
+						try{
+						model = bc.getBusinessByLocation(loc.getLongitude(),loc.getLatitude(),Integer.parseInt(txt_search.getText()));
+						}
+						catch (Exception e2) {
+							System.err.println("Bad inputs");
+							model = bc.getBusinessesDetails();
+						}
+						break;
 					default:
 						model = bc.getBusinessesDetails();
 						break;

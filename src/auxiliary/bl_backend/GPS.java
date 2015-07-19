@@ -10,7 +10,7 @@ import java.net.UnknownHostException;
 import java.util.Enumeration;
 
 public class GPS implements Sensor {
-	public void start() {
+	public Object start() {
 		
 		String ip;
 	    try {
@@ -32,14 +32,14 @@ public class GPS implements Sensor {
 	        throw new RuntimeException(e);
 	    }
 		
-	    System.out.println(getIpAddress());
+	   return(getIpAddress());
 		
 		}
 		
 	
 
-	public void stop() {
-
+	public Object stop() {
+		return null;
 	}
 	
 	public static String getIpAddress() 
