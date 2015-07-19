@@ -202,4 +202,6 @@ public interface ISL {
 			double longitude, double latitude, double radius);
 
 	DefaultTableModel getAllCategories();
+
+	void addCustomerPreferences(List<Category> categories, String username);
 }

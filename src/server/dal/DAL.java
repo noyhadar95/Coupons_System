@@ -21,8 +21,8 @@ public class DAL implements IDAL {
 
 	// Database credentials
 
-	static final String USER = "root";
-	static final String PASS = "root123";
+	static final String USER = "Shai";
+	static final String PASS = "root";
 
 	public DAL() {
 		//initialDatabase();
@@ -839,5 +839,10 @@ return getResultSetFromQuery(query);
 		return getResultSetFromQuery(query);
 	}
 	
+	@Override
+	public void AddPreferenceToCustomer(String username, int id){
+		String sql = String.format("INSERT INTO couponsdb.customers_preferences VALUES('%s', %d)", username,id);
+		executePassiveCommand(sql);
+	}
 
 }

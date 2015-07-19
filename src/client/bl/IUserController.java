@@ -1,5 +1,9 @@
 package client.bl;
 
+import java.util.List;
+
+import auxiliary.bl_backend.Category;
+
 public interface IUserController {
 
 	/**
@@ -77,5 +81,7 @@ public interface IUserController {
 	void Alerted();
 
 	int getNumAlertsToday();
+
+	void addCustomerPreferences(List<Category> categories, String username);
 
 }

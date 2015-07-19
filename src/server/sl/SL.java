@@ -306,4 +306,8 @@ public class SL implements ISL {
 		return categoryCont.getAllCategories();
 	}
 
+	@Override
+	public void addCustomerPreferences(List<Category> categories,String username){
+		userCont.addCustomerPreferences(categories, username);
+	}
 }

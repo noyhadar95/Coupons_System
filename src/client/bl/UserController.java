@@ -1,5 +1,6 @@
 package client.bl;
 
+import java.util.List;
 import java.util.Vector;
 
 import com.mysql.fabric.xmlrpc.base.Data;
@@ -123,6 +124,11 @@ public class UserController implements IUserController {
 	@Override
 	public int getNumAlertsToday(){
 		return DAL.getInstance().getNumAlertsToday();
+	}
+	
+	@Override
+	public void addCustomerPreferences(List<Category> categories,String username){
+		sl.addCustomerPreferences(categories, username);
 	}
 
 }

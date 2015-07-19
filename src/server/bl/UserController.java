@@ -1,7 +1,11 @@
 package server.bl;
 
+
+
+import java.util.List;
 import server.dal.DAL;
 import server.dal.IDAL;
+import auxiliary.bl_backend.Category;
 import auxiliary.bl_backend.Customer;
 import auxiliary.bl_backend.User;
 
@@ -79,6 +83,13 @@ public class UserController implements IUserController {
 		}
 
 		return email;
+	}
+	
+	@Override
+	public void addCustomerPreferences(List<Category> categories,String username){
+		for (int i = 0; i < categories.size(); i++) {
+			dal.AddPreferenceToCustomer(username, categories.get(i).getId());
+		}
 	}
 
 }

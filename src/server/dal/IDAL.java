@@ -100,4 +100,6 @@ public interface IDAL {
 
 	DefaultTableModel getAllCategories();
 
+	void AddPreferenceToCustomer(String username, int id);
+
 }

@@ -21,6 +21,7 @@ import auxiliary.bl_backend.EmailSender;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JComboBox;
@@ -33,6 +34,8 @@ import javax.swing.JList;
 import javax.swing.AbstractListModel;
 
 import client.bl.CategoryController;
+
+import javax.swing.JScrollPane;
 
 
 public class LoginFrame extends JFrame {
@@ -53,8 +56,10 @@ public class LoginFrame extends JFrame {
 	private JButton btnForgotPass;
 	private JButton btnBack;
 	private	JButton btnLogin;
-	private JList list;
+	private JList list_cat;
 	private CategoryController cc;
+	private JScrollPane scrollPane_cat;
+	private JLabel lblChoosePrefferedCategories;
 
 	/**
 	 * Launch the application.
@@ -235,6 +240,11 @@ public class LoginFrame extends JFrame {
 								"you are now signed up to 'coupons for you'\ntry to login to your new account");
 						textFieldUsername.setText("");;
 						textFieldPassword.setText("");
+						
+						
+						@SuppressWarnings("unchecked")
+						List<Category> categories = (List<Category>)list_cat.getSelectedValuesList();
+						userCont.addCustomerPreferences(categories, username);
 					}
 					else{
 						JOptionPane.showMessageDialog((Component) e.getSource(),
@@ -260,7 +270,9 @@ public class LoginFrame extends JFrame {
 				}
 				return (foundDigit && foundLetter);
 			}
-
+			
+			//Add
+			
 			
 		});
 		btnSignUp.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -308,18 +320,12 @@ public class LoginFrame extends JFrame {
 		btnBack.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnBack.setVisible(false);
 		
-		list = new JList();
-		list.setModel(new AbstractListModel() {
-			Category[] values = cc.getAllCategoriesArray();
-			public int getSize() {
-				return values.length;
-			}
-			public Object getElementAt(int index) {
-				return values[index];
-			}
-		});
+		scrollPane_cat = new JScrollPane();
+		scrollPane_cat.setEnabled(false);
+		scrollPane_cat.setVisible(false);
 		
-		
+		lblChoosePrefferedCategories = new JLabel("Preffered Categories:");
+		lblChoosePrefferedCategories.setVisible(false);
 		GroupLayout groupLayout = new GroupLayout(contentPane);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -330,14 +336,8 @@ public class LoginFrame extends JFrame {
 							.addGap(202)
 							.addComponent(lblWelcomeToCoupons))
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(btnBack, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-									.addGap(50))
-								.addGroup(groupLayout.createSequentialGroup()
-									.addGap(16)
-									.addComponent(list, GroupLayout.PREFERRED_SIZE, 99, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED)))
+							.addComponent(btnBack, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addGap(50)
 							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
 								.addGroup(groupLayout.createSequentialGroup()
 									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
@@ -355,14 +355,20 @@ public class LoginFrame extends JFrame {
 									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 										.addComponent(btnSignUp, GroupLayout.PREFERRED_SIZE, 159, GroupLayout.PREFERRED_SIZE)
 										.addComponent(btnForgotPass))
-									.addPreferredGap(ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+									.addPreferredGap(ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
 									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 										.addComponent(btnLogin, GroupLayout.PREFERRED_SIZE, 159, GroupLayout.PREFERRED_SIZE)
 										.addComponent(authTypeCB, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))))
-					.addGap(163))
+					.addGap(39)
+					.addComponent(scrollPane_cat, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE)
+					.addGap(29))
+				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+					.addContainerGap(604, Short.MAX_VALUE)
+					.addComponent(lblChoosePrefferedCategories)
+					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
+			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(39)
 					.addComponent(lblWelcomeToCoupons, GroupLayout.PREFERRED_SIZE, 67, GroupLayout.PREFERRED_SIZE)
@@ -372,15 +378,14 @@ public class LoginFrame extends JFrame {
 							.addGap(8)
 							.addComponent(textFieldUsername, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE))
 						.addComponent(lblUsername, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE))
-					.addGap(60)
+					.addGap(8)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblPassword, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
 						.addComponent(textFieldPassword, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE))
 					.addGap(35)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(textFieldEmail, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblEmail)
-						.addComponent(list, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE))
+						.addComponent(lblEmail))
 					.addGap(27)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(textFieldPhone, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
@@ -391,12 +396,30 @@ public class LoginFrame extends JFrame {
 						.addComponent(authTypeCB, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(28)
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(btnBack, GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
+						.addComponent(btnBack, GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
 						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 							.addComponent(btnLogin, GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
 							.addComponent(btnSignUp, GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)))
 					.addContainerGap())
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap(207, Short.MAX_VALUE)
+					.addComponent(lblChoosePrefferedCategories)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(scrollPane_cat, GroupLayout.PREFERRED_SIZE, 107, GroupLayout.PREFERRED_SIZE)
+					.addGap(150))
 		);
+		
+		list_cat = new JList();
+		scrollPane_cat.setViewportView(list_cat);
+		list_cat.setModel(new AbstractListModel() {
+			Category[] values = cc.getAllCategoriesArray();
+			public int getSize() {
+				return values.length;
+			}
+			public Object getElementAt(int index) {
+				return ((Category)values[index]);
+			}
+		});
 		contentPane.setLayout(groupLayout);
 		
 
@@ -410,6 +433,8 @@ public class LoginFrame extends JFrame {
 		textFieldEmail.setVisible(vis);
 		textFieldPhone.setVisible(vis);
 		btnBack.setVisible(vis);
+		scrollPane_cat.setVisible(vis);
+		lblChoosePrefferedCategories.setVisible(vis);
 		// these buttons are set to not(vis)
 		btnForgotPass.setVisible(!vis);
 		btnLogin.setVisible(!vis);
