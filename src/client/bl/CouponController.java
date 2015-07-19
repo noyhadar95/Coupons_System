@@ -94,6 +94,10 @@ public class CouponController implements ICouponController {
 		return sl.getCouponsByLocation(longitude, latitude, radius);
 	}
 	
+	@Override
+	public DefaultTableModel getCouponsByPreferencesAndLocation(String customerName, double longitude,double latitude,double radius){
+		return sl.getCouponsByPreferencesAndLocations(customerName, longitude, latitude, radius);
+	}
 	// returns a new special serial key.
 		private String genSerialKey() {
 			return UUID.randomUUID().toString().toUpperCase();

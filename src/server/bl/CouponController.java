@@ -101,4 +101,9 @@ public class CouponController implements ICouponController {
 		public DefaultTableModel getCouponsByCity(String city){
 			return dal.getCouponsByCity(city);
 		}
+		
+		@Override
+		public DefaultTableModel getCouponsByPreferencesAndLocations(String customerName, double longitude, double latitude, double radius){
+			return dal.getCouponsByPreferencesAndLocations(customerName, longitude, latitude, radius);
+		}
 }

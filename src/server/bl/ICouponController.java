@@ -36,4 +36,7 @@ public interface ICouponController {
 	public void purchaseCoupon(String couponName, String customerName);
 
 	DefaultTableModel getCouponsByCity(String city);
+
+	DefaultTableModel getCouponsByPreferencesAndLocations(String customerName,
+			double longitude, double latitude, double radius);
 }

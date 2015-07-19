@@ -295,5 +295,10 @@ public class SL implements ISL {
 	public DefaultTableModel getBusinessByLocation(double longitude, double latitude, double radius){
 		return businessCont.getBusinessByLocation(longitude, latitude, radius);
 	}
+	
+	@Override 
+	public DefaultTableModel getCouponsByPreferencesAndLocations(String customerName, double longitude, double latitude, double radius){
+		return couponCont.getCouponsByPreferencesAndLocations(customerName, longitude, latitude, radius);
+	}
 
 }

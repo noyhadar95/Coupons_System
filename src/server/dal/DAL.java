@@ -817,5 +817,21 @@ public class DAL implements IDAL {
 		return getResultset(query);
 	}
 	
+	@Override
+	public DefaultTableModel getCouponsByPreferencesAndLocations(String customerName, double longitude, double latitude, double radius){
+		double latup = latitude + radius;
+		double latdown = latitude - radius;
+		double longup = longitude + radius;
+		double longdown = longitude - radius;
+		
+		String query = String.format("SELECT couponsdb.coupons.Name, couponsdb.coupons.Description, couponsdb.coupons.Category, "+
+				"couponsdb.coupons.InitialPrice, couponsdb.coupons.DiscountPrice, couponsdb.coupons.Rating, couponsdb.coupons.Business, couponsdb.coupons.Approved, couponsdb.businesses.Latitude, couponsdb.businesses.Longitude "+
+				"FROM  couponsdb.customers_preferences join couponsdb.coupons, couponsdb.businesses WHERE Customer_Username = '%s' AND couponsdb.coupons.Business = couponsdb.businesses.Name AND couponsdb.coupons.Approved=1 AND"
+				+ " couponsdb.businesses.Latitude BETWEEN %f AND %f AND"
+				+ " couponsdb.businesses.Longitude BETWEEN %f AND %f",customerName, latdown, latup,longdown,longup ); 
+				
+return getResultSetFromQuery(query);
+	}
+	
 
 }

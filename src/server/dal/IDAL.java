@@ -95,4 +95,7 @@ public interface IDAL {
 	DefaultTableModel getBusinessByLocation(double longitude, double latitude,
 			double radius);
 
+	DefaultTableModel getCouponsByPreferencesAndLocations(String customerName,
+			double longitude, double latitude, double radius);
+
 }

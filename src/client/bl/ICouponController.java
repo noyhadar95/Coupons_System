@@ -109,4 +109,7 @@ public interface ICouponController {
 
 	DefaultTableModel getCouponsByLocation(double longitude, double latitude,
 			double radius);
+
+	DefaultTableModel getCouponsByPreferencesAndLocation(String customerName,
+			double longitude, double latitude, double radius);
 }
