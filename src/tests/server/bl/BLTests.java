@@ -1,4 +1,4 @@
-package tests;
+package tests.server.bl;
 
 import static org.junit.Assert.*;
 
@@ -30,7 +30,7 @@ public class BLTests {
 	public void tearDown() throws Exception {
 	}
 	
-	@Test
+	@Test//v
 	public void testTryLogin() {
 		Customer customer = new Customer("latscgqfySs", "pass",
 				"mail@gmail.com", "0129712");
@@ -44,7 +44,8 @@ public class BLTests {
 		assertFalse(result3);
 		
 	}
-	@Test
+	
+	@Test//v
 	public void testupdatePurchaseRating() {
 		Customer customer = new Customer("cust1", "pass", "mail@gmail.com",
 				"0129712");
@@ -87,7 +88,7 @@ public class BLTests {
 		
 	}
 
-	@Test
+	@Test//v
 	public void testAddDeleteCustomer() {
 		Customer customer = new Customer("latscgqfySs", "pass",
 				"mail@gmail.com", "0129712");
@@ -99,7 +100,7 @@ public class BLTests {
 		assertTrue(test_customer == null);
 	}
 
-	@Test
+	@Test//v
 	public void testAddDeleteAdmin() {
 		Admin admin = new Admin("latgfsscdyS", "pass", "mail@gmail.com",
 				"0129712");
@@ -111,7 +112,7 @@ public class BLTests {
 		assertTrue(test_admin == null);
 	}
 
-	@Test
+	@Test//v
 	public void testAddBusinessOwner() {
 		BusinessOwner owner = new BusinessOwner("owner", "pass",
 				"mail@gmail.com", "0129712");
@@ -124,7 +125,7 @@ public class BLTests {
 		assertTrue(temp_owner == null);
 	}
 
-	@Test
+	@Test//v
 	public void testUpdateOwner() {
 		BusinessOwner owner = new BusinessOwner("owner3", "pass",
 				"mail@gmail.com", "0129712");
@@ -142,7 +143,7 @@ public class BLTests {
 
 	}
 
-	@Test
+	@Test//v
 	public void testAddDeleteBusiness() {
 		// insert business owner
 		BusinessOwner owner = new BusinessOwner("owner1", "pass",
@@ -162,7 +163,7 @@ public class BLTests {
 		bl.deleteBusinessOwner(owner.getUsername());
 	}
 
-	@Test
+	@Test//v
 	public void testAddDeleteCoupon() {
 		// insert business owner and business before insert a coupon because
 		// coupon has a foreign key to business name. And insert a category.
@@ -192,7 +193,7 @@ public class BLTests {
 		bl.deleteBusinessOwner(owner.getUsername());
 	}
 
-	@Test
+	@Test//v
 	public void testUpdateCoupon() {
 		// insert business owner and business before insert a coupon because
 		// coupon has a foreign key to business name. And insert a category.
@@ -231,7 +232,7 @@ public class BLTests {
 
 	}
 
-	@Test
+	@Test//v
 	public void testAddDeletePurchase() {
 		// insert business owner and business before insert a coupon because
 		// coupon has a foreign key to business name. And then insert coupon and
@@ -271,7 +272,7 @@ public class BLTests {
 		bl.deleteCustomer(customer.getUsername());
 	}
 
-	@Test
+	@Test//v
 	public void testUpdatePurchase() {
 		// insert business owner and business before insert a coupon because
 		// coupon has a foreign key to business name. And then insert coupon and
