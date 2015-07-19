@@ -355,6 +355,7 @@ for(int i=0;i<model.getRowCount(); i++){
 	
 	
 	void checkNotificationByPreference(){
+		if(uc.getNumAlertsToday() < 10){
 		DefaultTableModel newModel = createModel();
 		ArrayList<String> list = new ArrayList<>();
 		for(int i=0; i < newModel.getRowCount(); i++){
@@ -364,6 +365,7 @@ for(int i=0;i<model.getRowCount(); i++){
 		}
 		
 		if(!list.isEmpty()){
+			uc.Alerted();
 			String newCoupons = "There are new coupons: \n";
 			for (int i = 0; i < list.size(); i++) {
 				newCoupons+= list.get(i) + "\n";
@@ -373,6 +375,10 @@ for(int i=0;i<model.getRowCount(); i++){
 		}
 		
 		lastModel = newModel;
+		}
+		else{
+			//quota of alerts reached
+		}
 	}
 	
 	private boolean inTable(String item,DefaultTableModel table){

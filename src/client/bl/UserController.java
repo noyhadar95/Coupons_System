@@ -115,6 +115,14 @@ public class UserController implements IUserController {
 		return DAL.getInstance().getMode();
 	}
 	
+	@Override
+	public void Alerted(){
+		DAL.getInstance().Alerted();
+	}
 	
+	@Override
+	public int getNumAlertsToday(){
+		return DAL.getInstance().getNumAlertsToday();
+	}
 
 }

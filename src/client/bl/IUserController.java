@@ -74,4 +74,8 @@ public interface IUserController {
 
 	int getMode();
 
+	void Alerted();
+
+	int getNumAlertsToday();
+
 }

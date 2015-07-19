@@ -12,6 +12,7 @@ public class DAL implements IDAL{
 	private ArrayList<auxiliary.bl_backend.Coupon> coupons=null;
 	private Vector<Vector<Object>> purchases;
 	private int mode = 0; //0 - preferences, 1 - location, 2 -mixed
+	private int numAlertsToday = 0;
 	private DAL(){	}
 	
 	public static DAL getInstance(){
@@ -43,6 +44,14 @@ public class DAL implements IDAL{
 	
 	public int getMode(){
 		return this.mode;
+	}
+	
+	public int getNumAlertsToday(){
+		return this.numAlertsToday;
+	}
+	
+	public void Alerted(){
+		this.numAlertsToday++;
 	}
 	
 	
