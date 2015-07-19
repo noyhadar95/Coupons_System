@@ -2,6 +2,8 @@ package client.bl;
 
 import java.util.Vector;
 
+import com.mysql.fabric.xmlrpc.base.Data;
+
 import client.dal.DAL;
 import server.sl.*;
 import auxiliary.bl_backend.*;
@@ -102,5 +104,17 @@ public class UserController implements IUserController {
 		Vector<Vector<Object>> purchases=sl.getPruchases(username);
 		DAL.getInstance().initializePurchases(purchases);
 	}
+	
+	@Override
+	public void setMode(int mode){
+		DAL.getInstance().setMode(mode);
+	}
+	
+	@Override
+	public int getMode(){
+		return DAL.getInstance().getMode();
+	}
+	
+	
 
 }

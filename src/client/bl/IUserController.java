@@ -70,4 +70,8 @@ public interface IUserController {
 	
 	void initializePurchases(String username);
 
+	void setMode(int mode);
+
+	int getMode();
+
 }

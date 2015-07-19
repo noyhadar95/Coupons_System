@@ -83,7 +83,7 @@ public class CustomerMain extends JFrame {
 		uc = new UserController();
 		bc = new BusinessController();
 		lc = new LocationController();
-		lastModel = cc.getCouponsByPreference(uc.getUsername());
+		lastModel = createModel();
 		
 		Timer timer = new Timer ();
 		TimerTask hourlyTask = new TimerTask () {
@@ -94,8 +94,9 @@ public class CustomerMain extends JFrame {
 		};
 		final JComboBox cmbx_By = new JComboBox();
 		// schedule the task to run starting now and then every hour...
-		timer.schedule (hourlyTask, 0l, 1000*60*60);   // 1000*10*60 every 10 minut
+		//timer.schedule (hourlyTask, 0l, 1000*10*60);   // 1000*10*60 every 10 minutes
 		//timer.schedule (hourlyTask, 0l, 60*60); 
+		timer.scheduleAtFixedRate(hourlyTask, 1000*10*60, 1000*10*60);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 766, 524);
 		contentPane = new JPanel();
@@ -275,30 +276,53 @@ for(int i=0;i<model.getRowCount(); i++){
 				f.setVisible(true);
 			}
 		});
+		
+		JLabel lblAlertsMode = new JLabel("Alerts Mode:");
+		
+		final JComboBox cmbx_Mode = new JComboBox();
+		cmbx_Mode.setModel(new DefaultComboBoxModel(new String[] {"By Preferences", "By Location", "Mixed"}));
+		cmbx_Mode.setSelectedIndex(uc.getMode());
+		cmbx_Mode.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				uc.setMode(cmbx_Mode.getSelectedIndex());
+				lastModel = createModel();
+			}
+		});
+		
+		
 		GroupLayout groupLayout = new GroupLayout(contentPane);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(table, GroupLayout.PREFERRED_SIZE, 698, GroupLayout.PREFERRED_SIZE)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(lblSearch)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(cmbx_Type, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(txt_search, GroupLayout.PREFERRED_SIZE, 198, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(cmbx_By, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(btn_search)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnLogout)))
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addComponent(lblSearch)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(cmbx_Type, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addComponent(txt_search, GroupLayout.PREFERRED_SIZE, 198, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addComponent(cmbx_By, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(btn_search)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnLogout)
+					.addContainerGap(67, Short.MAX_VALUE))
 				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap(245, Short.MAX_VALUE)
+					.addContainerGap(227, Short.MAX_VALUE)
 					.addComponent(btnObserveMyCoupons, GroupLayout.PREFERRED_SIZE, 294, GroupLayout.PREFERRED_SIZE)
 					.addGap(217))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(table, GroupLayout.PREFERRED_SIZE, 698, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(28, Short.MAX_VALUE))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(183)
+					.addComponent(lblAlertsMode)
+					.addGap(18)
+					.addComponent(cmbx_Mode, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(433, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -312,8 +336,12 @@ for(int i=0;i<model.getRowCount(); i++){
 						.addComponent(btn_search)
 						.addComponent(btnLogout))
 					.addGap(18)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblAlertsMode)
+						.addComponent(cmbx_Mode, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(19)
 					.addComponent(table, GroupLayout.PREFERRED_SIZE, 149, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 226, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, 164, Short.MAX_VALUE)
 					.addComponent(btnObserveMyCoupons, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
 		);
@@ -327,7 +355,7 @@ for(int i=0;i<model.getRowCount(); i++){
 	
 	
 	void checkNotificationByPreference(){
-		DefaultTableModel newModel = cc.getCouponsByPreference(uc.getUsername());
+		DefaultTableModel newModel = createModel();
 		ArrayList<String> list = new ArrayList<>();
 		for(int i=0; i < newModel.getRowCount(); i++){
 			if(inTable((String)newModel.getValueAt(i, 0), lastModel)==false) 
@@ -342,7 +370,9 @@ for(int i=0;i<model.getRowCount(); i++){
 			}
 		
 			JOptionPane.showMessageDialog(this, newCoupons, "NEW COUPONS",JOptionPane.INFORMATION_MESSAGE);
-		}	
+		}
+		
+		lastModel = newModel;
 	}
 	
 	private boolean inTable(String item,DefaultTableModel table){
@@ -351,5 +381,35 @@ for(int i=0;i<model.getRowCount(); i++){
 				return true;
 		}
 		return false;
+	}
+	
+	private DefaultTableModel createModel(){
+		switch (uc.getMode()) {
+		case 0:
+			return cc.getCouponsByPreference(uc.getUsername());
+		case 1:
+			Location loc = lc.getLocationByIp();
+			try{
+			return cc.getCouponsByLocation(loc.getLongitude(),loc.getLatitude(),10);
+			}
+			catch (Exception e2) {
+				System.err.println("Bad inputs");
+				return cc.getCouponsByPreference(uc.getUsername());
+			}
+			
+		case 2:
+			Location loc2 = lc.getLocationByIp();
+			try{
+			return cc.getCouponsByPreferencesAndLocation(uc.getUsername() ,loc2.getLongitude(),loc2.getLatitude(),10);
+			}
+			catch (Exception e2) {
+				System.err.println("Bad inputs");
+				return cc.getCouponsByPreference(uc.getUsername());
+			}
+
+		default:
+			return cc.getCouponsByPreference(uc.getUsername());
+		}
+		
 	}
 }
