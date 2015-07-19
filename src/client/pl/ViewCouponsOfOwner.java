@@ -8,6 +8,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.table.DefaultTableModel;
 
+import client.bl.CouponController;
 import client.bl.ICouponController;
 import client.bl.IUserController;
 
@@ -23,7 +24,7 @@ public class ViewCouponsOfOwner extends JPanel {
 	
 	//TODO: ViewCouponsOfOwner Get sl before change
 	public ViewCouponsOfOwner() {
-		
+		coupController= new CouponController();
 		//((DAL)(dal)).testAddDeleteCoupon();
 		String query="coupons Join (select Name,Owner From couponsdb.businesses) b  on b.Name=coupons.business where b.Owner='"+userController.getUsername()+"'";
 		DefaultTableModel coupons=coupController.getResultset(query);

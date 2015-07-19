@@ -53,8 +53,8 @@ public class PurchaseController implements IPurchaseController {
 	}
 	
 	@Override
-	public DefaultTableModel getResultset(String custumerName) {
-		return dal.getResultset("purchases WHERE CustomerName='"+custumerName+"'");
+	public DefaultTableModel getResultset(String query) {
+		return dal.getResultset(query);
 	}
 	
 	@Override
@@ -78,6 +78,11 @@ public class PurchaseController implements IPurchaseController {
 	public void updatePurchase(Purchase purchase) {
 		dal.updatePurchase(purchase);
 		
+	}
+
+	@Override
+	public Vector<Vector<Object>> getPruchases(String username) {
+		return dal.getPruchases(username);
 	}
 	
 	

@@ -69,8 +69,8 @@ public class CouponController implements ICouponController {
 	}
 	
 	@Override
-	public DefaultTableModel getResultset(String custumerName) {
-		return dal.getResultset("purchases WHERE CustomerName='"+custumerName+"'");
+	public DefaultTableModel getResultset(String table) {
+		return dal.getResultset(table);
 	}
 	@Override
 	public List getTableArrayList(String string) {

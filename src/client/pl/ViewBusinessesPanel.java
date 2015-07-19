@@ -9,6 +9,7 @@ import javax.swing.JTable;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.table.DefaultTableModel;
 
+import client.bl.BusinessController;
 import client.bl.IBusinessController;
 
 
@@ -21,7 +22,7 @@ public class ViewBusinessesPanel extends JPanel {
 	 * Create the panel.
 	 */
 	public ViewBusinessesPanel() {
-
+			businessCont= new BusinessController();
 			//((DAL)(dal)).testAddDeleteCoupon();
 			DefaultTableModel businesses=businessCont.getResultset("businesses");
 			 table = new JTable(businesses);

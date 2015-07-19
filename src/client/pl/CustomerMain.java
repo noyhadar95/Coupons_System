@@ -71,9 +71,9 @@ public class CustomerMain extends JFrame {
 	 * Create the frame.
 	 */
 	public CustomerMain() { //TODO: Got isl 
-		this.cc =new CouponController();
-		this.uc = new UserController();
-		this.bc = new BusinessController();
+		cc =new CouponController();
+		uc = new UserController();
+		bc = new BusinessController();
 		lastModel = cc.getCouponsByPreference(uc.getUsername());
 		
 		Timer timer = new Timer ();

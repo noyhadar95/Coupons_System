@@ -27,7 +27,7 @@ public interface ICouponController {
 
 	void deleteCoupon(String name);
 	
-	public DefaultTableModel getResultset(String custumerName);
+	public DefaultTableModel getResultset(String table);
 	
 	public List getTableArrayList(String string) ;
 	

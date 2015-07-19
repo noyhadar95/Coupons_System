@@ -8,6 +8,7 @@ import javax.swing.JTable;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.table.DefaultTableModel;
 
+import client.bl.BusinessController;
 import client.bl.IBusinessController;
 import client.bl.IUserController;
 
@@ -21,7 +22,7 @@ public class ViewBusinessesOfOwnerPanel extends JPanel {
 	 * Create the panel.
 	 */
 	public ViewBusinessesOfOwnerPanel() {
-		
+		businessCont= new BusinessController();
 		String owner =userCont.getUsername();
 		
 		// TODO: check controller (is it the right one?)
