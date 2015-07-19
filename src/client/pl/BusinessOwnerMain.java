@@ -51,7 +51,8 @@ public class BusinessOwnerMain extends JFrame {
 	 * Create the frame.
 	 */
 	public BusinessOwnerMain() {//TODO: got isl
-		this.boc = new BusinessOwnerController();
+		boc = new BusinessOwnerController();
+		uc = new UserController();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();

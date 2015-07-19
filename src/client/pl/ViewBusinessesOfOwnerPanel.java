@@ -11,6 +11,7 @@ import javax.swing.table.DefaultTableModel;
 import client.bl.BusinessController;
 import client.bl.IBusinessController;
 import client.bl.IUserController;
+import client.bl.UserController;
 
 
 public class ViewBusinessesOfOwnerPanel extends JPanel {
@@ -22,6 +23,7 @@ public class ViewBusinessesOfOwnerPanel extends JPanel {
 	 * Create the panel.
 	 */
 	public ViewBusinessesOfOwnerPanel() {
+		userCont = new UserController();
 		businessCont= new BusinessController();
 		String owner =userCont.getUsername();
 		

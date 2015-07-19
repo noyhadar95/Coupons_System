@@ -553,10 +553,11 @@ public class DAL implements IDAL {
 	@Override
 	public void insertBusiness(Business business) {
 		String sql = String
-				.format("INSERT INTO couponsdb.businesses VALUES ('%s', '%s', '%s','%s','%s','%s')",
+				.format("INSERT INTO couponsdb.businesses VALUES ('%s', '%s', '%s','%s','%s','%s',%f,%f)",
 						business.getName(), business.getAddress(),
 						business.getCity(), business.getCategory(),
-						business.getDescription(), business.getOwner());
+						business.getDescription(), business.getOwner(),
+						business.getLatitude(), business.getLongitude());
 		executePassiveCommand(sql);
 
 	}

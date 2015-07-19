@@ -63,4 +63,11 @@ public class Business {
 		this.latitude = latitude;
 	}
 	
+	public double getLongitude(){
+		return this.longitude;
+	}
+	
+	public double getLatitude(){
+		return this.latitude;
+	}
 }

@@ -105,6 +105,8 @@ public class CustomerMain extends JFrame {
                 	cmbx_By.removeAllItems();
                 		cmbx_By.insertItemAt("By Business", 0);
                 		cmbx_By.insertItemAt("By Category", 1);
+                		cmbx_By.insertItemAt("By Location", 2);
+                		cmbx_By.insertItemAt("By Current Location", 3);
                 		cmbx_By.setVisible(true);
                 }
                 
@@ -112,6 +114,8 @@ public class CustomerMain extends JFrame {
                 	cmbx_By.removeAllItems();
                 		cmbx_By.insertItemAt("By Category", 0);
                 		cmbx_By.insertItemAt("By City", 1);
+                		cmbx_By.insertItemAt("By Current Location", 2);
+                		cmbx_By.insertItemAt("Show all", 3);
                 }
                 	
                 
@@ -124,7 +128,7 @@ public class CustomerMain extends JFrame {
 		txt_search.setColumns(10);
 		
 		
-		cmbx_By.setModel(new DefaultComboBoxModel(new String[] {"By Business", "By Category"}));
+		cmbx_By.setModel(new DefaultComboBoxModel(new String[] {"By Business", "By Category", "By Location", "By Current Location"}));
 		
 		JButton btn_search = new JButton("Search");
 		btn_search.addActionListener(new ActionListener() {
@@ -137,15 +141,17 @@ public class CustomerMain extends JFrame {
 					break;
 				case 1:
 					 model = cc.getCouponsByFilter("Category", txt_search.getText()); 
+			//	case 2: 
+				//	moe
 				
 				default:
 					model = cc.getApprovedCoupons();
 					break;
 				}
 				
-for(int i=0;i<table.getRowCount(); i++){
+for(int i=0;i<model.getRowCount(); i++){
 		        	
-		        	table.setValueAt("Purchase", i, 7);
+	model.setValueAt("Purchase", i, 7);
 
 		        }
 				
@@ -163,7 +169,7 @@ for(int i=0;i<table.getRowCount(); i++){
 
 			            }
 			        };
-			         
+			         table.setModel(model);
 			        ButtonColumn buttonColumn = new ButtonColumn(table, purchase, 7);
 				}
 				else{
@@ -175,11 +181,12 @@ for(int i=0;i<table.getRowCount(); i++){
 						 model = bc.getBusinessByFilter("City", txt_search.getText()); 
 						 break;
 					default:
-						model = bc.getBusinessByFilter("Name", "");
+						model = bc.getBusinessesDetails();
 						break;
 					}
+					table.setModel(model);	
 				}
-				table.setModel(model);	
+				
 			}
 		});
 		
@@ -280,9 +287,6 @@ for(int i=0;i<table.getRowCount(); i++){
 					.addContainerGap())
 		);
 		contentPane.setLayout(groupLayout);
-		
-	
-		
 	}
 	
 	

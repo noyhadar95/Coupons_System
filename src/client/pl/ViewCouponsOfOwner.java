@@ -11,6 +11,7 @@ import javax.swing.table.DefaultTableModel;
 import client.bl.CouponController;
 import client.bl.ICouponController;
 import client.bl.IUserController;
+import client.bl.UserController;
 
 
 public class ViewCouponsOfOwner extends JPanel {
@@ -24,6 +25,7 @@ public class ViewCouponsOfOwner extends JPanel {
 	
 	//TODO: ViewCouponsOfOwner Get sl before change
 	public ViewCouponsOfOwner() {
+		userController = new UserController();
 		coupController= new CouponController();
 		//((DAL)(dal)).testAddDeleteCoupon();
 		String query="coupons Join (select Name,Owner From couponsdb.businesses) b  on b.Name=coupons.business where b.Owner='"+userController.getUsername()+"'";
