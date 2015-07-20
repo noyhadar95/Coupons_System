@@ -1,4 +1,4 @@
-package tests;
+package tests.server.dal;
 
 import static org.junit.Assert.*;
 
