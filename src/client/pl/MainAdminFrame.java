@@ -74,12 +74,12 @@ public class MainAdminFrame extends JFrame {
 		JButton btnAdd = new JButton("Add");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO: deleted sl from constructor
+				
 				AdminAddFrame addFrame = new AdminAddFrame();
 				addFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		         
 		        //Create and set up the content pane.
-				// TODO: deleted sl from constructor
+				
 		        CardLayoutDemo demo = new CardLayoutDemo();
 		        demo.addComponentToPane(addFrame.getContentPane());
 		         
@@ -158,7 +158,6 @@ public class MainAdminFrame extends JFrame {
 				addFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		         
 		        //Create and set up the content pane.
-				// TODO: deleted sl from constructor
 		        AdminDeleteCardLayout demo = new AdminDeleteCardLayout();
 		        demo.addComponentToPane(addFrame.getContentPane());
 		         
@@ -174,7 +173,7 @@ public class MainAdminFrame extends JFrame {
 		gbc_btnDelete.gridy = 4;
 		contentPane.add(btnDelete, gbc_btnDelete);
 		
-		//TODO: check if there are coupons to approve
+		//check if there are coupons to approve
 		int toApprove=couponCont.getNumOfUnapprovedCoupons();
 		if(toApprove>0){
 			lblApprove.setText("You Have "+toApprove+" Coupons to Approve! ->");

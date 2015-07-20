@@ -27,7 +27,6 @@ public class ViewBusinessesOfOwnerPanel extends JPanel {
 		businessCont= new BusinessController();
 		String owner =userCont.getUsername();
 		
-		// TODO: check controller (is it the right one?)
 		DefaultTableModel businesses=businessCont.getResultset("businesses WHERE owner='"+owner+"'");
 		 table = new JTable(businesses);
 		 JScrollPane spTable = new JScrollPane(table);

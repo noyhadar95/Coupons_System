@@ -22,7 +22,6 @@ public class ViewPurchases extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	// TODO: get  SL
 	public ViewPurchases() {
 		purchaseController = new PurchaseController();
 		String name = userController.getUsername();

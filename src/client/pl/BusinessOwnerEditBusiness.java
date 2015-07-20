@@ -29,7 +29,7 @@ public class BusinessOwnerEditBusiness extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public BusinessOwnerEditBusiness() {//TODO: GOT ISL
+	public BusinessOwnerEditBusiness() {
 		//isl =sl;
 		uc = new UserController();
 		bc = new BusinessController();
@@ -43,7 +43,6 @@ int colcount = business.getColumnCount();
 		       colNames.add(business.getColumnName(col));
 		    }
 		
-		//TODO: Where i get the items, make sure that the Approval is already changed 
         DefaultTableModel model = new DefaultTableModel(business.getDataVector(),colNames)
         {
         	@Override

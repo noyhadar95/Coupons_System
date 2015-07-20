@@ -43,7 +43,7 @@ public class CustomersCoupons extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CustomersCoupons frame = new CustomersCoupons(); //TODO: Gave isl
+					CustomersCoupons frame = new CustomersCoupons(); 
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -55,7 +55,7 @@ public class CustomersCoupons extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CustomersCoupons() { //TODO: Got isl
+	public CustomersCoupons() {
 		cc = new CouponController();
 		pc = new PurchaseController();
 		uc=new client.bl.UserController();

@@ -11,9 +11,9 @@ public class CardLayoutDemo implements ItemListener {
     final static String COUPON = "Coupon";
     final static String BUSINESSOWNER = "Business Owner";
     final static String BUSINESS = "Business";
-    //TODO: HAS ISL
+   
      
-    public CardLayoutDemo(){//TODO: Got sl
+    public CardLayoutDemo(){
 
     }
     public void addComponentToPane(Container pane) {
@@ -30,7 +30,7 @@ public class CardLayoutDemo implements ItemListener {
          
         JPanel card2 = new AddBusinessOwnerPanel();
          
-        JPanel card3=new AddCouponPanel(); //TODO: Gave sl
+        JPanel card3=new AddCouponPanel(); 
         //Create the panel that contains the "cards".
         cards = new JPanel(new CardLayout());
         cards.add(card3, COUPON);
@@ -57,7 +57,7 @@ public class CardLayoutDemo implements ItemListener {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
          
         //Create and set up the content pane.
-        CardLayoutDemo demo = new CardLayoutDemo();//TODO: Gave sl
+        CardLayoutDemo demo = new CardLayoutDemo();
         demo.addComponentToPane(frame.getContentPane());
          
         //Display the window.

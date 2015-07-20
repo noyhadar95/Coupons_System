@@ -63,7 +63,6 @@ public class PurchaseController implements IPurchaseController {
 	
 	@Override
 	public DefaultTableModel getPurchases(){
-		System.out.println("local data!");
 		Vector<Vector<Object>> data =DAL.getInstance().getPurchases();
 		Vector<String> columnNames = new Vector<String>();
 		columnNames.add("SerialKey");

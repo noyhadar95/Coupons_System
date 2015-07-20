@@ -29,7 +29,6 @@ public class DAL implements IDAL{
 	}
 	
 	public void initializePurchases(Vector<Vector<Object>> purchases){
-		System.out.println("init purchases");
 		this.purchases=purchases;
 	}
 	

@@ -50,7 +50,7 @@ public class BusinessOwnerAddCoupon extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					BusinessOwnerAddCoupon frame = new BusinessOwnerAddCoupon(); //TODO: used to be an isl
+					BusinessOwnerAddCoupon frame = new BusinessOwnerAddCoupon();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -62,7 +62,7 @@ public class BusinessOwnerAddCoupon extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public BusinessOwnerAddCoupon() { //TODO: used to be an isl
+	public BusinessOwnerAddCoupon() {
 		bc = new BusinessController();
 		cc = new CouponController();
 		uc = new UserController();
@@ -208,7 +208,6 @@ public class BusinessOwnerAddCoupon extends JFrame {
 		gbc_btnAddCoupon.gridy = 8;
 		contentPane.add(btnAddCoupon, gbc_btnAddCoupon);
 		
-		//TODO: CHANGE THIS TO CONTROLLER
 		String owner=uc.getUsername();
 		
 		List data=bc.getTableArrayList("businesses WHERE owner='"+owner+"'");

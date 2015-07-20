@@ -50,7 +50,7 @@ public class BusinessOwnerMain extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public BusinessOwnerMain() {//TODO: got isl
+	public BusinessOwnerMain() {
 		boc = new BusinessOwnerController();
 		uc = new UserController();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -98,7 +98,7 @@ public class BusinessOwnerMain extends JFrame {
 		JButton btnAddCoupon = new JButton("Add Coupon");
 		btnAddCoupon.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				BusinessOwnerAddCoupon addFrame = new BusinessOwnerAddCoupon(); //TODO: Gave sl
+				BusinessOwnerAddCoupon addFrame = new BusinessOwnerAddCoupon();
 				addFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		         
 		        //Display the window.
@@ -126,7 +126,7 @@ public class BusinessOwnerMain extends JFrame {
 				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				frame.getContentPane().setLayout(new BorderLayout());
 				frame.setSize(900, 700);
-				 ViewBusinessesOfOwnerPanel v=new ViewBusinessesOfOwnerPanel();//TODO: Gave sl
+				 ViewBusinessesOfOwnerPanel v=new ViewBusinessesOfOwnerPanel();
 				 frame.getContentPane().add(v, BorderLayout.CENTER);
 				 frame.pack();
 				 frame.setVisible(true);
@@ -152,7 +152,7 @@ public class BusinessOwnerMain extends JFrame {
 				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				frame.getContentPane().setLayout(new BorderLayout());
 				frame.setSize(900, 700);
-				 ViewCouponsOfOwner v=new ViewCouponsOfOwner();//TODO: Gave sl
+				 ViewCouponsOfOwner v=new ViewCouponsOfOwner();
 				 frame.getContentPane().add(v, BorderLayout.CENTER);
 				 frame.pack();
 				 frame.setVisible(true);
@@ -171,7 +171,7 @@ public class BusinessOwnerMain extends JFrame {
 				JFrame frame = new JFrame();
 				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		         
-				JPanel panel=new BusinessOwnerEditBusiness();//TODO: Gave sl
+				JPanel panel=new BusinessOwnerEditBusiness();
 				frame.getContentPane().add(panel);
 		         
 		        //Display the window.

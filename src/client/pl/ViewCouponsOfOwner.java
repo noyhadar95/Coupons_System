@@ -23,7 +23,6 @@ public class ViewCouponsOfOwner extends JPanel {
 	 * Create the panel.
 	 */
 	
-	//TODO: ViewCouponsOfOwner Get sl before change
 	public ViewCouponsOfOwner() {
 		userController = new UserController();
 		coupController= new CouponController();

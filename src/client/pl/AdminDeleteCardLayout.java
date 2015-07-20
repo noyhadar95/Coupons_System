@@ -10,7 +10,7 @@ public class AdminDeleteCardLayout implements ItemListener {
     final static String COUPON = "Coupon";
     final static String BUSINESS = "Business"; 
     
-    public AdminDeleteCardLayout() {//TODO used to receive sl in the constructor
+    public AdminDeleteCardLayout() {
 	}
     
     public void addComponentToPane(Container pane) {
@@ -23,8 +23,7 @@ public class AdminDeleteCardLayout implements ItemListener {
         comboBoxPane.add(cb);
          
         //Create the "cards".
-        JPanel card2 = new DeleteBusinessPanel();//TODO used to receive sl in the constructor
-         
+        JPanel card2 = new DeleteBusinessPanel();
         JPanel card3=new DeleteCouponPanel();
         //Create the panel that contains the "cards".
         cards = new JPanel(new CardLayout());
@@ -51,7 +50,7 @@ public class AdminDeleteCardLayout implements ItemListener {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
          
         //Create and set up the content pane.
-        CardLayoutDemo demo = new CardLayoutDemo();//TODO used to receive sl in the constructor
+        CardLayoutDemo demo = new CardLayoutDemo();
         demo.addComponentToPane(frame.getContentPane());
          
         //Display the window.

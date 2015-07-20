@@ -25,7 +25,7 @@ public class DeleteBusinessPanel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public DeleteBusinessPanel() {//TODO used to receive sl in the constructor
+	public DeleteBusinessPanel() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
@@ -47,7 +47,7 @@ public class DeleteBusinessPanel extends JPanel {
 				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				frame.getContentPane().setLayout(new BorderLayout());
 				frame.setSize(900, 700);
-				 ViewBusinessesPanel v=new ViewBusinessesPanel();//TODO used to receive sl in the constructor
+				 ViewBusinessesPanel v=new ViewBusinessesPanel();
 				 frame.getContentPane().add(v, BorderLayout.CENTER);
 				 frame.pack();
 				 frame.setVisible(true);

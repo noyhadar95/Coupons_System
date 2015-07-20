@@ -69,7 +69,7 @@ public class AdminAddFrame extends JFrame implements ItemListener{
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
          
         //Create and set up the content pane.
-        CardLayoutDemo demo = new CardLayoutDemo();//TODO used to receive sl in the constructor
+        CardLayoutDemo demo = new CardLayoutDemo();
         demo.addComponentToPane(frame.getContentPane());
          
         //Display the window.
@@ -116,11 +116,11 @@ public class AdminAddFrame extends JFrame implements ItemListener{
             public void run() {
                 //createAndShowGUI();
             	try {
-					AdminAddFrame frame = new AdminAddFrame();//TODO used to receive sl in the constructor
+					AdminAddFrame frame = new AdminAddFrame();
 					frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			         
 			        //Create and set up the content pane.
-			        CardLayoutDemo demo = new CardLayoutDemo();//TODO used to receive sl in the constructor
+			        CardLayoutDemo demo = new CardLayoutDemo();
 			        demo.addComponentToPane(frame.getContentPane());
 			         
 			        //Display the window.
@@ -136,7 +136,7 @@ public class AdminAddFrame extends JFrame implements ItemListener{
 	/**
 	 * Create the frame.
 	 */
-	public AdminAddFrame() {//TODO used to receive sl in the constructor
+	public AdminAddFrame() {
 		super("Admin Add");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);

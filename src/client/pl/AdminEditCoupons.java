@@ -48,7 +48,7 @@ int colcount = coupons.getColumnCount();
 		       colNames.add(coupons.getColumnName(col));
 		    }
 		
-		//TODO: Where i get the items, make sure that the Approval is already changed 
+		
         DefaultTableModel model = new DefaultTableModel(coupons.getDataVector(),colNames)
         {
         	@Override

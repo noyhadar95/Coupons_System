@@ -112,11 +112,11 @@ public class LoginFrame extends JFrame {
 					boolean success = userCont.tryLogin(tryUsername, tryPassword, authType);
 					
 					if(success){
-						userCont.initializePurchases(DAL.getInstance().getUsername());//TODO: purchase controller!
+						userCont.initializePurchases(DAL.getInstance().getUsername());
 						
 						switch (authType) {
 						case "Customer":
-							// TODO: deleted sl from constructor
+							
 							JFrame customerFrame = new CustomerMain();
 							customerFrame.setLocation(getLocation()); 
 							customerFrame.setVisible(true);
@@ -124,7 +124,7 @@ public class LoginFrame extends JFrame {
 							setVisible(false);
 							break;
 						case "Admin":
-							// TODO: deleted sl from constructor
+							
 							JFrame adminFrame = new MainAdminFrame();
 							adminFrame.setLocation(getLocation()); 
 							adminFrame.setVisible(true);
@@ -132,7 +132,7 @@ public class LoginFrame extends JFrame {
 							setVisible(false);
 							break;
 						case "Bussines Owner":
-							// TODO: deleted sl from constructor
+							
 							JFrame ownerFrame = new BusinessOwnerMain();
 							ownerFrame.setLocation(getLocation()); 
 							ownerFrame.setVisible(true);

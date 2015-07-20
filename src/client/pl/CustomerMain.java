@@ -66,7 +66,7 @@ public class CustomerMain extends JFrame {
 			public void run() {
 				try {
 					
-					CustomerMain frame = new CustomerMain();//TODO: Gave sl
+					CustomerMain frame = new CustomerMain();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -78,7 +78,7 @@ public class CustomerMain extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CustomerMain() { //TODO: Got isl 
+	public CustomerMain() {  
 		cc =new CouponController();
 		uc = new UserController();
 		bc = new BusinessController();
@@ -281,7 +281,7 @@ for(int i=0;i<model.getRowCount(); i++){
 		JButton btnObserveMyCoupons = new JButton("Observe My Coupons");
 		btnObserveMyCoupons.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				JFrame newFrame = new CustomersCoupons(); //TODO: Gave sl
+				JFrame newFrame = new CustomersCoupons();
 				
 			}
 		});

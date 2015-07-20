@@ -50,10 +50,9 @@ public class MainAdminFrameTests {
 		//try{Thread.sleep(250);}catch(InterruptedException e){}
 		//bot.mouseRelease(InputEvent.BUTTON1_MASK);
 		} catch (AWTException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		fail("Not yet implemented"); // TODO
+		fail("Not yet implemented"); 
 	}*/
 
 }
