@@ -186,6 +186,7 @@ for(int i=0;i<model.getRowCount(); i++){
 			                int modelRow = Integer.valueOf( e.getActionCommand() );
 
 			               cc.purchaseCoupon((String)table.getValueAt(modelRow, 0), uc.getUsername());
+			               uc.initializePurchases(DAL.getInstance().getUsername());
 			               Object[] options = {"Pay with paypal"};
 			               int n = JOptionPane.showOptionDialog((JFrame)cmbx_By.getTopLevelAncestor(),
 			            		   uc.getUsername()+" buys: " + (String)table.getValueAt(modelRow, 0),
