@@ -1,4 +1,4 @@
-package tests.server.bl;
+package tests.client.bl;
 
 import static org.junit.Assert.*;
 
@@ -6,7 +6,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import server.bl.BusinessOwnerController;
+import client.bl.BusinessOwnerController;
 import auxiliary.bl_backend.BusinessOwner;
 
 public class BusinessOwnerControllerTests {
@@ -25,7 +25,7 @@ public class BusinessOwnerControllerTests {
 	public void testAddBusinessOwner() {
 		BusinessOwner owner = new BusinessOwner("owner", "pass",
 				"mail@gmail.com", "0129712");
-		boc.insertBusinessOwner(owner);
+		boc.inserBusinessOwner(owner);
 		BusinessOwner temp_owner = boc.selectBusinessOwner(owner.getUsername());
 		assertTrue(temp_owner.getUsername().equals(owner.getUsername()));
 
@@ -38,7 +38,7 @@ public class BusinessOwnerControllerTests {
 	public void testUpdateOwner() {
 		BusinessOwner owner = new BusinessOwner("owner3", "pass",
 				"mail@gmail.com", "0129712");
-		boc.insertBusinessOwner(owner);
+		boc.inserBusinessOwner(owner);
 
 		owner.setPassword("pass2");
 		owner.setEmail("smail@gmail.com");

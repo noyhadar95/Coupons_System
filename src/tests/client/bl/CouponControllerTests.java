@@ -1,4 +1,4 @@
-package tests.server.bl;
+package tests.client.bl;
 
 import static org.junit.Assert.*;
 
@@ -6,10 +6,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import server.bl.BusinessController;
-import server.bl.BusinessOwnerController;
-import server.bl.CategoryController;
-import server.bl.CouponController;
+import client.bl.BusinessController;
+import client.bl.BusinessOwnerController;
+import client.bl.CategoryController;
+import client.bl.CouponController;
 import auxiliary.bl_backend.Business;
 import auxiliary.bl_backend.BusinessOwner;
 import auxiliary.bl_backend.Category;
@@ -38,7 +38,7 @@ public class CouponControllerTests {
 		// coupon has a foreign key to business name. And insert a category.
 		BusinessOwner owner = new BusinessOwner("owner1", "pass",
 				"mail@gmail.com", "0129712");
-		boc.insertBusinessOwner(owner);
+		boc.inserBusinessOwner(owner);
 		Business business = new Business("business_name", "pqwfqwass", "asc",
 				"wqfqwf", "uu", "owner1");
 		bc.insertBusiness(business);
@@ -68,7 +68,7 @@ public class CouponControllerTests {
 		// coupon has a foreign key to business name. And insert a category.
 		BusinessOwner owner = new BusinessOwner("owner1", "pass",
 				"mail@gmail.com", "0129712");
-		boc.insertBusinessOwner(owner);
+		boc.inserBusinessOwner(owner);
 		Business business = new Business("business_name", "pqwfqwass", "asc",
 				"wqfqwf", "uu", "owner1");
 		bc.insertBusiness(business);

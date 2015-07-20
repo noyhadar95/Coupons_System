@@ -1,4 +1,4 @@
-package tests.server.bl;
+package tests.client.bl;
 
 import static org.junit.Assert.*;
 
@@ -6,8 +6,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import server.bl.BusinessController;
-import server.bl.BusinessOwnerController;
+import client.bl.BusinessController;
+import client.bl.BusinessOwnerController;
 import auxiliary.bl_backend.Business;
 import auxiliary.bl_backend.BusinessOwner;
 
@@ -29,7 +29,7 @@ public class BusinessControllerTests {
 		// insert business owner
 		BusinessOwner owner = new BusinessOwner("owner1", "pass",
 				"mail@gmail.com", "0129712");
-		boc.insertBusinessOwner(owner);
+		boc.inserBusinessOwner(owner);
 
 		Business business = new Business("cas", "pqwfqwass", "asc", "wqfqwf",
 				"uu", "owner1");
