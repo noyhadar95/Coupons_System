@@ -33,6 +33,7 @@ import java.util.TimerTask;
 
 import javax.swing.JTable;
 
+import auxiliary.bl_backend.EmailSender;
 import auxiliary.bl_backend.GPS;
 import auxiliary.bl_backend.Location;
 import auxiliary.bl_backend.Sensor;
@@ -250,11 +251,11 @@ for(int i=0;i<model.getRowCount(); i++){
 	                JTable table = (JTable)e.getSource();
 	                int modelRow = Integer.valueOf( e.getActionCommand() );
 
-	               cc.purchaseCoupon((String)table.getValueAt(modelRow, 0), uc.getUsername());
+	               String serial_key = cc.purchaseCoupon((String)table.getValueAt(modelRow, 0), uc.getUsername());
 	               uc.initializePurchases(DAL.getInstance().getUsername());
 	    
 	               Object[] options = {"Pay with paypal"};
-	               int n = JOptionPane.showOptionDialog((JFrame)cmbx_By.getTopLevelAncestor(),
+	               int result = JOptionPane.showOptionDialog((JFrame)cmbx_By.getTopLevelAncestor(),
 	            		   uc.getUsername()+" buys: " + (String)table.getValueAt(modelRow, 0),
 	            		    "Pay",
 	            		    JOptionPane.OK_OPTION,
@@ -262,8 +263,34 @@ for(int i=0;i<model.getRowCount(); i++){
 	            		    null,     //do not use a custom Icon
 	            		    options,  //the titles of buttons
 	            		    options[0]); //default button title
-	            //   JOptionPane.showMessageDialog(c, uc.getUsername()+" bought via paypal: " + (String)table.getValueAt(modelRow, 0));
+	               //   JOptionPane.showMessageDialog(c, uc.getUsername()+" bought via paypal: " + (String)table.getValueAt(modelRow, 0));
 
+	               
+	               // send serial key to email
+	               if(result == JOptionPane.OK_OPTION){
+	            	   
+	            	   String username =  uc.getUsername();
+						String authType = "Customer";
+						String password = uc.getPasswordByUsername(username, authType);
+						if(password == null){
+							JOptionPane.showMessageDialog((Component) e.getSource(),
+									"username does not exist");
+						}
+						else{
+							EmailSender emailSender = new EmailSender();
+							String userEmail = uc.getEmailByUsername(username, authType);
+							boolean success = emailSender.sendEmail(userEmail, LoginFrame.COMPANY_EMAIL,
+									LoginFrame.COMPANY_NAME + "new purchase has been made: ", "your new purchase's serial key is: "+ serial_key);
+							if(success){
+								JOptionPane.showMessageDialog((Component) e.getSource(),
+										"your serial key has been sent to your email");
+							}
+							else{
+								JOptionPane.showMessageDialog((Component) e.getSource(),
+										"network problems, could not send the serial key to your email");
+							}
+						}
+	               }
 	            }
 	        };
 	         

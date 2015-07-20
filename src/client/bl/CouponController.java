@@ -77,11 +77,13 @@ public class CouponController implements ICouponController {
 	}
 	
 	@Override
-	public void purchaseCoupon(String couponName, String customerName) {
+	public String purchaseCoupon(String couponName, String customerName) {
 		String serial_key = genSerialKey();
 		Purchase purchase = new Purchase(serial_key, 0, customerName,
 				couponName, 0);
 		sl.insertPurchase(purchase);
+		
+		return serial_key;
 	}
 	
 	@Override 
