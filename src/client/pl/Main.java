@@ -12,9 +12,9 @@ public class Main {
 		JFrame couponSystem = new LoginFrame();
 		couponSystem.setVisible(true);
 		DAL dal = new DAL();
-		GPS gps = new GPS();
-		gps.start();
-		DefaultTableModel model = dal.getCouponsByLocation(10, 10, 5);
+		//GPS gps = new GPS();
+		//gps.start();
+		//DefaultTableModel model = dal.getCouponsByLocation(10, 10, 5);
 		dal.testAddDeleteCoupon1();// adding some sample records to the db
 
 	}
