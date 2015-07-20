@@ -22,11 +22,7 @@ public class DAL implements IDAL {
 	// Database credentials
 
 	static final String USER = "root";
-<<<<<<< HEAD
 	static final String PASS = "";
-=======
-	static final String PASS = "root123";
->>>>>>> origin/email_serial_key_purchase
 
 	public DAL() {
 		//initialDatabase();
