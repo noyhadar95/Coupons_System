@@ -43,4 +43,9 @@ public class CategoryController implements ICategoryController {
 		
 		return categories;
 	}
+
+	@Override
+	public Category selectCategory(String name) {
+		return sl.selectCategory(name);
+	}
 }

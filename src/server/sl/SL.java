@@ -310,4 +310,9 @@ public class SL implements ISL {
 	public void addCustomerPreferences(List<Category> categories,String username){
 		userCont.addCustomerPreferences(categories, username);
 	}
+
+	@Override
+	public Category selectCategory(String name) {
+		return categoryCont.selectCategory(name);
+	}
 }

@@ -845,4 +845,16 @@ return getResultSetFromQuery(query);
 		executePassiveCommand(sql);
 	}
 
+	@Override
+	public Category selectCategory(String name) {
+		String sql = String.format(
+				"SELECT * FROM couponsdb.category WHERE Name='%s' ", name);
+		List catList = executeActiveCommand(sql);
+		if (catList.size() == 0)
+			return null;
+		HashMap cat = (HashMap) catList.get(0);
+		Category result = new Category((int)cat.get("Id"),(String) cat.get("Name"));
+		return result;
+	}
+
 }

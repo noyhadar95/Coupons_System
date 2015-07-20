@@ -204,4 +204,6 @@ public interface ISL {
 	DefaultTableModel getAllCategories();
 
 	void addCustomerPreferences(List<Category> categories, String username);
+
+	Category selectCategory(String name);
 }

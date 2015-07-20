@@ -29,4 +29,10 @@ public class CategoryController implements ICategoryController {
 	public DefaultTableModel getAllCategories(){
 		return dal.getAllCategories();
 	}
+
+	@Override
+	public Category selectCategory(String name) {
+		return dal.selectCategory(name);
+		
+	}
 }

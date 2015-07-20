@@ -102,4 +102,6 @@ public interface IDAL {
 
 	void AddPreferenceToCustomer(String username, int id);
 
+	Category selectCategory(String name);
+
 }
