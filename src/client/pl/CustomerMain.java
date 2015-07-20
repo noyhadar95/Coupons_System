@@ -186,8 +186,16 @@ for(int i=0;i<model.getRowCount(); i++){
 			                int modelRow = Integer.valueOf( e.getActionCommand() );
 
 			               cc.purchaseCoupon((String)table.getValueAt(modelRow, 0), uc.getUsername());
-			               
-			               JOptionPane.showMessageDialog((JFrame)cmbx_By.getTopLevelAncestor(), uc.getUsername()+" bought " + (String)table.getValueAt(modelRow, 0));
+			               Object[] options = {"Pay with paypal"};
+			               int n = JOptionPane.showOptionDialog((JFrame)cmbx_By.getTopLevelAncestor(),
+			            		   uc.getUsername()+" buys: " + (String)table.getValueAt(modelRow, 0),
+			            		    "Pay",
+			            		    JOptionPane.OK_OPTION,
+			            		    JOptionPane.QUESTION_MESSAGE,
+			            		    null,     //do not use a custom Icon
+			            		    options,  //the titles of buttons
+			            		    options[0]); //default button title
+			            //   JOptionPane.showMessageDialog(c, uc.getUsername()+" bought via paypal: " + (String)table.getValueAt(modelRow, 0));
 
 			            }
 			        };
@@ -244,7 +252,16 @@ for(int i=0;i<model.getRowCount(); i++){
 	               cc.purchaseCoupon((String)table.getValueAt(modelRow, 0), uc.getUsername());
 	               uc.initializePurchases(DAL.getInstance().getUsername());
 	    
-	               JOptionPane.showMessageDialog((JFrame)cmbx_By.getTopLevelAncestor(), uc.getUsername()+" bought " + (String)table.getValueAt(modelRow, 0));
+	               Object[] options = {"Pay with paypal"};
+	               int n = JOptionPane.showOptionDialog((JFrame)cmbx_By.getTopLevelAncestor(),
+	            		   uc.getUsername()+" buys: " + (String)table.getValueAt(modelRow, 0),
+	            		    "Pay",
+	            		    JOptionPane.OK_OPTION,
+	            		    JOptionPane.QUESTION_MESSAGE,
+	            		    null,     //do not use a custom Icon
+	            		    options,  //the titles of buttons
+	            		    options[0]); //default button title
+	            //   JOptionPane.showMessageDialog(c, uc.getUsername()+" bought via paypal: " + (String)table.getValueAt(modelRow, 0));
 
 	            }
 	        };
@@ -291,6 +308,13 @@ for(int i=0;i<model.getRowCount(); i++){
 			}
 		});
 		
+		JButton btnAddCouponFrom = new JButton("Add Coupon From  Social Network");
+		btnAddCouponFrom.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				JFrame newFrame =new CustomerAddCouponFrame();
+			}
+		});
+		
 		
 		GroupLayout groupLayout = new GroupLayout(contentPane);
 		groupLayout.setHorizontalGroup(
@@ -308,21 +332,23 @@ for(int i=0;i<model.getRowCount(); i++){
 					.addComponent(btn_search)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnLogout)
-					.addContainerGap(67, Short.MAX_VALUE))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap(227, Short.MAX_VALUE)
-					.addComponent(btnObserveMyCoupons, GroupLayout.PREFERRED_SIZE, 294, GroupLayout.PREFERRED_SIZE)
-					.addGap(217))
+					.addContainerGap(123, Short.MAX_VALUE))
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(table, GroupLayout.PREFERRED_SIZE, 698, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(28, Short.MAX_VALUE))
+					.addContainerGap(32, Short.MAX_VALUE))
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(183)
 					.addComponent(lblAlertsMode)
 					.addGap(18)
 					.addComponent(cmbx_Mode, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(433, Short.MAX_VALUE))
+					.addContainerGap(380, Short.MAX_VALUE))
+				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+					.addContainerGap(229, Short.MAX_VALUE)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addComponent(btnAddCouponFrom, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(btnObserveMyCoupons, GroupLayout.PREFERRED_SIZE, 294, GroupLayout.PREFERRED_SIZE))
+					.addGap(217))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -341,7 +367,9 @@ for(int i=0;i<model.getRowCount(); i++){
 						.addComponent(cmbx_Mode, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(19)
 					.addComponent(table, GroupLayout.PREFERRED_SIZE, 149, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 164, Short.MAX_VALUE)
+					.addGap(102)
+					.addComponent(btnAddCouponFrom, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
 					.addComponent(btnObserveMyCoupons, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
 		);

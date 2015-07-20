@@ -1,5 +1,6 @@
 package client.pl;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -111,11 +112,24 @@ public class AddBusinessOwnerPanel extends JPanel {
 		btnAdd = new JButton("Add");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				try{
 				String name1=name.getText();
 				String pass1=pass.getText();
 				String email1=email.getText();
 				String phone1=phone.getText();
+				if(businessOwnerCont.selectBusinessOwner(name1)!=null&&businessOwnerCont.selectBusinessOwner(name1).getUsername()!=""){
+					JOptionPane.showMessageDialog(null, "Business Owner Already Exists");
+				}
+				else{
 				businessOwnerCont.insertBusinessOwner(new BusinessOwner(name1, pass1, email1, phone1)); 
+				if(businessOwnerCont.selectBusinessOwner(name1)!=null){
+					JOptionPane.showMessageDialog(null, "Business Owner Added Successfully");
+				}
+			}
+				}
+			catch(Exception e1){
+				JOptionPane.showMessageDialog(null, "illegal input");
+			}
 			}
 		});
 		GridBagConstraints gbc_btnAdd = new GridBagConstraints();

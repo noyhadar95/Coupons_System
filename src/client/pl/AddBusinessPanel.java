@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
@@ -150,14 +151,26 @@ public class AddBusinessPanel extends JPanel {
 		JButton btnAdd = new JButton("Add");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				try{
 				String name=txtName.getText();
 				String address=txtAddress.getText();
-				//city cat desc owner
 				String city=txtCity.getText();
 				String cat=txtCat.getText();
 				String desc=txtDesc.getText();
 				String owner=txtOwner.getText();
+				if(businessCont.selectBusiness(name)!=null&&(businessCont.selectBusiness(name).getName()!="")){
+					JOptionPane.showMessageDialog(null, "Business Already Exists");
+				}
+				else{
 				businessCont.insertBusiness(new Business(name, address, city, cat, desc, owner));
+				if(businessCont.selectBusiness(name)!=null){
+					JOptionPane.showMessageDialog(null, "Business Added Successfully");
+				}
+				}
+				}
+				catch(Exception e1){
+					JOptionPane.showMessageDialog(null, "illegal input");
+				}
 			}
 		});
 		GridBagConstraints gbc_btnAdd = new GridBagConstraints();
