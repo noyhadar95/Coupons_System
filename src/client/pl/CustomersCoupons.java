@@ -73,10 +73,14 @@ public class CustomersCoupons extends JFrame {
 		int colcount = coupons.getColumnCount();
 		
 		Vector<String> colNames = new Vector<String>();
-		    for(int col = 0;col < colcount;col++) { 
-		       colNames.add(coupons.getColumnName(col));
-		    }
-		
+		  //  for(int col = 0;col < colcount;col++) { 
+		    //   colNames.add(coupons.getColumnName(col));
+		   // }
+		    
+		    colNames.add("Serial key");
+		    colNames.add("Coupon Name");
+		    colNames.add("Rating");
+		    colNames.add("Used");
 		
         DefaultTableModel model = new DefaultTableModel(coupons.getDataVector(),colNames)
         {

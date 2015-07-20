@@ -1,5 +1,7 @@
 package client.pl;
 
+import javax.mail.Message;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -13,6 +15,8 @@ import java.awt.Insets;
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
+
+import com.sun.mail.handlers.message_rfc822;
 
 import auxiliary.bl_backend.*;
 import client.bl.*;
@@ -31,6 +35,7 @@ public class AddCouponPanel extends JPanel {
 	private JLabel lblAddCoupon;
 	private JButton btnAdd;
 	private ICouponController couponCont=new CouponController();
+	private IBusinessController bc=new BusinessController();
 
 	/**
 	 * Create the panel.
@@ -173,6 +178,7 @@ public class AddCouponPanel extends JPanel {
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				try{
 				String name=txtName.getText();
 				String desc=txtDesc.getText();
 				int cat=Integer.parseInt(txtCat.getText());
@@ -180,7 +186,19 @@ public class AddCouponPanel extends JPanel {
 				int discount=Integer.parseInt(txtDiscount.getText());
 				int rating=Integer.parseInt(txtRating.getText());
 				String business=txtBusiness.getText();
+				if(couponCont.selectCoupon(name)!=null){
+					JOptionPane.showMessageDialog(null, "Coupon Already Exists");
+				}
+				else{
 				couponCont.insertCoupon(new Coupon(name, desc, cat, initial, discount, rating, business,0));
+				if(couponCont.selectCoupon(name)!=null){
+					JOptionPane.showMessageDialog(null, "Coupon Added Succesfully");
+				}
+				}
+				}
+				catch(Exception e1){
+					JOptionPane.showMessageDialog(null, "illegal input");
+				}
 				
 			}
 		});
